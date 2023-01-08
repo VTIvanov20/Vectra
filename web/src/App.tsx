@@ -13,11 +13,23 @@ function App() {
   return (
     <div className="App">
       <Mafs height={height}>
-        <CartesianCoordinates subdivisions={2} />
+        <CartesianCoordinates 
+        xAxis={{
+          axis: false,
+          lines: 0.5,
+          labels: false
+        }}
+        yAxis={{
+          axis: false,
+          lines: 0.5,
+          labels: false
+        }}
+        subdivisions={false} />
         
-        <Text x={-4.3} y={2.5} attach="n" color="#5d8ca3">
-          hello world
+        <Text size={90} attach="n">
+          Mathematics made visual
         </Text>
+        {/*TODO: Fix actual font import to be CMU Serif Upright Italic*/}
       </Mafs>
     </div>
   )
