@@ -33,8 +33,46 @@ function App() {
   const lineStart = useMovablePoint([3.35, -0.2]);
   const lineEnd = useMovablePoint([1.9, -0.2]);
 
-  {/*TODO: Refactor this into a template for all polygons*/}
-  const poly: Points = [[-6.5, -7], [-6, -7], [-6, -2], [-6.5, -2]]
+  const poly: Points = [[-6, -7], [-5.5, -7], [-5.5, -3], [-6, -3]]
+  
+  const blValue = poly[0][0], brValue = poly[0][1], 
+        trValue = poly[2][0], tlValue = poly[2][1]
+  {/* 
+    bottom left, bottom right, top right, top left 
+    to simplify total positioning, the code has been reformatted
+    const poly2: Points = [[-5.5, -7], [-5, -7], [  -5,   -2], [  -5.5, -2]]
+  */}
+  const poly2: Points = [
+    [(blValue + 0.5), brValue],
+    [(trValue + 0.5), brValue], 
+    [(trValue + 0.5), (tlValue + 0.5)], 
+    [(blValue + 0.5), (tlValue + 0.5)]
+  ]
+
+  // const poly3: Points = [[-4.99, -7], [-4.5, -7], [-4.5, -1.5], [-4.99, -1.5]]
+  const poly3: Points = [
+    [(blValue + 1.01), brValue],
+    [(trValue + 1), brValue], 
+    [(trValue + 1), (tlValue + 1.5)], 
+    [(blValue + 1.01), (tlValue + 1.5)]
+  ]
+
+  // const poly4: Points = [[-4.99, -7], [-4.5, -7], [-4.5, -1.5], [-4.99, -1.5]]
+  const poly4: Points = [
+    [(blValue + 1.51), brValue],
+    [(trValue + 1.5), brValue], 
+    [(trValue + 1.5), (tlValue + 1)], 
+    [(blValue + 1.51), (tlValue + 1)]
+  ]
+
+  // no comment :(
+  const poly5: Points = [
+    [(blValue + 2), brValue],
+    [(trValue + 2), brValue], 
+    [(trValue + 2), (tlValue + 0.5)], 
+    [(blValue + 2), (tlValue + 0.5)]
+  ]
+
 
   return (
     <div className="App">
@@ -65,6 +103,22 @@ function App() {
         <Polygon 
           points={poly}
           color="#D73DFE"
+        />
+        <Polygon 
+          points={poly2}
+          color="#D73DFE"
+        />
+        <Polygon 
+          points={poly3}
+          color="#86FE3D"
+        />
+        <Polygon 
+          points={poly4}
+          color="#86FE3D"
+        />
+        <Polygon 
+          points={poly5}
+          color="#86FE3D"
         />
       </Mafs>
     </div>
