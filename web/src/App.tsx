@@ -5,22 +5,36 @@ import {
   Line,
   useMovablePoint,
   Polygon,
-  CartesianCoordinates 
+  CartesianCoordinates,
+  Vector2,
 } from "mafs"
+import { useEffect, useState } from "react";
 import './App.css'
 
+type Points = Vector2[];
+
 function App() {
-  let height = window.innerHeight;
+  let [height, setHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    function handleResize(this: Window, ev: UIEvent) {
+      setHeight(window.innerHeight);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  })
+
   const point = useMovablePoint([0, 0]);
 
   const lineStart = useMovablePoint([3.35, -0.2]);
   const lineEnd = useMovablePoint([1.9, -0.2]);
 
   {/*TODO: Refactor this into a template for all polygons*/}
-  const a = [-6.5, -7] as [number, number]
-  const b = [-6, -7] as [number, number]
-  const c = [-6, -2] as [number, number]
-  const d = [-6.5, -2] as [number, number]
+  const poly: Points = [[-6.5, -7], [-6, -7], [-6, -2], [-6.5, -2]]
 
   return (
     <div className="App">
@@ -38,7 +52,7 @@ function App() {
         }}
         subdivisions={false} />
         
-        <Text size={90} attach="n">
+        <Text x={0} y={0} size={90} attach="n">
           Mathematics made visual
         </Text>
         {/*TODO: Fix actual font import to be CMU Serif Upright Italic*/}
@@ -49,7 +63,7 @@ function App() {
           point2={lineEnd.point}
         />
         <Polygon 
-          points={[a, b, c, d]}
+          points={poly}
           color="#D73DFE"
         />
       </Mafs>
