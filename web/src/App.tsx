@@ -34,14 +34,16 @@ function App() {
   const lineEnd = useMovablePoint([1.9, -0.2]);
 
   const poly: Points = [[-6, -7], [-5.5, -7], [-5.5, -3], [-6, -3]]
-  
+
+  // bottom left, bottom right, top right, top left 
   const blValue = poly[0][0], brValue = poly[0][1], 
         trValue = poly[2][0], tlValue = poly[2][1]
+  
   {/* 
-    bottom left, bottom right, top right, top left 
     to simplify total positioning, the code has been reformatted
     const poly2: Points = [[-5.5, -7], [-5, -7], [  -5,   -2], [  -5.5, -2]]
   */}
+  
   const poly2: Points = [
     [(blValue + 0.5), brValue],
     [(trValue + 0.5), brValue], 
@@ -72,7 +74,6 @@ function App() {
     [(trValue + 2), (tlValue + 0.5)], 
     [(blValue + 2), (tlValue + 0.5)]
   ]
-
 
   return (
     <div className="App">
