@@ -6,7 +6,9 @@ import {
   useMovablePoint,
   Polygon,
   CartesianCoordinates,
+  vec,
   Vector2,
+  Circle,
 } from "mafs"
 import { useEffect, useState } from "react";
 import './App.css'
@@ -28,53 +30,61 @@ function App() {
     }
   })
 
-  const point = useMovablePoint([0, 0]);
-
+  
   const lineStart = useMovablePoint([3.35, -0.2]);
   const lineEnd = useMovablePoint([1.9, -0.2]);
-
-  const poly: Points = [[-6, -7], [-5.5, -7], [-5.5, -3], [-6, -3]]
-
+  
+  const col1: Points = [[-6, -7], [-5.5, -7], [-5.5, -3], [-6, -3]]
+  
   // bottom left, bottom right, top right, top left 
-  const blValue = poly[0][0], brValue = poly[0][1], 
-        trValue = poly[2][0], tlValue = poly[2][1]
+  const blValue = col1[0][0], brValue = col1[0][1], 
+  trValue = col1[2][0], tlValue = col1[2][1]
   
   {/* 
-    to simplify total positioning, the code has been reformatted
-    const poly2: Points = [[-5.5, -7], [-5, -7], [  -5,   -2], [  -5.5, -2]]
-  */}
-  
-  const poly2: Points = [
-    [(blValue + 0.5), brValue],
-    [(trValue + 0.5), brValue], 
-    [(trValue + 0.5), (tlValue + 0.5)], 
-    [(blValue + 0.5), (tlValue + 0.5)]
-  ]
+  to simplify total positioning, the code has been reformatted
+  const col2: Points = [[-5.5, -7], [-5, -7], [  -5,   -2], [  -5.5, -2]]
+*/}
 
-  // const poly3: Points = [[-4.99, -7], [-4.5, -7], [-4.5, -1.5], [-4.99, -1.5]]
-  const poly3: Points = [
-    [(blValue + 1.01), brValue],
-    [(trValue + 1), brValue], 
-    [(trValue + 1), (tlValue + 1.5)], 
-    [(blValue + 1.01), (tlValue + 1.5)]
-  ]
+const col2: Points = [
+  [(blValue + 0.5), brValue],
+  [(trValue + 0.5), brValue], 
+  [(trValue + 0.5), (tlValue + 0.5)], 
+  [(blValue + 0.5), (tlValue + 0.5)]
+]
 
-  // const poly4: Points = [[-4.99, -7], [-4.5, -7], [-4.5, -1.5], [-4.99, -1.5]]
-  const poly4: Points = [
-    [(blValue + 1.51), brValue],
-    [(trValue + 1.5), brValue], 
-    [(trValue + 1.5), (tlValue + 1)], 
-    [(blValue + 1.51), (tlValue + 1)]
-  ]
+// const col3: Points = [[-4.99, -7], [-4.5, -7], [-4.5, -1.5], [-4.99, -1.5]]
+const col3: Points = [
+  [(blValue + 1.01), brValue],
+  [(trValue + 1), brValue], 
+  [(trValue + 1), (tlValue + 1.5)], 
+  [(blValue + 1.01), (tlValue + 1.5)]
+]
 
-  // no comment :(
-  const poly5: Points = [
+// const col4: Points = [[-4.99, -7], [-4.5, -7], [-4.5, -1.5], [-4.99, -1.5]]
+const col4: Points = [
+  [(blValue + 1.51), brValue],
+  [(trValue + 1.5), brValue], 
+  [(trValue + 1.5), (tlValue + 1)], 
+  [(blValue + 1.51), (tlValue + 1)]
+]
+
+// no comment :(
+  const col5: Points = [
     [(blValue + 2), brValue],
     [(trValue + 2), brValue], 
     [(trValue + 2), (tlValue + 0.5)], 
     [(blValue + 2), (tlValue + 0.5)]
   ]
+  
+  const circleDrag = useMovablePoint([
+    Math.sqrt(49) / 7,
+    Math.sqrt(49) / 7,
+    //7, 3.5
+  ]);
 
+  const radius = vec.mag(circleDrag.point)
+  
+  
   return (
     <div className="App">
       <Mafs pan={false} height={height}>
@@ -101,26 +111,30 @@ function App() {
           point1={lineStart.point}
           point2={lineEnd.point}
         />
+
+        <Circle center={[7, 3.5]} radius={radius}/>
+
         <Polygon 
-          points={poly}
+          points={col1}
           color="#D73DFE"
         />
         <Polygon 
-          points={poly2}
+          points={col2}
           color="#D73DFE"
         />
         <Polygon 
-          points={poly3}
+          points={col3}
           color="#86FE3D"
         />
         <Polygon 
-          points={poly4}
+          points={col4}
           color="#86FE3D"
         />
         <Polygon 
-          points={poly5}
+          points={col5}
           color="#86FE3D"
         />
+        {circleDrag.element}
       </Mafs>
     </div>
   )
