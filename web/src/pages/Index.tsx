@@ -118,7 +118,7 @@ const Index: React.FC = (props) => {
       point2={lineEnd.point}
     />
 
-    {/* <Circle center={[7, 3.5]} radius={3} color="#FF2121"/> */}
+    <Circle center={[7, 3.5]} radius={3} color="#FF2121"/>
 
     {/* Begining of graphs */}
     <Polygon 
