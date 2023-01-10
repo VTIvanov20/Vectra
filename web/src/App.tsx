@@ -79,9 +79,15 @@ const col4: Points = [
   const circleDrag = useMovablePoint([
     Math.sqrt(49) / 7,
     Math.sqrt(49) / 7,
+    
     //7, 3.5
   ]);
 
+  /*
+  TODO:
+  closestDragPoint = abs(circleCenter - radius)
+  since the distance between the point and circle outline is a const, just modify the value
+  */
   const radius = vec.mag(circleDrag.point)
   
   
