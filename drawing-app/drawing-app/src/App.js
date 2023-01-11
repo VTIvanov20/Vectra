@@ -51,6 +51,9 @@ const getElementAtPosition = (x, y, elements) => {
     .find(element => element.position !== null);
 };
 
+const removeElement = (id, elements) => {
+  return elements.filter(element => element.id !== id);
+};
 
 const adjustElementCoordinates = element => {
   const { type, x1, y1, x2, y2 } = element;
@@ -190,6 +193,13 @@ const App = () => {
     setSelectionElement(null);
   };
 
+  const handleRemove = event => {
+    //event.target.value will give you the value of the selected radio button
+    const elements = removeElement(event.target.value, elements);
+    // Update the state with the new elements
+    setElements(elements);
+  };
+
   return (
     <div>
       <div style={{ position: "fixed"}}>
@@ -199,6 +209,8 @@ const App = () => {
         <label htmlFor="line">Line</label>
         <input type="radio" id="rectangle" checked={tool === "rectangle"} onChange={() => setTool("rectangle")}/>
         <label htmlFor="rectangle">Rectangle</label>
+        <input type="radio" id="remove" checked={tool === "remove"} onChange={handleRemove} value={element.id}/>
+        <label htmlFor="remove">Remove</label>
       </div>
       
       <canvas 
