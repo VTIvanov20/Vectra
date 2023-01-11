@@ -47,7 +47,6 @@ const isPointInTriangle = (x, y, x1, y1, x2, y2, x3, y3) => {
   return (0 <= a && a <= 1) && (0 <= b && b <= 1) && (0 <= c && c <= 1);
 }
 
-
 const positionWithinElement = (x, y, element) => {
   const { type, x1, x2, y1, y2 } = element;
   switch (type) {
@@ -142,6 +141,18 @@ const resizedCoordinates = (clientX, clientY, position, coordinates) => {
       return null; //should not really get here...
   }
 };
+
+const importImage = (url, x, y, width, height) => {
+  const image = new Image();
+  image.src = url;
+  image.onload = function() {
+    generator.image(x, y, image, {
+      width: width,
+      height: height
+    });
+  }
+};
+
 
 const App = () => {
   const [elements, setElements] = useState([]);
@@ -238,6 +249,12 @@ const App = () => {
     setElements(elements);
   };
 
+  const handleFileSelection = event => {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    importImage(url, x, y, width, height);
+  };
+
   const clearElements = () => {
     setElements([]);
   }  
@@ -258,7 +275,9 @@ const App = () => {
         <input type="radio" id="remove" checked={tool === "remove"} onChange={handleRemove} value={element.id}/>
         <label htmlFor="remove">Remove</label>
         <input type="radio" id="clear" checked={tool === "clear"} onChange={clearElements}/>
-        <label htmlFor="remove">Clear</label>
+        <label htmlFor="clear">Clear</label>
+        <input type="file" accept="image/*" onChange={(event) => handleFileSelection(event)}/>
+        <label htmlFor="file">Clear</label>
       </div>
       
       <canvas 
