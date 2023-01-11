@@ -200,6 +200,10 @@ const App = () => {
     setElements(elements);
   };
 
+  const clearElements = () => {
+    setElements([]);
+  }  
+
   return (
     <div>
       <div style={{ position: "fixed"}}>
@@ -211,6 +215,8 @@ const App = () => {
         <label htmlFor="rectangle">Rectangle</label>
         <input type="radio" id="remove" checked={tool === "remove"} onChange={handleRemove} value={element.id}/>
         <label htmlFor="remove">Remove</label>
+        <input type="radio" id="clear" checked={tool === "clear"} onChange={clearElements}/>
+        <label htmlFor="remove">Clear</label>
       </div>
       
       <canvas 
