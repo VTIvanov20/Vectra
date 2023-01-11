@@ -3,7 +3,7 @@ import rough from "roughjs/bundled/rough.esm";
 
 const generator = rough.generator();
 
-function createElement(id, x1, y1, x2, y2, type) {
+function createElement(id, x1, y1, x2, y2, x3, y3, type) {
   let roughElement;
   switch (type) {
     case "line":
@@ -16,10 +16,13 @@ function createElement(id, x1, y1, x2, y2, type) {
         const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         roughElement = generator.circle(x1, y1, radius);
         break;
+    case "triangle":
+      roughElement = generator.polygon([x1, y1], [x2, y2], [x3, y3]);
+      break;
     default:
         throw new Error(`Type not recognized: ${type}`);
   }
-  return {id, x1, y1, x2, y2, type, roughElement };
+  return {id, x1, y1, x2, y2, x3, y3, type, roughElement };
 }
 
 const nearPoint = (x, y, x1, y1, name) => {
@@ -33,6 +36,17 @@ const onLine = (x1, y1, x2, y2, x, y, maxDistance = 1) => {
   const offset = distance(a, b) - (distance(a, c) + distance(b, c));
   return Math.abs(offset) < maxDistance ? "inside" : null;
 };
+
+const isPointInTriangle = (x, y, x1, y1, x2, y2, x3, y3) => {
+  // Compute barycentric coordinates
+  const denominator = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3));
+  const a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denominator;
+  const b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denominator;
+  const c = 1 - a - b;
+  // Check if point is inside triangle
+  return (0 <= a && a <= 1) && (0 <= b && b <= 1) && (0 <= c && c <= 1);
+}
+
 
 const positionWithinElement = (x, y, element) => {
   const { type, x1, x2, y1, y2 } = element;
@@ -49,6 +63,11 @@ const positionWithinElement = (x, y, element) => {
       const bottomRight = nearPoint(x, y, x2, y2, "br");
       const inside = x >= x1 && x <= x2 && y >= y1 && y <= y2 ? "inside" : null;
       return topLeft || topRight || bottomLeft || bottomRight || inside;
+    case "circle":
+        const distance = Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2));
+        return distance <= radius ? "inside" : null;
+    case "triangle":
+        return isPointInTriangle(x, y, x1, y1, x2, y2, x3, y3) ? 'inside' : null
     default:
       throw new Error(`Type not recognised: ${type}`);
   }
@@ -67,8 +86,16 @@ const removeElement = (id, elements) => {
 };
 
 const adjustElementCoordinates = element => {
-  const { type, x1, y1, x2, y2 } = element;
-  if (type === "rectangle") {
+  const { type, x1, y1, x2, y2, x3, y3 } = element;
+  if (type === 'triangle') {
+    const minX = Math.min(x1, x2, x3);
+    const maxX = Math.max(x1, x2, x3);
+    const minY = Math.min(y1, y2, y3);
+    const maxY = Math.max(y1, y2, y3);
+    return { x1: minX, y1: minY, x2: maxX, y2: maxY };
+  } else if(type === "circle") {
+    return { x1: x1-radius, y1: y1-radius, x2: x1+radius, y2: y1+radius, radius};
+  } else if (type === "rectangle") {
     const minX = Math.min(x1, x2);
     const maxX = Math.max(x1, x2);
     const minY = Math.min(y1, y2);
@@ -224,6 +251,10 @@ const App = () => {
         <label htmlFor="line">Line</label>
         <input type="radio" id="rectangle" checked={tool === "rectangle"} onChange={() => setTool("rectangle")}/>
         <label htmlFor="rectangle">Rectangle</label>
+        <input type="radio" id="circle" checked={tool === "circle"} onChange={() => setTool("circle")}/>
+        <label htmlFor="circle">Circle</label>
+        <input type="radio" id="triangle" checked={tool === "triangle"} onChange={() => setTool("triangle")}/>
+        <label htmlFor="circle">Triangle</label>
         <input type="radio" id="remove" checked={tool === "remove"} onChange={handleRemove} value={element.id}/>
         <label htmlFor="remove">Remove</label>
         <input type="radio" id="clear" checked={tool === "clear"} onChange={clearElements}/>
