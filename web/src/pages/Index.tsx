@@ -3,7 +3,7 @@ import {
   CartesianCoordinates,
   Mafs, Text, Line, Circle,
   Polygon, Vector2,
-  useMovablePoint, vec, Plot
+  useMovablePoint, useStopwatch, Point
 } from 'mafs';
 import * as React from 'react';
 
@@ -23,7 +23,7 @@ const Index: React.FC = (props) => {
       window.removeEventListener('resize', handleResize);
     }
   })
-  
+
   
   const lineStart = useMovablePoint([3.35, -0.2]);
   const lineEnd = useMovablePoint([1.9, -0.2]);
@@ -92,6 +92,9 @@ const Index: React.FC = (props) => {
   // points have to be [4, -3]
   const triC = useMovablePoint([triArr[0] - 2, triArr[1] - 2.5])
 
+  // line animation
+  const { time, start, stop } = useStopwatch({ endTime: 2 })
+  useEffect(() => start(), [start])
 
   return <Mafs pan={false} height={height}>
     <CartesianCoordinates 
@@ -114,7 +117,7 @@ const Index: React.FC = (props) => {
     <Line.Segment 
       weight={5}
       color="#2F94FF"
-      point1={lineStart.point}
+      point1={[time * 2, -0.2]}
       point2={lineEnd.point}
     />
 
