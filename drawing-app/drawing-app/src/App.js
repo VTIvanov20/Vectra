@@ -4,10 +4,21 @@ import rough from "roughjs/bundled/rough.esm";
 const generator = rough.generator();
 
 function createElement(id, x1, y1, x2, y2, type) {
-  const roughElement = 
-  type === "line" 
-  ? generator.line(x1, y1, x2, y2)
-  : generator.rectangle(x1, y1, x2-x1, y2-y1)
+  let roughElement;
+  switch (type) {
+    case "line":
+        roughElement = generator.line(x1, y1, x2, y2);
+        break;
+    case "rectangle":
+        roughElement = generator.rectangle(x1, y1, x2-x1, y2-y1);
+        break;
+    case "circle":
+        const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        roughElement = generator.circle(x1, y1, radius);
+        break;
+    default:
+        throw new Error(`Type not recognized: ${type}`);
+  }
   return {id, x1, y1, x2, y2, type, roughElement };
 }
 
