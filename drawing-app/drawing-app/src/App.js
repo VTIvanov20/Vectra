@@ -153,12 +153,23 @@ const importImage = (url, x, y, width, height) => {
   }
 };
 
+const moveElements = (x, y, elements) => {
+  elements.forEach(element => {
+      element.x1 += x;
+      element.y1 += y;
+      element.x2 += x;
+      element.y2 += y;
+  });
+};
+
 
 const App = () => {
   const [elements, setElements] = useState([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("line");
   const [selectedElement, setSelectionElement] = useState(null);
+  const [isCanvasClicked, setIsCanvasClicked] = useState(false);
+
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -179,6 +190,10 @@ const App = () => {
   };
 
   const handleMouseDown = event => {
+
+    setIsCanvasClicked(true);
+    handleCanvasMouseDown(event);
+
     const { clientX, clientY } = event;
 
     if (tool === "selection") {
@@ -205,6 +220,11 @@ const App = () => {
   };
 
   const handleMouseMove = event => {
+
+    if (isCanvasClicked) { // added this line
+      handleCanvasMouseMove(event); // added this line
+    }
+
     const { clientX, clientY } = event;
 
     if (tool === "selection") {
@@ -257,7 +277,29 @@ const App = () => {
 
   const clearElements = () => {
     setElements([]);
-  }  
+  };
+
+  const handleMoveClick = () => {
+    setIsMovingElements(true);
+  };
+
+  const handleCanvasMouseDown = (event) => {
+    if (isMovingElements) {
+        setInitialCoordinates({ x: event.clientX, y: event.clientY });
+        setIsCanvasClicked(true);
+    }
+  };
+
+  const handleCanvasMouseMove = (event) => {
+      if (isMovingElements && isCanvasClicked) {
+          const { x, y } = event;
+          const { x: initialX, y: initialY } = initialCoordinates;
+          const dx = x - initialX;
+          const dy = y - initialY;
+          moveElements(dx, dy, selectedElements);
+          setInitialCoordinates({ x, y });
+      }
+  };
 
   return (
     <div>
@@ -277,7 +319,9 @@ const App = () => {
         <input type="radio" id="clear" checked={tool === "clear"} onChange={clearElements}/>
         <label htmlFor="clear">Clear</label>
         <input type="file" accept="image/*" onChange={(event) => handleFileSelection(event)}/>
-        <label htmlFor="file">Clear</label>
+        <label htmlFor="file">Image</label>
+        <input type="radio" name="drawingOption" onClick={handleMoveClick} />
+        <label htmlFor="moveAll">MoveAll</label>
       </div>
       
       <canvas 
