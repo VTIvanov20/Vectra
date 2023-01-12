@@ -1,16 +1,20 @@
+import * as React from 'react';
 import { useEffect, useState } from "react";
 import {
   CartesianCoordinates,
-  Mafs, Text, Line, Circle,
+  Mafs, Text as MafsText, Line, Circle,
   Polygon, Vector2,
   useMovablePoint, useStopwatch, Point
 } from 'mafs';
-import * as React from 'react';
+import { 
+  Box, Text as ChakraText, Center
+ } from "@chakra-ui/react"
 
 type GraphPoints = Vector2[];
 
 const Index: React.FC = (props) => {
   let [height, setHeight] = useState(window.innerHeight);
+  let [width, setWidth] = useState(window.innerWidth);
   
   useEffect(() => {
     function handleResize(this: Window, ev: UIEvent) {
@@ -96,7 +100,9 @@ const Index: React.FC = (props) => {
   const { time, start, stop } = useStopwatch({ endTime: 2 })
   useEffect(() => start(), [start])
 
-  return <Mafs pan={false} height={height}>
+  return <div className="main-parent">
+    <div className="mafs-landing">
+    <Mafs pan={false} height={height}>
     <CartesianCoordinates 
     xAxis={{
       axis: false,
@@ -110,9 +116,9 @@ const Index: React.FC = (props) => {
     }}
     subdivisions={false} />
     
-    <Text x={0} y={0} size={90} attach="n">
+    <MafsText x={0} y={0} size={90} attach="n">
       Mathematics made visual
-    </Text>
+    </MafsText>
     {/*TODO: Fix actual font import to be CMU Serif Upright Italic*/}
     <Line.Segment 
       weight={5}
@@ -157,6 +163,45 @@ const Index: React.FC = (props) => {
     {triB.element}
     {triC.element}
   </Mafs>
+    </div>
+    <div className="second">
+      <Box 
+        width={'100vw'} 
+        height={'100vh'}
+        bgColor={'#020207'}
+      >
+
+      {/* <ChakraText
+        color={'#fff'}
+        marginTop={"49vh"}
+        marginLeft={"49vw"}
+        fontFamily={'CMU Serif, serif'}
+      >
+        Designed for interactivity.
+      </ChakraText> */}
+      <Center
+        w={'inherit'}
+        h={'inherit'}
+        color={'#fff'}
+        fontFamily={'CMU Serif, serif'}
+        margin={'0 auto'}
+        fontSize={'4.3rem'}
+      >
+        Designed for interactivity.
+      </Center>
+      <Center
+        color={'#bbb'}
+        fontFamily={'Raleway, serif'}
+        margin={'-35vh'}
+        fontSize={'3.3rem'}
+        letterSpacing={8}
+      >
+        (students + teachers) + parents
+      </Center>
+    </Box>
+    </div>
+
+  </div>
 }
 
 export default Index;
