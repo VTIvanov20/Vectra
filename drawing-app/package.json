@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "perfect-freehand": "^1.2.0",
     "roughjs": "^4.5.2"
   }
 }
