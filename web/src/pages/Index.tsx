@@ -243,25 +243,25 @@ const Index: React.FC = (props) => {
         >
           {/* !!TODO: CMU SERIF -> CMU SERIF UPRIGHT */}
           {/* TODO: rework overflow: hidden to utilise alternative postitioning */}
-          <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip'>
-            <Heading as='h1' marginTop={'8vh'} marginLeft={'2vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif, serif'}>
+          <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='#020207' color={'#fff'}>
+            <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif, serif'}>
               Web
             </Heading>
 
             {/* add bullet points as text decor */}
-            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'5vw'}>
+            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
               <ListItem>Online editing platform.</ListItem>
               <ListItem>Designed for classrooms.</ListItem>
               <ListItem>Clean and modern looks.</ListItem>
             </UnorderedList>
           </GridItem>
 
-          <GridItem rowStart={3} rowSpan={2} colSpan={3} bg='papayawhip'> 
-            <Heading as='h1' marginTop={'8vh'} marginLeft={'2vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Modern, serif'}>
+          <GridItem rowStart={3} rowSpan={2} colSpan={3} bg='#020207' color={'#fff'}> 
+            <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Modern, serif'}>
               Mobile
             </Heading>
 
-            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'5vw'}>
+            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
               <ListItem>Online editing platform.</ListItem>
               <ListItem>Designed for classrooms.</ListItem>
               <ListItem>Clean and modern looks.</ListItem>
@@ -270,6 +270,7 @@ const Index: React.FC = (props) => {
           
           <GridItem rowSpan={4} colSpan={1} bg='coral'> 
             <img src={'#'}/>
+            img goes here
           </GridItem>
           
           <GridItem rowSpan={4} colSpan={2} bg='tomato'>
