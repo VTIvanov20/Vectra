@@ -53,9 +53,9 @@ const positionWithinElement = (x, y, element) => {
       const inside = x >= x1 && x <= x2 && y >= y1 && y <= y2 ? "inside" : null;
       return topLeft || topRight || bottomLeft || bottomRight || inside;
     case "circle":
-      const dist = Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2));
-      if (dist <= element.radius) return "inside";
-        break;
+      const dist = Math.sqrt(Math.pow(x - element.x1, 2) + Math.pow(y - element.y1, 2));
+      return (dist <= element.radius) ? "inside" : null;
+
     case "pencil":
       const betweenAnyPoint = element.points.some((point, index) => {
         const nextPoint = element.points[index + 1];
@@ -87,16 +87,16 @@ const adjustElementCoordinates = element => {
       const minY = Math.min(y1, y2);
       const maxY = Math.max(y1, y2);
       return { x1: minX, y1: minY, x2: maxX, y2: maxY };
+    case "circle": 
+      return { x1: x1, y1: y1, radius: Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)) };
     case "line":
     case "pencil":
-    case "text":
+    case "text": 
       if (x1 < x2 || (x1 === x2 && y1 < y2)) {
         return { x1, y1, x2, y2 };
       } else {
         return { x1: x2, y1: y2, x2: x1, y2: y1 };
       }
-    case "circle":
-      return { x1, y1, x2 };
     default:
       throw new Error(`Type not recognized: ${type}`);
   }
@@ -201,8 +201,9 @@ const App = () => {
         roughCanvas.draw(element.roughElement);
         break;
       case "circle":
+        const radius = Math.sqrt(Math.pow(element.x2 - element.x1, 2) + Math.pow(element.y2 - element.y1, 2));
         context.beginPath();
-        context.arc(element.x1, element.y1, element.x2, 0, 2 * Math.PI);
+        context.arc(element.x1, element.y1, radius, 0, 2 * Math.PI);
         context.stroke();
         break;
       case "pencil":
@@ -505,7 +506,7 @@ const App = () => {
       ) : null}
       <canvas
         id="canvas"
-        width={window.innerWidth}
+        width={1000/*window.innerWidth*/}
         height={window.innerHeight}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
