@@ -168,57 +168,65 @@ const Index: React.FC = (props) => {
       <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
         <Box w={'100vw'} h={'100vh'} display={'inline-flex'}> {/* height value must sum to 100vh */}
 
-            {/* TODO: add rotation to all elemetns */}
-          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'}>
+          {/* TODO: add rotation to all elemetns */}
+          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'}>
               <ChakraText>2</ChakraText>
               <hr />
               <ChakraText>3</ChakraText>
           </Box>
 
-          <Box marginTop={'23vh'} marginLeft={'10vw'}textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
+          <Box marginTop={'23vh'} marginLeft={'10vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
             <ChakraText>π</ChakraText>
           </Box>
 
-          <Box marginTop={'5vh'} marginLeft={'7vw'}textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'}>
+          <Box marginTop={'5vh'} marginLeft={'7vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'}>
             <ChakraText>
               √
               <ChakraText as='sub'>2</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'7vw'}textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'}>
+          <Box marginTop={'20vh'} marginLeft={'7vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'}>
             <ChakraText>p(x)</ChakraText>
           </Box>
 
           {/* right side of falling numbers starts here */}
 
-          <Box marginTop={'23vh'} marginLeft={'28vw'}textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'}>
+          <Box marginTop={'23vh'} marginLeft={'28vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'}>
             <ChakraText>1</ChakraText>
           </Box>
 
-          <Box marginTop={'8vh'} marginLeft={'8vw'}textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} >
+          <Box marginTop={'8vh'} marginLeft={'8vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} >
             <ChakraText>
               e
               <ChakraText as='sup' fontSize={'4rem'}> 3</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'35vh'} marginLeft={'3vw'}textAlign={'center'} color={'#bbb'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} >
+          <Box marginTop={'35vh'} marginLeft={'3vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} >
             <ChakraText>
               log
               <ChakraText as='sub' fontSize={'2rem'}> 2</ChakraText> 3
             </ChakraText>
           </Box>
+          
         </Box>
         <Center marginTop={'-90vh'} w={'100vw'} h={'85vh'}> {/* height value must sum to 100vh */}
           <Box>
             <ChakraText color={'#fff'} textAlign={'center'} fontSize={'6.5rem'} fontFamily={'CMU Serif, serif'}>
               Designed for interactivity
             </ChakraText>
-            <br />
-            <ChakraText color={'#bbb'} textAlign={'center'} fontSize={'3.3rem'} fontFamily={'Raleway, serif'} letterSpacing={8}>
-              (students + teachers) + parents
-            </ChakraText>
+            <br/>
+            <Box alignItems={'center'} textAlign={'center'}>
+              <ChakraText color={'#bbb'} fontSize={'3.3rem'} fontFamily={'Raleway, serif'} letterSpacing={12} display={'inline-flex'}>
+                (
+                  <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
+                + 
+                  <ChakraText bgGradient={'linear(to-r, #FF862F, #FF2F2F)'} bgClip={'text'}>teachers</ChakraText> 
+                )+
+                  <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText>
+              </ChakraText>
+            </Box>
           </Box>
         </Center>
       </Box>
