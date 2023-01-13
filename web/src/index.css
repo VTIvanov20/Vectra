@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -23,20 +23,10 @@
   overflow-x: hidden;
 }
 
-#root, #second {
+/* #root, #second, #third {
   height: 100vh;
   width: 100vw;
-}
-
-span {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-#blue {
-  background: linear-gradient(90deg, #2F94FF 0%, #2F37FF 100%);
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {

@@ -7,7 +7,9 @@ import {
   useMovablePoint, useStopwatch, Point
 } from 'mafs';
 import { 
-  Box, Text as ChakraText, Center
+  Box, Text as ChakraText, Heading, 
+  Center, Divider, Grid, GridItem,
+  List, ListItem, ListIcon, UnorderedList,
  } from "@chakra-ui/react"
 
 type GraphPoints = Vector2[];
@@ -171,11 +173,11 @@ const Index: React.FC = (props) => {
           {/* TODO: add rotation to all elemetns */}
           <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'}>
               <ChakraText>2</ChakraText>
-              <hr />
+              <Divider />
               <ChakraText>3</ChakraText>
           </Box>
 
-          <Box marginTop={'23vh'} marginLeft={'10vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
+          <Box marginTop={'20vh'} marginLeft={'9vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
             <ChakraText>π</ChakraText>
           </Box>
 
@@ -229,6 +231,56 @@ const Index: React.FC = (props) => {
             </Box>
           </Box>
         </Center>
+      </Box>
+    </div>
+    <div className="third">
+      <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
+        <Grid
+          h='49vw'
+          templateRows='repeat(4, 1fr)'
+          templateColumns='repeat(6, 1fr)'
+          gap={4}
+        >
+          {/* !!TODO: CMU SERIF -> CMU SERIF UPRIGHT */}
+          {/* TODO: rework overflow: hidden to utilise alternative postitioning */}
+          <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip'>
+            <Heading as='h1' marginTop={'8vh'} marginLeft={'2vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif, serif'}>
+              Web
+            </Heading>
+
+            {/* add bullet points as text decor */}
+            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'5vw'}>
+              <ListItem>Online editing platform.</ListItem>
+              <ListItem>Designed for classrooms.</ListItem>
+              <ListItem>Clean and modern looks.</ListItem>
+            </UnorderedList>
+          </GridItem>
+
+          <GridItem rowStart={3} rowSpan={2} colSpan={3} bg='papayawhip'> 
+            <Heading as='h1' marginTop={'8vh'} marginLeft={'2vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Modern, serif'}>
+              Mobile
+            </Heading>
+
+            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'5vw'}>
+              <ListItem>Online editing platform.</ListItem>
+              <ListItem>Designed for classrooms.</ListItem>
+              <ListItem>Clean and modern looks.</ListItem>
+            </UnorderedList>
+          </GridItem>
+          
+          <GridItem rowSpan={4} colSpan={1} bg='coral'> 
+            <img src={'#'}/>
+          </GridItem>
+          
+          <GridItem rowSpan={4} colSpan={2} bg='tomato'>
+            <Mafs height={height} />
+          </GridItem>
+          
+          {/* ====*/}
+          {/* <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip' />
+          <GridItem rowStart={3} rowSpan={4} colSpan={3} bg='papayawhip' />
+          <GridItem rowSpan={4} colSpan={3} bg='tomato' /> */}
+        </Grid>
       </Box>
     </div>
 
