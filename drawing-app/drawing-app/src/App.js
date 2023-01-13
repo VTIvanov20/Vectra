@@ -166,46 +166,6 @@ const getSvgPathFromStroke = stroke => {
   return d.join(" ");
 };
 
-const drawElement = (roughCanvas, context, element) => {
-  switch (element.type) {
-    case "line":
-    case "rectangle":
-      roughCanvas.draw(element.roughElement);
-      break;
-    case "pencil":
-      const stroke = getSvgPathFromStroke(getStroke(element.points, {
-        size: 16,
-        thinning: 0.7,
-        /* for fun
-        size: 32,
-        thinning: 0.5,
-        smoothing: 0.5,
-        streamline: 0.5,
-        easing: (t) => t,
-        start: {
-          taper: 0,
-          easing: (t) => t,
-          cap: true
-        },
-        end: {
-          taper: 100,
-          easing: (t) => t,
-          cap: true
-        }
-        */
-      }));
-      context.fill(new Path2D(stroke));
-      break;
-    case "text":
-      context.textBaseline = "top";
-      context.font = "24px sans-serif";
-      context.fillText(element.text, element.x1, element.y1);
-      break;
-    default:
-      throw new Error(`Type not recognised: ${element.type}`);
-  }
-};
-
 const adjustmentRequired = type => ["line", "rectangle"].includes(type);
 
 const App = () => {
@@ -214,7 +174,11 @@ const App = () => {
   const [tool, setTool] = useState("pencil");
   const [selectedElement, setSelectedElement] = useState(null);
   const textAreaRef = useRef();
-  
+  const [pencilSize, setPencilSize] = useState(16);
+
+  const handlePencilSizeChange = (event) => {
+    setPencilSize(event.target.value);
+  }
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -254,10 +218,50 @@ const App = () => {
     }
   }, [action, selectedElement]);
 
+  const drawElement = (roughCanvas, context, element) => {
+    switch (element.type) {
+      case "line":
+      case "rectangle":
+        roughCanvas.draw(element.roughElement);
+        break;
+      case "pencil":
+        const stroke = getSvgPathFromStroke(getStroke(element.points, {
+          size: pencilSize,
+          thinning: 0.7,
+          /* for fun
+          size: 32,
+          thinning: 0.5,
+          smoothing: 0.5,
+          streamline: 0.5,
+          easing: (t) => t,
+          start: {
+            taper: 0,
+            easing: (t) => t,
+            cap: true
+          },
+          end: {
+            taper: 100,
+            easing: (t) => t,
+            cap: true
+          }
+          */
+        }));
+        context.fill(new Path2D(stroke));
+        break;
+      case "text":
+        context.textBaseline = "top";
+        context.font = "24px sans-serif";
+        context.fillText(element.text, element.x1, element.y1);
+        break;
+      default:
+        throw new Error(`Type not recognised: ${element.type}`);
+    }
+  };
+
   const removeElement = (x1, y1, x2, y2) => {
     const newElements = elements.filter(element => !(element.x1 === x1 && element.y1 === y1 && element.x2 === x2 && element.y2 === y2));
     setElements(newElements);
-}
+  }
 
   const updateElement = (id, x1, y1, x2, y2, type, options) => {
     const elementsCopy = [...elements];
@@ -450,7 +454,14 @@ const App = () => {
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
         <button onClick={() => removeAllElements(elements, setElements)}>Clear</button>
-
+        <label>Pencil Size:</label>
+        <select onChange={handlePencilSizeChange}>
+          <option value={8}>8</option>
+          <option value={12}>12</option>
+          <option value={16}>16</option>
+          <option value={20}>20</option>
+          <option value={24}>24</option>
+        </select>
       </div>
       {action === "writing" ? (
         <textarea
