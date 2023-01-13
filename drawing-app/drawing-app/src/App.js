@@ -272,8 +272,8 @@ const App = () => {
   useEffect(() => {
     const textArea = textAreaRef.current;
     if (action === "writing") {
-      textArea.focus();
-      textArea.value = selectedElement.text;
+      // textArea.focus();
+      // textArea.value = selectedElement.text;
     }
   }, [action, selectedElement]);
 
