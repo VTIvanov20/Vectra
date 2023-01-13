@@ -165,40 +165,19 @@ const Index: React.FC = (props) => {
   </Mafs>
     </div>
     <div className="second">
-      <Box 
-        width={'100vw'} 
-        height={'100vh'}
-        bgColor={'#020207'}
-      >
-
-      {/* <ChakraText
-        color={'#fff'}
-        marginTop={"49vh"}
-        marginLeft={"49vw"}
-        fontFamily={'CMU Serif, serif'}
-      >
-        Designed for interactivity.
-      </ChakraText> */}
-      <Center
-        w={'inherit'}
-        h={'inherit'}
-        color={'#fff'}
-        fontFamily={'CMU Serif, serif'}
-        margin={'0 auto'}
-        fontSize={'4.3rem'}
-      >
-        Designed for interactivity.
-      </Center>
-      <Center
-        color={'#bbb'}
-        fontFamily={'Raleway, serif'}
-        margin={'-35vh'}
-        fontSize={'3.3rem'}
-        letterSpacing={8}
-      >
-        (students + teachers) + parents
-      </Center>
-    </Box>
+      <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
+        <Center w={'100vw'} h={'100vh'}>
+          <Box>
+            <ChakraText color={'#fff'} textAlign={'center'} fontSize={'4.3rem'} fontFamily={'CMU Serif, serif'}>
+              Designed for interactivity
+            </ChakraText>
+            <br />
+            <ChakraText color={'#bbb'} textAlign={'center'} fontSize={'3.3rem'} fontFamily={'Raleway, serif'} letterSpacing={8}>
+              (students + teachers) + parents
+            </ChakraText>
+          </Box>
+        </Center>
+      </Box>
     </div>
 
   </div>
