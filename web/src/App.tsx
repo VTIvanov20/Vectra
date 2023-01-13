@@ -7,7 +7,7 @@ const IndexPage = lazy(() => import('./pages/Index'));
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/index",
     element: <IndexPage />,
     children: []
   }
