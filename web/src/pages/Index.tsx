@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { useEffect, useState } from "react";
 import {
-  CartesianCoordinates,
-  Mafs, Text as MafsText, Line, Circle,
-  Polygon, Vector2,
-  useMovablePoint, useStopwatch, Point
+  Mafs, CartesianCoordinates,
+  Text as MafsText, Vector2,
+  Polygon, Line, Circle, Point,
+  useMovablePoint, useStopwatch
 } from 'mafs';
 import { 
-  Box, Text as ChakraText, Heading, 
-  Center, Divider, Grid, GridItem,
-  List, ListItem, ListIcon, UnorderedList,
+  Box, Center, Divider,
+  Text as ChakraText, Heading, Image,
+  Grid, GridItem,
+  List, ListItem, ListIcon, UnorderedList
  } from "@chakra-ui/react"
+import { triggerAsyncId } from 'async_hooks';
+import { number } from 'prop-types';
 
 type GraphPoints = Vector2[];
 
@@ -39,12 +42,20 @@ const Index: React.FC = (props) => {
 
   const triArr2: Array<number> = [-1.5, -2]
 
-  // used as base
-  const triA2 = useMovablePoint([triArr2[0] - 0.5, triArr2[1]])
+  // used as base; scrambled due to argument passing by Mafs
+  // labeled as C
+  const triA2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] + 0.5])
 
+  // labeled as A
   const triB2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] - 2.5])
-
+  
+  //labeled as B
   const triC2 = useMovablePoint([triArr2[0] + 3.5, triArr2[1] - 2.5])
+  
+  // console.log(Math.sqrt(Math.pow((triArr2[0] - 1.5)-(triArr2[0] - 1.5),2)+Math.pow(((triArr2[1] + 0.5)-(triArr2[1] - 2.5)),2)) / 2)
+  // 
+  // console.log((triArr2[0] + 3.5) - (triArr2[0] - 1.5))
+  // console.log((triArr2[0] - 0.5) - (triArr2[0] + 3.5))
   
   // end of instance
 
@@ -286,7 +297,7 @@ const Index: React.FC = (props) => {
           </GridItem>
           
           <GridItem rowSpan={4} colSpan={1} bg='#020207'> 
-            <img src={'#'}/>
+            <Image src='web/src/assets/bracket.png' alt='Image of a curly bracket that points to the current selected mode of examples'/>
             img goes here
           </GridItem>
           
@@ -338,14 +349,29 @@ const Index: React.FC = (props) => {
 
               <Polygon 
                 points={[triA2.point, triB2.point, triC2.point]}
-                color="#2F94FF"
+                color="#fff"
               />
               {/* <Point></Point> */}
+              <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
+                B
+              </MafsText>
+
+              {/* <Point x={Math.abs(triC2 - triA2)}/> */}
+
+              {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
+              <MafsText x={triB2.x - 0.25} y={triB2.y - 0.3} size={35}>
+                C
+              </MafsText>
+              
+              <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
+                A
+              </MafsText>
 
               {triA2.element}
               {triB2.element}
               {triC2.element}
             </Mafs>
+            {/* Add alt text for all math views and think about accessibility */}
           </GridItem>
           
           {/* ====*/}
