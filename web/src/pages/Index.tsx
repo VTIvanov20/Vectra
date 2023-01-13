@@ -30,7 +30,24 @@ const Index: React.FC = (props) => {
     }
   })
 
+  // second Mafs instance
+  const assumeX = -0.33
+  const assumeY = 3.7
+
+  const answerX = -1.25
+  const answerY = 0.67
+
+  const triArr2: Array<number> = [-1.5, -2]
+
+  // used as base
+  const triA2 = useMovablePoint([triArr2[0] - 0.5, triArr2[1]])
+
+  const triB2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] - 2.5])
+
+  const triC2 = useMovablePoint([triArr2[0] + 3.5, triArr2[1] - 2.5])
   
+  // end of instance
+
   const lineStart = useMovablePoint([3.35, -0.2]);
   const lineEnd = useMovablePoint([1.9, -0.2]);
   
@@ -268,13 +285,67 @@ const Index: React.FC = (props) => {
             </UnorderedList>
           </GridItem>
           
-          <GridItem rowSpan={4} colSpan={1} bg='coral'> 
+          <GridItem rowSpan={4} colSpan={1} bg='#020207'> 
             <img src={'#'}/>
             img goes here
           </GridItem>
           
-          <GridItem rowSpan={4} colSpan={2} bg='tomato'>
-            <Mafs height={height} />
+          <GridItem rowSpan={4} colSpan={2} bg='#020207'>
+            <Mafs height={height}>
+              <CartesianCoordinates 
+                xAxis={{
+                  axis: false,
+                  lines: 0.5,
+                  labels: false
+                }}
+                yAxis={{
+                  axis: false,
+                  lines: 0.5,
+                  labels: false
+                }}
+                subdivisions={false}
+              />
+
+                {/* x: -0.3 | y: 3.7 */}
+              <MafsText x={assumeX} y={assumeY} size={45} attach="w">
+                Assume that
+              </MafsText>
+              <Line.Segment 
+                weight={5}
+                color="#2F94FF"
+                point1={[-3, 3.5]}
+                point2={[-0.25, 3.5]}
+              />
+              <MafsText x={assumeX + 2.7} y={assumeY - 0.7} size={45} attach={"w"}>
+                Solve for the hypothenuse
+              </MafsText>
+              <MafsText x={assumeX - 0.5} y={assumeY - 1.4} size={45} attach={"w"}>
+                of △ABC.              
+              </MafsText>
+
+              {/* end of problem code */}
+              {/* start of solution code */}
+
+              <MafsText x={answerX} y={answerY} size={45} attach={"w"}>
+                Solution
+              </MafsText>
+              <Line.Segment                
+                weight={5}
+                color="#2F94FF"
+                point1={[answerX - 1.7, answerY - 0.25]}
+                point2={[answerX, answerY - 0.25]}
+              />
+
+              <Polygon 
+                points={[triA2.point, triB2.point, triC2.point]}
+                color="#2F94FF"
+              />
+              {/* <Point></Point> */}
+
+              {triA2.element}
+              {triB2.element}
+              {triC2.element}
+            </Mafs>
           </GridItem>
           
           {/* ====*/}
