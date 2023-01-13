@@ -382,6 +382,13 @@ const Index: React.FC = (props) => {
       </Box>
     </div>
 
+    <div className="fourth">
+      <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
+        <svg width="1467" height="1079" viewBox="0 0 1467 1079" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1086.5 0H1466.5V1079H0L1086.5 0Z" fill="#FED7D7"/>
+        </svg>
+      </Box>
+    </div>
   </div>
 }
 
