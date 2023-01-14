@@ -23,11 +23,6 @@
   overflow-x: hidden;
 }
 
-svg {
-  margin-right: -10vw;
-  height: 100vh;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -12,7 +12,7 @@ import {
   Grid, GridItem,
   List, ListItem, ListIcon, UnorderedList
  } from "@chakra-ui/react"
-import styled from "@emotion/styled"
+import styled from "@emotion/styled"  
 import { triggerAsyncId } from 'async_hooks';
 import { number } from 'prop-types';
 import { useResolution } from '../util/useResolution';
@@ -136,7 +136,7 @@ const Index: React.FC = (props) => {
     }}
     subdivisions={false} />
     
-    <MafsText x={0} y={0} size={90} attach="n">
+    <MafsText x={0} y={0} size={90} attach="n" >
       Mathematics made visual
     </MafsText>
     {/*TODO: Fix actual font import to be CMU Serif Upright Italic*/}
@@ -233,7 +233,7 @@ const Index: React.FC = (props) => {
         </Box>
         <Center marginTop={'-90vh'} w={'100vw'} h={'85vh'}> {/* height value must sum to 100vh */}
           <Box>
-            <ChakraText color={'#fff'} textAlign={'center'} fontSize={'6.5rem'} fontFamily={'CMU Serif, serif'}>
+            <ChakraText color={'#fff'} textAlign={'center'} fontSize={'6.5rem'} fontFamily={'CMU Serif Upright, serif'}>
               Designed for interactivity
             </ChakraText>
             <br/>
@@ -258,15 +258,13 @@ const Index: React.FC = (props) => {
         templateRows={'repeat(4, 1fr)'}
         templateColumns={'repeat(6, 1fr)'}
       >
-        {/* !!TODO: CMU SERIF -> CMU SERIF UPRIGHT */}
-        {/* TODO: rework overflow: hidden to utilise alternative postitioning */}
         <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}>
-          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif, serif'}>
+          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             Web
           </Heading>
 
           {/* add bullet points as text decor */}
-          <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
+          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'}>
             <ListItem>Online editing platform.</ListItem>
             <ListItem>Designed for classrooms.</ListItem>
             <ListItem>Clean and modern looks.</ListItem>
@@ -274,11 +272,11 @@ const Index: React.FC = (props) => {
         </GridItem>
 
         <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}> 
-          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Modern, serif'}>
+          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             Mobile
           </Heading>
 
-          <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
+          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'}>
             <ListItem>Online editing platform.</ListItem>
             <ListItem>Designed for classrooms.</ListItem>
             <ListItem>Clean and modern looks.</ListItem>
@@ -291,7 +289,7 @@ const Index: React.FC = (props) => {
         </GridItem>
         
         <GridItem rowSpan={4} colSpan={2} bg={'#020207'}>
-          <Mafs height={height}>
+          <Mafs height={height} pan={false}>
             <CartesianCoordinates 
               xAxis={{
                 axis: false,
@@ -398,6 +396,9 @@ const Index: React.FC = (props) => {
           // }}
         >
           3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223
+        </GridItem>
+        <GridItem rowStart={}>
+
         </GridItem>
         <GridItem 
           rowStart={2} rowSpan={1} 
