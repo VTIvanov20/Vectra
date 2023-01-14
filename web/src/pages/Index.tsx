@@ -14,24 +14,12 @@ import {
  } from "@chakra-ui/react"
 import { triggerAsyncId } from 'async_hooks';
 import { number } from 'prop-types';
+import { useResolution } from '../util/useResolution';
 
 type GraphPoints = Vector2[];
 
 const Index: React.FC = (props) => {
-  let [height, setHeight] = useState(window.innerHeight);
-  let [width, setWidth] = useState(window.innerWidth);
-  
-  useEffect(() => {
-    function handleResize(this: Window, ev: UIEvent) {
-      setHeight(window.innerHeight);
-    }
-    
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-  })
+  let [width, height] = useResolution();
 
   // second Mafs instance
   const assumeX = -0.33
