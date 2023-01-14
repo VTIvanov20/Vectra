@@ -12,9 +12,11 @@ import {
   Grid, GridItem,
   List, ListItem, ListIcon, UnorderedList
  } from "@chakra-ui/react"
+import styled from "@emotion/styled"
 import { triggerAsyncId } from 'async_hooks';
 import { number } from 'prop-types';
 import { useResolution } from '../util/useResolution';
+import { text } from 'stream/consumers';
 
 type GraphPoints = Vector2[];
 
@@ -376,11 +378,60 @@ const Index: React.FC = (props) => {
         templateColumns={'repeat(7, 1fr)'}
         gap={4}
         backgroundColor={'#020207'}
+        // sanity check?
       >
-        <GridItem rowStart={2} rowSpan={1} colStart={2} colSpan={2} bg='tomato' />
-        <GridItem rowStart={2} rowSpan={1} colStart={4} colSpan={1} bg='papayawhip' />
-        <GridItem rowStart={3} rowSpan={1} colStart={2} colSpan={3} bg='papayawhip' />
-        <GridItem rowStart={2} rowSpan={2} colStart={5} colSpan={2} bg='tomato' />
+        <GridItem 
+          rowStart={2} rowSpan={1} 
+          colStart={2} colSpan={2} 
+          bg='tomato'
+          overflow={'hidden'}
+          fontSize={'2rem'}
+          _hover={{
+            backgroundColor: '#000',
+            border: '3px dashed #2F94FF',
+            color: '#fff',
+            userSelct: 'none',
+            textAlign: 'center',
+          }}
+          // _before={{
+          //   content: "Web port!"
+          // }}
+        >
+          3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223
+        </GridItem>
+        <GridItem 
+          rowStart={2} rowSpan={1} 
+          colStart={4} colSpan={1} 
+          bg='papayawhip'
+          _hover={{
+            backgroundColor: '#000',
+            border: '3px dashed #2F94FF'
+          }}
+        >
+          
+        </GridItem>
+          <GridItem 
+          rowStart={3} rowSpan={1} 
+          colStart={2} colSpan={3} 
+          bg='papayawhip'
+          _hover={{
+            backgroundColor: '#000',
+            border: '3px dashed #2F94FF'
+          }}
+        >
+          
+        </GridItem>
+        <GridItem 
+          rowStart={2} rowSpan={2} 
+          colStart={5} colSpan={2} 
+          bg='tomato'
+          _hover={{
+            backgroundColor: '#000',
+            border: '3px dashed #2F94FF'
+          }}
+        >
+          
+        </GridItem>
       </Grid>
     </div>
   </div>
