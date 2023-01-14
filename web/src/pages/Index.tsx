@@ -182,7 +182,7 @@ const Index: React.FC = (props) => {
     {triC.element}
   </Mafs>
     </div>
-    <div className="second">
+    <div className={"second"}>
       <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
         <Box w={'100vw'} h={'100vh'} display={'inline-flex'}> {/* height value must sum to 100vh */}
 
@@ -193,35 +193,35 @@ const Index: React.FC = (props) => {
               <ChakraText>3</ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'9vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
+          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
             <ChakraText>π</ChakraText>
           </Box>
 
-          <Box marginTop={'5vh'} marginLeft={'7vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'}>
+          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'}>
             <ChakraText>
               √
               <ChakraText as='sub'>2</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'7vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'}>
+          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'}>
             <ChakraText>p(x)</ChakraText>
           </Box>
 
           {/* right side of falling numbers starts here */}
 
-          <Box marginTop={'23vh'} marginLeft={'28vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'}>
+          <Box marginTop={'23vh'} marginLeft={'28vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'}>
             <ChakraText>1</ChakraText>
           </Box>
 
-          <Box marginTop={'8vh'} marginLeft={'8vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} >
+          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} >
             <ChakraText>
               e
               <ChakraText as='sup' fontSize={'4rem'}> 3</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'35vh'} marginLeft={'3vw'}textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} >
+          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} >
             <ChakraText>
               log
               <ChakraText as='sub' fontSize={'2rem'}> 2</ChakraText> 3
@@ -250,132 +250,138 @@ const Index: React.FC = (props) => {
       </Box>
     </div>
     <div className="third">
-      <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
-        <Grid
-          h='49vw'
-          templateRows='repeat(4, 1fr)'
-          templateColumns='repeat(6, 1fr)'
-          gap={4}
-        >
-          {/* !!TODO: CMU SERIF -> CMU SERIF UPRIGHT */}
-          {/* TODO: rework overflow: hidden to utilise alternative postitioning */}
-          <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='#020207' color={'#fff'}>
-            <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif, serif'}>
-              Web
-            </Heading>
+      <Grid
+        h={'100vh'}
+        w={'100vw'}
+        templateRows={'repeat(4, 1fr)'}
+        templateColumns={'repeat(6, 1fr)'}
+      >
+        {/* !!TODO: CMU SERIF -> CMU SERIF UPRIGHT */}
+        {/* TODO: rework overflow: hidden to utilise alternative postitioning */}
+        <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}>
+          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif, serif'}>
+            Web
+          </Heading>
 
-            {/* add bullet points as text decor */}
-            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
-              <ListItem>Online editing platform.</ListItem>
-              <ListItem>Designed for classrooms.</ListItem>
-              <ListItem>Clean and modern looks.</ListItem>
-            </UnorderedList>
-          </GridItem>
+          {/* add bullet points as text decor */}
+          <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
+            <ListItem>Online editing platform.</ListItem>
+            <ListItem>Designed for classrooms.</ListItem>
+            <ListItem>Clean and modern looks.</ListItem>
+          </UnorderedList>
+        </GridItem>
 
-          <GridItem rowStart={3} rowSpan={2} colSpan={3} bg='#020207' color={'#fff'}> 
-            <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Modern, serif'}>
-              Mobile
-            </Heading>
+        <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}> 
+          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Modern, serif'}>
+            Mobile
+          </Heading>
 
-            <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
-              <ListItem>Online editing platform.</ListItem>
-              <ListItem>Designed for classrooms.</ListItem>
-              <ListItem>Clean and modern looks.</ListItem>
-            </UnorderedList>
-          </GridItem>
-          
-          <GridItem rowSpan={4} colSpan={1} bg='#020207'> 
-            <Image src='web/src/assets/bracket.png' alt='Image of a curly bracket that points to the current selected mode of examples'/>
-            img goes here
-          </GridItem>
-          
-          <GridItem rowSpan={4} colSpan={2} bg='#020207'>
-            <Mafs height={height}>
-              <CartesianCoordinates 
-                xAxis={{
-                  axis: false,
-                  lines: 0.5,
-                  labels: false
-                }}
-                yAxis={{
-                  axis: false,
-                  lines: 0.5,
-                  labels: false
-                }}
-                subdivisions={false}
-              />
+          <UnorderedList fontFamily={'Raleway'} fontSize={'3.5rem'} marginTop={'2vh'} marginLeft={'7vw'}>
+            <ListItem>Online editing platform.</ListItem>
+            <ListItem>Designed for classrooms.</ListItem>
+            <ListItem>Clean and modern looks.</ListItem>
+          </UnorderedList>
+        </GridItem>
+        
+        <GridItem rowSpan={4} colSpan={1} bg={'#020207'}> 
+          <Image src='web/src/assets/bracket.png' alt='Image of a curly bracket that points to the current selected mode of examples'/>
+          img goes here
+        </GridItem>
+        
+        <GridItem rowSpan={4} colSpan={2} bg={'#020207'}>
+          <Mafs height={height}>
+            <CartesianCoordinates 
+              xAxis={{
+                axis: false,
+                lines: 0.5,
+                labels: false
+              }}
+              yAxis={{
+                axis: false,
+                lines: 0.5,
+                labels: false
+              }}
+              subdivisions={false}
+            />
 
-                {/* x: -0.3 | y: 3.7 */}
-              <MafsText x={assumeX} y={assumeY} size={45} attach="w">
-                Assume that
-              </MafsText>
-              <Line.Segment 
-                weight={5}
-                color="#2F94FF"
-                point1={[-3, 3.5]}
-                point2={[-0.25, 3.5]}
-              />
-              <MafsText x={assumeX + 2.7} y={assumeY - 0.7} size={45} attach={"w"}>
-                Solve for the hypothenuse
-              </MafsText>
-              <MafsText x={assumeX - 0.5} y={assumeY - 1.4} size={45} attach={"w"}>
-                of △ABC.              
-              </MafsText>
+              {/* x: -0.3 | y: 3.7 */}
+            <MafsText x={assumeX} y={assumeY} size={45} attach="w">
+              Assume that
+            </MafsText>
+            <Line.Segment 
+              weight={5}
+              color={"#2F94FF"}
+              point1={[-3, 3.5]}
+              point2={[-0.25, 3.5]}
+            />
+            <MafsText x={assumeX + 2.7} y={assumeY - 0.7} size={45} attach={"w"}>
+              Solve for the hypothenuse
+            </MafsText>
+            <MafsText x={assumeX - 0.5} y={assumeY - 1.4} size={45} attach={"w"}>
+              of △ABC.              
+            </MafsText>
 
-              {/* end of problem code */}
-              {/* start of solution code */}
+            {/* end of problem code */}
+            {/* start of solution code */}
 
-              <MafsText x={answerX} y={answerY} size={45} attach={"w"}>
-                Solution
-              </MafsText>
-              <Line.Segment                
-                weight={5}
-                color="#2F94FF"
-                point1={[answerX - 1.7, answerY - 0.25]}
-                point2={[answerX, answerY - 0.25]}
-              />
+            <MafsText x={answerX} y={answerY} size={45} attach={"w"}>
+              Solution
+            </MafsText>
+            <Line.Segment                
+              weight={5}
+              color={"#2F94FF"}
+              point1={[answerX - 1.7, answerY - 0.25]}
+              point2={[answerX, answerY - 0.25]}
+            />
 
-              <Polygon 
-                points={[triA2.point, triB2.point, triC2.point]}
-                color="#fff"
-              />
-              {/* <Point></Point> */}
-              <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
-                B
-              </MafsText>
+            <Polygon 
+              points={[triA2.point, triB2.point, triC2.point]}
+              color={"#fff"}
+            />
+            {/* <Point></Point> */}
+            <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
+              B
+            </MafsText>
 
-              {/* <Point x={Math.abs(triC2 - triA2)}/> */}
+            {/* <Point x={Math.abs(triC2 - triA2)}/> */}
 
-              {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
-              <MafsText x={triB2.x - 0.25} y={triB2.y - 0.3} size={35}>
-                C
-              </MafsText>
-              
-              <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
-                A
-              </MafsText>
+            {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
+            <MafsText x={triB2.x - 0.25} y={triB2.y - 0.3} size={35}>
+              C
+            </MafsText>
+            
+            <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
+              A
+            </MafsText>
 
-              {triA2.element}
-              {triB2.element}
-              {triC2.element}
-            </Mafs>
-            {/* Add alt text for all math views and think about accessibility */}
-          </GridItem>
-          
-          {/* ====*/}
-          {/* <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip' />
-          <GridItem rowStart={3} rowSpan={4} colSpan={3} bg='papayawhip' />
-          <GridItem rowSpan={4} colSpan={3} bg='tomato' /> */}
-        </Grid>
-      </Box>
+            {triA2.element}
+            {triB2.element}
+            {triC2.element}
+          </Mafs>
+          {/* Add alt text for all math views and think about accessibility */}
+        </GridItem>
+        
+        {/* ====*/}
+        {/* <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip' />
+        <GridItem rowStart={3} rowSpan={4} colSpan={3} bg='papayawhip' />
+        <GridItem rowSpan={4} colSpan={3} bg='tomato' /> */}
+      </Grid>
     </div>
 
     <div className="fourth">
-      <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
-        <svg width="1467" height="1079" viewBox="0 0 1467 1079" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1086.5 0H1466.5V1079H0L1086.5 0Z" fill="#FED7D7"/>
-        </svg>
-      </Box>
+      <Grid
+        h={'100vh'}
+        w={'100vw'}
+        templateRows={'repeat(4, 1fr)'}
+        templateColumns={'repeat(7, 1fr)'}
+        gap={4}
+        backgroundColor={'#020207'}
+      >
+        <GridItem rowStart={2} rowSpan={1} colStart={2} colSpan={2} bg='tomato' />
+        <GridItem rowStart={2} rowSpan={1} colStart={4} colSpan={1} bg='papayawhip' />
+        <GridItem rowStart={3} rowSpan={1} colStart={2} colSpan={3} bg='papayawhip' />
+        <GridItem rowStart={2} rowSpan={2} colStart={5} colSpan={2} bg='tomato' />
+      </Grid>
     </div>
   </div>
 }
