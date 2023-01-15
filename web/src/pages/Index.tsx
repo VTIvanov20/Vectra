@@ -190,41 +190,41 @@ const Index: React.FC = (props) => {
 
           {/* TODO: add rotation to all elemetns */}
           <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'}>
-              <ChakraText>2</ChakraText>
-              <Divider />
-              <ChakraText>3</ChakraText>
+              <ChakraText transform={'rotate(-8deg)'}>2</ChakraText>
+              <Divider    transform={'rotate(-8deg)'} />
+              <ChakraText transform={'rotate(-8deg)'}>3</ChakraText>
           </Box>
 
           <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
-            <ChakraText>π</ChakraText>
+            <ChakraText transform={'rotate(-12deg)'}>π</ChakraText>
           </Box>
 
           <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'}>
-            <ChakraText>
+            <ChakraText transform={'rotate(-8deg)'}>
               √
               <ChakraText as='sub'>2</ChakraText>
             </ChakraText>
           </Box>
 
           <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'}>
-            <ChakraText>p(x)</ChakraText>
+            <ChakraText transform={'rotate(-15deg)'}>p(x)</ChakraText>
           </Box>
 
           {/* right side of falling numbers starts here */}
 
           <Box marginTop={'23vh'} marginLeft={'28vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'}>
-            <ChakraText>1</ChakraText>
+            <ChakraText transform={'rotate(15deg)'}>1</ChakraText>
           </Box>
 
           <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} >
-            <ChakraText>
+            <ChakraText transform={'rotate(11deg)'}>
               e
               <ChakraText as='sup' fontSize={'4rem'}> 3</ChakraText>
             </ChakraText>
           </Box>
 
           <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} >
-            <ChakraText>
+            <ChakraText transform={'rotate(20deg)'}>
               log
               <ChakraText as='sub' fontSize={'2rem'}> 2</ChakraText> 3
             </ChakraText>
@@ -374,10 +374,15 @@ const Index: React.FC = (props) => {
         w={'100vw'}
         templateRows={'repeat(4, 1fr)'}
         templateColumns={'repeat(7, 1fr)'}
-        gap={4}
+        gap={6}
         backgroundColor={'#020207'}
-        // sanity check?
       >
+        <GridItem 
+          rowStart={2} rowSpan={2}
+          colStart={2} colSpan={4}
+          bg={'blue.300'}
+        />
+
         <GridItem 
           rowStart={2} rowSpan={1} 
           colStart={2} colSpan={2} 
@@ -392,14 +397,12 @@ const Index: React.FC = (props) => {
             textAlign: 'center',
           }}
           // _before={{
-          //   content: "Web port!"
+          //   content: "lorem ipsum"
           // }}
         >
           3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223
         </GridItem>
-        <GridItem rowStart={}>
 
-        </GridItem>
         <GridItem 
           rowStart={2} rowSpan={1} 
           colStart={4} colSpan={1} 
@@ -419,9 +422,8 @@ const Index: React.FC = (props) => {
             backgroundColor: '#000',
             border: '3px dashed #2F94FF'
           }}
-        >
+        />
           
-        </GridItem>
         <GridItem 
           rowStart={2} rowSpan={2} 
           colStart={5} colSpan={2} 
@@ -430,9 +432,8 @@ const Index: React.FC = (props) => {
             backgroundColor: '#000',
             border: '3px dashed #2F94FF'
           }}
-        >
+        />
           
-        </GridItem>
       </Grid>
     </div>
   </div>
