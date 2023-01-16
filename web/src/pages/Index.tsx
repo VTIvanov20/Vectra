@@ -11,8 +11,9 @@ import {
   Text as ChakraText, Heading, Image,
   Grid, GridItem,
   Flex, Spacer,
-  List, ListItem, ListIcon, UnorderedList
+  ListItem, UnorderedList
  } from "@chakra-ui/react"
+ import bracketUrl from '../assets/bracket.png'
 import styled from "@emotion/styled"  
 import { triggerAsyncId } from 'async_hooks';
 import { number } from 'prop-types';
@@ -276,7 +277,7 @@ const Index: React.FC = (props) => {
           </UnorderedList>
         </GridItem>
 
-        <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}> 
+        <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'} overflow={'hidden'}> 
           <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             Mobile
           </Heading>
@@ -288,9 +289,8 @@ const Index: React.FC = (props) => {
           </UnorderedList>
         </GridItem>
         
-        <GridItem rowSpan={4} colSpan={1} bg={'#020207'}> 
-          <Image src='web/src/assets/bracket.png' alt='Image of a curly bracket that points to the current selected mode of examples'/>
-          img goes here
+        <GridItem height={'100vh'} rowSpan={4} colSpan={1} bg={'#020207'} color={'white'}> 
+          <Image src={bracketUrl} alt='Image of a curly bracket that points to the current selected mode of examples'/>
         </GridItem>
         
         <GridItem rowSpan={4} colSpan={2} bg={'#020207'}>
@@ -379,86 +379,49 @@ const Index: React.FC = (props) => {
         <Flex h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
           <Box h={'55vh'} w={'75vh'} bgColor={'white'}>
             <Box h={'25.5vh'} w={'75vh'} bgColor={'blue'} display={'flex'}>
-              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'green'} />
+              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'blue.200'} 
+                _hover={{
+                  backgroundColor: '#000',
+                  border: '3px dashed #2F94FF',
+                }}
+              />
+              
+              {/* Spacer */}
               <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
-              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'green'} />
+              
+              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'blue.200'} 
+                _hover={{
+                  backgroundColor: '#000',
+                  border: '3px dashed #2F94FF',
+                }}
+              />
             </Box>
+
+            {/* Spacer */}
             <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
-            <Box h={'25.5vh'} w={'75vh'} bgColor={'red'} />
+            
+            <Box h={'25.5vh'} w={'75vh'} bgColor={'blue.500'} 
+              _hover={{
+                backgroundColor: '#000',
+                border: '3px dashed #2F94FF',
+              }}
+            />
           
           </Box>
+          
+          {/* Spacer */}
           <Box h={'inherit'} w={'2vw'} bgColor={'black'}/> 
-          <Box h={'55vh'} w={'55vh'} bgColor={'white'} />
-          <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas>
+          
+          <Box 
+            h={'55vh'} w={'55vh'} bgColor={'blue.700'} 
+            _hover={{
+              backgroundColor: '#000',
+              border: '3px dashed #2F94FF',
+            }}
+          />
+          {/* <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas> */}
         </Flex>
       </Box>
-
-      {/* <Grid
-        h={'100vh'}
-        w={'100vw'}
-        templateRows={'repeat(4, 1fr)'}
-        templateColumns={'repeat(7, 1fr)'}
-        gap={6}
-        backgroundColor={'#020207'}
-      >
-        <GridItem 
-          rowStart={2} rowSpan={2}
-          colStart={2} colSpan={4}
-          bg={'blue.300'}
-        />
-
-        <GridItem 
-          rowStart={2} rowSpan={1} 
-          colStart={2} colSpan={2} 
-          bg='tomato'
-          overflow={'hidden'}
-          fontSize={'2rem'}
-          _hover={{
-            backgroundColor: '#000',
-            border: '3px dashed #2F94FF',
-            color: '#fff',
-            userSelct: 'none',
-            textAlign: 'center',
-          }}
-          // _before={{
-          //   content: "lorem ipsum"
-          // }}
-        >
-          3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223
-        </GridItem>
-
-        <GridItem 
-          rowStart={2} rowSpan={1} 
-          colStart={4} colSpan={1} 
-          bg='papayawhip'
-          _hover={{
-            backgroundColor: '#000',
-            border: '3px dashed #2F94FF'
-          }}
-        >
-          
-        </GridItem>
-          <GridItem 
-          rowStart={3} rowSpan={1} 
-          colStart={2} colSpan={3} 
-          bg='papayawhip'
-          _hover={{
-            backgroundColor: '#000',
-            border: '3px dashed #2F94FF'
-          }}
-        />
-          
-        <GridItem 
-          rowStart={2} rowSpan={2} 
-          colStart={5} colSpan={2} 
-          bg='tomato'
-          _hover={{
-            backgroundColor: '#000',
-            border: '3px dashed #2F94FF'
-          }}
-        />
-          
-      </Grid> */}
     </div>
   </div>
 }
