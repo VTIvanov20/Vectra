@@ -10,7 +10,7 @@ import {
   Box, Center, Divider,
   Text as ChakraText, Heading, Image,
   Grid, GridItem,
-  Flex, Spacer,
+  Flex,
   ListItem, UnorderedList
  } from "@chakra-ui/react"
  import bracketUrl from '../assets/bracket.png'
@@ -195,42 +195,42 @@ const Index: React.FC = (props) => {
         <Box w={'100vw'} h={'100vh'} display={'inline-flex'}> {/* height value must sum to 100vh */}
 
           {/* TODO: add rotation to all elemetns */}
-          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'}>
-              <ChakraText transform={'rotate(-8deg)'}>2</ChakraText>
-              <Divider    transform={'rotate(-8deg)'} />
-              <ChakraText transform={'rotate(-8deg)'}>3</ChakraText>
+          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'} transform={'rotate(-8deg)'}>
+              <ChakraText>2</ChakraText>
+              <Divider />
+              <ChakraText>3</ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}>
-            <ChakraText transform={'rotate(-12deg)'}>π</ChakraText>
+          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}transform={'rotate(-12deg)'}>
+            <ChakraText>π</ChakraText>
           </Box>
 
-          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'} defaultValue={"1"}>
-            <ChakraText transform={'rotate(-8deg)'}>
+          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'} defaultValue={"1"} transform={'rotate(-8deg)'}>
+            <ChakraText>
               √
               <ChakraText as='sub'>2</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'}>
-            <ChakraText transform={'rotate(-15deg)'}>p(x)</ChakraText>
+          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'} transform={'rotate(-15deg)'}>
+            <ChakraText>p(x)</ChakraText>
           </Box>
 
           {/* right side of falling numbers starts here */}
 
-          <Box marginTop={'23vh'} marginLeft={'28vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'}>
-            <ChakraText transform={'rotate(15deg)'}>1</ChakraText>
+          <Box marginTop={'23vh'} marginLeft={'23vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} transform={'rotate(15deg)'}>
+            <ChakraText>1</ChakraText>
           </Box>
 
-          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} >
-            <ChakraText transform={'rotate(11deg)'}>
+          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} transform={'rotate(11deg)'}>
+            <ChakraText>
               e
               <ChakraText as='sup' fontSize={'4rem'}> 3</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} >
-            <ChakraText transform={'rotate(20deg)'}>
+          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} transform={'rotate(20deg)'}>
+            <ChakraText>
               log
               <ChakraText as='sub' fontSize={'2rem'}> 2</ChakraText> 3
             </ChakraText>
