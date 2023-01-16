@@ -10,6 +10,7 @@ import {
   Box, Center, Divider,
   Text as ChakraText, Heading, Image,
   Grid, GridItem,
+  Flex, Spacer,
   List, ListItem, ListIcon, UnorderedList
  } from "@chakra-ui/react"
 import styled from "@emotion/styled"  
@@ -17,6 +18,7 @@ import { triggerAsyncId } from 'async_hooks';
 import { number } from 'prop-types';
 import { useResolution } from '../util/useResolution';
 import { text } from 'stream/consumers';
+import { BlockList } from 'net';
 
 type GraphPoints = Vector2[];
 
@@ -120,6 +122,9 @@ const Index: React.FC = (props) => {
   const { time, start, stop } = useStopwatch({ endTime: 2 })
   useEffect(() => start(), [start])
 
+  // let canvas = document.getElementById("canvas")
+  // let context = canvas.getContext("2d");
+
   return <div className="main-parent">
     <div className="mafs-landing">
     <Mafs pan={false} height={height}>
@@ -199,7 +204,7 @@ const Index: React.FC = (props) => {
             <ChakraText transform={'rotate(-12deg)'}>π</ChakraText>
           </Box>
 
-          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'}>
+          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'} defaultValue={"1"}>
             <ChakraText transform={'rotate(-8deg)'}>
               √
               <ChakraText as='sub'>2</ChakraText>
@@ -369,7 +374,26 @@ const Index: React.FC = (props) => {
     </div>
 
     <div className="fourth">
-      <Grid
+
+      <Box h={'100vh'} w={'100vw'} bgColor={'#020207'} >
+        <Flex h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
+          <Box h={'55vh'} w={'75vh'} bgColor={'white'}>
+            <Box h={'25.5vh'} w={'75vh'} bgColor={'blue'} display={'flex'}>
+              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'green'} />
+              <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
+              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'green'} />
+            </Box>
+            <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+            <Box h={'25.5vh'} w={'75vh'} bgColor={'red'} />
+          
+          </Box>
+          <Box h={'inherit'} w={'2vw'} bgColor={'black'}/> 
+          <Box h={'55vh'} w={'55vh'} bgColor={'white'} />
+          <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas>
+        </Flex>
+      </Box>
+
+      {/* <Grid
         h={'100vh'}
         w={'100vw'}
         templateRows={'repeat(4, 1fr)'}
@@ -434,7 +458,7 @@ const Index: React.FC = (props) => {
           }}
         />
           
-      </Grid>
+      </Grid> */}
     </div>
   </div>
 }

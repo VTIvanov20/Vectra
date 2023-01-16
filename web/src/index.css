@@ -23,6 +23,13 @@
   overflow-x: hidden;
 }
 
+canvas {
+  height: 55vh;
+  width: 134vh;
+  position: absolute;
+  border: 10px solid blue
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
