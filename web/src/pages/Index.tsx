@@ -27,28 +27,29 @@ const Index: React.FC = (props) => {
   let [width, height] = useResolution();
 
   // second Mafs instance
-  const assumeX = -0.33
+  const assumeX = -0.4
   const assumeY = 3.7
 
   const answerX = -1.25
   const answerY = 0.67
 
   const triArr2: Array<number> = [-1.5, -2]
+  const pointC = [-3, -4.5] as [number, number]
 
   // used as base; scrambled due to argument passing by Mafs
-  // labeled as C
-  const triA2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] + 0.5])
+  // labeled as B
+  const triA2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] + 0.5], {
+    constrain: ([x, y]) => [Math.round(x*2)/2, Math.round(y*2)/2]
+  })
 
-  // labeled as A
-  const triB2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] - 2.5])
-  
-  //labeled as B
-  const triC2 = useMovablePoint([triArr2[0] + 3.5, triArr2[1] - 2.5])
-  
-  // console.log(Math.sqrt(Math.pow((triArr2[0] - 1.5)-(triArr2[0] - 1.5),2)+Math.pow(((triArr2[1] + 0.5)-(triArr2[1] - 2.5)),2)) / 2)
-  // 
-  // console.log((triArr2[0] + 3.5) - (triArr2[0] - 1.5))
-  // console.log((triArr2[0] - 0.5) - (triArr2[0] + 3.5))
+  //labeled as A
+  const triC2 = useMovablePoint([triArr2[0] + 3.5, triArr2[1] - 2.5], {
+    constrain: ([x, y]) => [Math.round(x*2)/2, Math.round(y*2)/2]
+  })
+
+  let sideA = Math.abs(Math.abs(triA2.y) - Math.abs(-4.5))
+  let sideB = Math.abs(triC2.x) + Math.abs(-3)
+  let hypothenuse = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2))
   
   // end of instance
 
@@ -266,7 +267,7 @@ const Index: React.FC = (props) => {
       >
         <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}>
           <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
-            Web
+            <u>Web</u>
           </Heading>
 
           {/* add bullet points as text decor */}
@@ -279,7 +280,7 @@ const Index: React.FC = (props) => {
 
         <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'} overflow={'hidden'}> 
           <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
-            Mobile
+            <u>Mobile</u>
           </Heading>
 
           <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'}>
@@ -289,7 +290,7 @@ const Index: React.FC = (props) => {
           </UnorderedList>
         </GridItem>
         
-        <GridItem height={'100vh'} rowSpan={4} colSpan={1} bg={'#020207'} color={'white'}> 
+        <GridItem height={'100vh'} rowSpan={4} colSpan={1} bg={'#020207'} color={'white'} userSelect={'none'}> 
           <Image src={bracketUrl} alt='Image of a curly bracket that points to the current selected mode of examples'/>
         </GridItem>
         
@@ -319,7 +320,7 @@ const Index: React.FC = (props) => {
               point1={[-3, 3.5]}
               point2={[-0.25, 3.5]}
             />
-            <MafsText x={assumeX + 2.7} y={assumeY - 0.7} size={45} attach={"w"}>
+            <MafsText x={assumeX + 2.65} y={assumeY - 0.8} size={45} attach={"w"}>
               Solve for the hypothenuse
             </MafsText>
             <MafsText x={assumeX - 0.5} y={assumeY - 1.4} size={45} attach={"w"}>
@@ -340,10 +341,9 @@ const Index: React.FC = (props) => {
             />
 
             <Polygon 
-              points={[triA2.point, triB2.point, triC2.point]}
-              color={"#fff"}
+              points={[triA2.point, pointC, triC2.point]}
+              color={"#CC2727"}
             />
-            {/* <Point></Point> */}
             <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
               B
             </MafsText>
@@ -351,16 +351,29 @@ const Index: React.FC = (props) => {
             {/* <Point x={Math.abs(triC2 - triA2)}/> */}
 
             {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
-            <MafsText x={triB2.x - 0.25} y={triB2.y - 0.3} size={35}>
+            <MafsText x={-3.25} y={-4.8} size={35}>
               C
             </MafsText>
+            <Point x={-3} y={-4.5} color={'#bbb'}/>
             
             <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
               A
             </MafsText>
 
+            <MafsText x={answerX - 1.7} y={answerY - 0.9} attach={'e'}>
+              If a = {sideA * 2} and b = {sideB * 2}, then ...
+            </MafsText>
+
+            <MafsText x={answerX + 1.3} y={answerY - 1.93} size={52} attach={'e'}>
+              c = {(hypothenuse * 2).toFixed(2)}
+            </MafsText>
+
+            <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'}>
+              (since a^2 + b^2 = c^2)
+            </MafsText>
+
             {triA2.element}
-            {triB2.element}
+            {/* {triB2.element} */}
             {triC2.element}
           </Mafs>
           {/* Add alt text for all math views and think about accessibility */}
