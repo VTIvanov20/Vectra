@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
+import * as api_client from './services/api_client'
 
 const generator = rough.generator();
 
@@ -199,8 +200,9 @@ const App = () => {
     y: 200,
     width: 500,
     height: 500,
-    src: ''
+    src: 'https://graphicallyspeaking.blob.core.windows.net/images/clock.png'
   });
+  const [images, setImages] = useState(api_client.get_image_url)
 
 
   const handleFileChange = (event) => {
@@ -557,6 +559,21 @@ const App = () => {
         />
     ) : null}
     </div>
+    /*
+      <Flatlist
+      data={images}
+      keyExtractor={(_, index) => index}
+      initialNumToRender={images.length}
+      renderItem={({item, _}) => {
+        return (
+          <Image
+              style={{height: 100, width: 100, borderRadius: 5, margin: 5}}
+              source={{uri: api_client.get_image_url(item.name)}} />
+        )
+      }} />
+    */
+            
+
   );
 };
 
