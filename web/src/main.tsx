@@ -16,6 +16,21 @@ const dark = extendTheme({
   }
 })
 
+const breakpoins = {
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  xl: '80em',
+  '2xl': '96em',
+  '3xl': '112em',
+}
+
+// const fontSizes = [
+//   'xl': '',
+//   '2xl': '96em',
+
+// ]
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider theme={dark}>

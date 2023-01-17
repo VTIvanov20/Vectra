@@ -128,8 +128,8 @@ const Index: React.FC = (props) => {
   // let context = canvas.getContext("2d");
 
   return <div className="main-parent">
-    <div className="mafs-landing">
-    <Mafs pan={false} height={height}>
+    <div className="first">
+    <Mafs  height={height}>
     <CartesianCoordinates 
     xAxis={{
       axis: false,
@@ -193,44 +193,44 @@ const Index: React.FC = (props) => {
     </div>
     <div className={"second"}>
       <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
-        <Box w={'100vw'} h={'100vh'} display={'inline-flex'}> {/* height value must sum to 100vh */}
+        <Box w={{base: '30rem', sm: '60rem', md: '100rem', lg: '200rem'}} h={'100vh'} display={'inline-flex'} overflow={'hidden'}> {/* height value must sum to 100vh  fontSize={{ base: '24px', md: '40px', lg: '56px' }}       \/  this was previously 4rem \/  */}
 
           {/* TODO: add rotation to all elemetns */}
-          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'4rem'} transform={'rotate(-8deg)'}>
+          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '2rem', md: '3rem', lg: '4rem'}} transform={'rotate(-8deg)'}>
               <ChakraText>2</ChakraText>
               <Divider />
               <ChakraText>3</ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'10rem'}transform={'rotate(-12deg)'}>
+          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '4rem', sm: '6rem', md: '8rem', lg: '10rem'}} transform={'rotate(-12deg)'}>
             <ChakraText>π</ChakraText>
           </Box>
 
-          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'6rem'} defaultValue={"1"} transform={'rotate(-8deg)'}>
+          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '2rem', md: '4rem', lg: '6rem'}} defaultValue={"1"} transform={'rotate(-8deg)'}>
             <ChakraText>
               √
               <ChakraText as='sub'>2</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3.5rem'} transform={'rotate(-15deg)'}>
+          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '0.5rem', sm: '1.5rem', md: '2.5rem', lg: '3.5rem'}} transform={'rotate(-15deg)'}>
             <ChakraText>p(x)</ChakraText>
           </Box>
 
           {/* right side of falling numbers starts here */}
 
-          <Box marginTop={'23vh'} marginLeft={'23vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} transform={'rotate(15deg)'}>
+          <Box marginTop={'23vh'} marginLeft={'23vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '3rem', md: '5rem', lg: '7rem'}} transform={'rotate(15deg)'}>
             <ChakraText>1</ChakraText>
           </Box>
 
-          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'7rem'} transform={'rotate(11deg)'}>
+          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '3rem', md: '5rem', lg: '7rem'}} transform={'rotate(11deg)'}>
             <ChakraText>
               e
               <ChakraText as='sup' fontSize={'4rem'}> 3</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={'3rem'} transform={'rotate(20deg)'}>
+          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '0.5rem', sm: '1rem', md: '2rem', lg: '3rem'}} transform={'rotate(20deg)'}>
             <ChakraText>
               log
               <ChakraText as='sub' fontSize={'2rem'}> 2</ChakraText> 3
@@ -240,18 +240,19 @@ const Index: React.FC = (props) => {
         </Box>
         <Center marginTop={'-90vh'} w={'100vw'} h={'85vh'}> {/* height value must sum to 100vh */}
           <Box>
-            <ChakraText color={'#fff'} textAlign={'center'} fontSize={'6.5rem'} fontFamily={'CMU Serif Upright, serif'}>
+            <ChakraText color={'#F6F6F6'} textAlign={'center'} fontSize={{base: '3.5rem', sm: '4.5rem', md: '5.5rem', lg: '6.5rem'}} fontFamily={'CMU Serif Upright, serif'}>
               Designed for interactivity
             </ChakraText>
             <br/>
             <Box alignItems={'center'} textAlign={'center'}>
-              <ChakraText color={'#bbb'} fontSize={'3.3rem'} fontFamily={'Raleway, serif'} letterSpacing={12} display={'inline-flex'}>
-                (
+              <ChakraText  color={'#bbb'} fontSize={{base: '1.3rem', sm: '1.3rem', md: '2.3rem', lg: '3.3rem'}} fontFamily={'Raleway, serif'} letterSpacing={12} display={'inline-flex'}>
+                {/* (
                   <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
                 + 
                   <ChakraText bgGradient={'linear(to-r, #FF862F, #FF2F2F)'} bgClip={'text'}>teachers</ChakraText> 
                 )+
-                  <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText>
+                  <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText> */}
+                  (students + teachers) + parents
               </ChakraText>
             </Box>
           </Box>
@@ -266,7 +267,7 @@ const Index: React.FC = (props) => {
         templateColumns={'repeat(6, 1fr)'}
       >
         <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}>
-          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
+          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Web</u>
           </Heading>
 
@@ -279,7 +280,7 @@ const Index: React.FC = (props) => {
         </GridItem>
 
         <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'} overflow={'hidden'}> 
-          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={'4xl'} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
+          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Mobile</u>
           </Heading>
 
@@ -389,7 +390,7 @@ const Index: React.FC = (props) => {
     <div className="fourth">
 
       <Box h={'100vh'} w={'100vw'} bgColor={'#020207'} >
-        <Flex h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
+        <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
           <Box h={'55vh'} w={'75vh'} bgColor={'white'}>
             <Box h={'25.5vh'} w={'75vh'} bgColor={'blue'} display={'flex'}>
               <Box h={'25.5vh'} w={'45.5vh'} bgColor={'blue.200'} 
@@ -432,7 +433,7 @@ const Index: React.FC = (props) => {
               border: '3px dashed #2F94FF',
             }}
           />
-          {/* <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas> */}
+          <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas>
         </Flex>
       </Box>
     </div>
