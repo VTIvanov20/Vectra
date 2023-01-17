@@ -14,12 +14,14 @@ const createElement = (id, x1, y1, x2, y2, type) => {
           : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
       return { id, x1, y1, x2, y2, type, roughElement };
     case "circle":
-      return { id, x1, y1, x2, y2, type, radius: x2 };
+      const r = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+      return { id, x1, y1, x2, y2, type, radius: r };
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }] };
     case "text":
       return { id, type, x1, y1, x2, y2, text: "" };
-      
+    case "image":
+      return { id, type, x1, y1, x2, y2, text: "" };
     default:
       throw new Error(`Type not recognised: ${type}`);
   }
@@ -188,7 +190,46 @@ const App = () => {
   const [tool, setTool] = useState("pencil");
   const [selectedElement, setSelectedElement] = useState(null);
   const textAreaRef = useRef();
-  const [pencilSize, setPencilSize] = useState(16);
+  const [pencilSize, setPencilSize] = useState(8);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(200);
+  const [startY, setStartY] = useState(200);
+  const [image, setImage] = useState({
+    x: 200,
+    y: 200,
+    width: 500,
+    height: 500,
+    src: ''
+  });
+
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        setImage({
+            ...image,
+            src: reader.result
+        });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  const handleImageMouseDown = (event) => {
+    if (tool !== "selection") return;
+    setIsDragging(true);
+    setStartX(event.clientX - image.x);
+    setStartY(event.clientY - image.y);
+  };
+
+  const handleImageMouseMove = (event) => {
+      if (!isDragging) return;
+      setImage({
+          ...image,
+          x: event.clientX - startX,
+          y: event.clientY - startY,
+      });
+  };
 
   const handlePencilSizeChange = (event) => {
     setPencilSize(event.target.value);
@@ -209,24 +250,6 @@ const App = () => {
       case "pencil":
         const stroke = getSvgPathFromStroke(getStroke(element.points, {
           size: pencilSize,
-          thinning: 0.7,
-          /* for fun
-          size: 32,
-          thinning: 0.5,
-          smoothing: 0.5,
-          streamline: 0.5,
-          easing: (t) => t,
-          start: {
-            taper: 0,
-            easing: (t) => t,
-            cap: true
-          },
-          end: {
-            taper: 100,
-            easing: (t) => t,
-            cap: true
-          }
-          */
         }));
         context.fill(new Path2D(stroke));
         break;
@@ -271,7 +294,7 @@ const App = () => {
   }, [undo, redo]);
 
   useEffect(() => {
-    const textArea = textAreaRef.current;
+    //const textArea = textAreaRef.current;
     if (action === "writing") {
       // textArea.focus();
       // textArea.value = selectedElement.text;
@@ -396,7 +419,9 @@ const App = () => {
 
   const handleMouseUp = event => {
     const { clientX, clientY } = event;
-    
+
+    setIsDragging(false);
+
     if (selectedElement) {
       if (
         selectedElement.type === "text" &&
@@ -477,12 +502,14 @@ const App = () => {
         <button onClick={() => removeAllElements(elements, setElements)}>Clear</button>
         <label>Pencil Size:</label>
         <select onChange={handlePencilSizeChange}>
+          <option value={4}>4</option>
           <option value={8}>8</option>
           <option value={12}>12</option>
           <option value={16}>16</option>
           <option value={20}>20</option>
           <option value={24}>24</option>
         </select>
+        <input type="file" onChange={handleFileChange} />
       </div>
       {action === "writing" ? (
         <textarea
@@ -506,7 +533,7 @@ const App = () => {
       ) : null}
       <canvas
         id="canvas"
-        width={1000/*window.innerWidth*/}
+        width={window.innerWidth}
         height={window.innerHeight}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -514,6 +541,21 @@ const App = () => {
       >
         Canvas
       </canvas>
+      {image.src ? (
+        <img
+            src={image.src}
+            style={{
+                position: "absolute",
+                left: image.x,
+                top: image.y,
+                width: image.width,
+                height: image.height,
+            }}
+            onMouseDown={handleImageMouseDown}
+            onMouseMove={handleImageMouseMove}
+            onMouseUp={handleMouseUp}
+        />
+    ) : null}
     </div>
   );
 };
