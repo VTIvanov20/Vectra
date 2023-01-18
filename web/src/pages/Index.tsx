@@ -13,7 +13,8 @@ import {
   Flex,
   ListItem, UnorderedList
  } from "@chakra-ui/react"
- import bracketUrl from '../assets/bracket.png'
+import bracketUrl from '../assets/bracket.png'
+import { clamp } from "lodash"
 import styled from "@emotion/styled"  
 import { triggerAsyncId } from 'async_hooks';
 import { number } from 'prop-types';
@@ -39,12 +40,13 @@ const Index: React.FC = (props) => {
   // used as base; scrambled due to argument passing by Mafs
   // labeled as B
   const triA2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] + 0.5], {
-    constrain: ([x, y]) => [Math.round(x*2)/2, Math.round(y*2)/2]
+    // constrain: ([y]) => [clamp(-1,(Math.round(y*2)/2), (Math.round(y*2)/2)), -1]
+    constrain: ([y]) => [triArr2[0] -1.5, clamp(y,(Math.round(y*2)/2), (Math.round(y*2)/2))]
   })
 
-  //labeled as A
+  //labeled as A Math.round(x*2)/2, Math.round(y*2)/2
   const triC2 = useMovablePoint([triArr2[0] + 3.5, triArr2[1] - 2.5], {
-    constrain: ([x, y]) => [Math.round(x*2)/2, Math.round(y*2)/2]
+    constrain: ([x]) => [clamp(x, (Math.round(x*2)/2), (Math.round(x*2)/2)), pointC[1]]
   })
 
   let sideA = Math.abs(Math.abs(triA2.y) - Math.abs(-4.5))
@@ -240,7 +242,7 @@ const Index: React.FC = (props) => {
         </Box>
         <Center marginTop={'-90vh'} w={'100vw'} h={'85vh'}> {/* height value must sum to 100vh */}
           <Box>
-            <ChakraText color={'#F6F6F6'} textAlign={'center'} fontSize={{base: '3.5rem', sm: '4.5rem', md: '5.5rem', lg: '6.5rem'}} fontFamily={'CMU Serif Upright, serif'}>
+            <ChakraText color={'#F6F6F6'} textAlign={'center'} fontSize={{base: '3.5rem', sm: '4.5rem', md: '5.5rem', lg: '6.5rem'}} fontFamily={'CMU Serif Upright, serif'} overflow={'hidden'}>
               Designed for interactivity
             </ChakraText>
             <br/>
@@ -266,16 +268,16 @@ const Index: React.FC = (props) => {
         templateRows={'repeat(4, 1fr)'}
         templateColumns={'repeat(6, 1fr)'}
       >
-        <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'}>
+        <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'} overflow={'hidden'}>
           <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Web</u>
           </Heading>
 
           {/* add bullet points as text decor */}
           <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'}>
-            <ListItem>Online editing platform.</ListItem>
-            <ListItem>Designed for classrooms.</ListItem>
-            <ListItem>Clean and modern looks.</ListItem>
+            <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
+            <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
+            <ListItem overflow={'hidden'}>Clean and modern looks.</ListItem>
           </UnorderedList>
         </GridItem>
 
@@ -284,10 +286,10 @@ const Index: React.FC = (props) => {
             <u>Mobile</u>
           </Heading>
 
-          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'}>
-            <ListItem>Online editing platform.</ListItem>
-            <ListItem>Designed for classrooms.</ListItem>
-            <ListItem>Clean and modern looks.</ListItem>
+          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'} overflow={'hidden'}>
+            <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
+            <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
+            <ListItem overflow={'hidden'}>Clean and modern looks.</ListItem>
           </UnorderedList>
         </GridItem>
         
@@ -365,11 +367,11 @@ const Index: React.FC = (props) => {
               If a = {sideA * 2} and b = {sideB * 2}, then ...
             </MafsText>
 
-            <MafsText x={answerX + 1.3} y={answerY - 1.93} size={52} attach={'e'}>
+            <MafsText x={answerX + 1.3} y={answerY - 1.93} size={52} attach={'e'}   >
               c = {(hypothenuse * 2).toFixed(2)}
             </MafsText>
 
-            <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'}>
+            <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'} color="#bbb">
               (since a^2 + b^2 = c^2)
             </MafsText>
 
