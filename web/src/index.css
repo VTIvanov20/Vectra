@@ -24,6 +24,12 @@
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  cursor: url('./assets/cursor.png')
+
+}
+
+body {
+  cursor: url('./assets/cursor.png')
 }
 
 .main-parent {
