@@ -25,6 +25,16 @@ import { BlockList } from 'net';
 type GraphPoints = Vector2[];
 
 const Index: React.FC = (props) => {
+  const [isHovered, setIsHovered] = useState(false);
+  let bracketRotation = 0
+  // if(isHovered === true)
+  // {
+  //   bracketRotation = "180deg"
+  // } 
+  // else {
+  //   bracketRotation = "90deg"
+  // }
+
   let [width, height] = useResolution();
 
   // second Mafs instance
@@ -194,45 +204,45 @@ const Index: React.FC = (props) => {
   </Mafs>
     </div>
     <div className={"second"}>
-      <Box w={'100vw'} h={'100vh'} bgColor={'#020207'}>
+      <Box w={'100vw'} h={'100vh'} bgColor={'bg'}>
         <Box w={{base: '30rem', sm: '60rem', md: '100rem', lg: '200rem'}} h={'100vh'} display={'inline-flex'} overflow={'hidden'}> {/* height value must sum to 100vh  fontSize={{ base: '24px', md: '40px', lg: '56px' }}       \/  this was previously 4rem \/  */}
 
           {/* TODO: add rotation to all elemetns */}
-          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '2rem', md: '3rem', lg: '4rem'}} transform={'rotate(-8deg)'}>
+          <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '2rem', md: '3rem', lg: '4rem'}} transform={'rotate(-8deg)'} >
               <ChakraText>2</ChakraText>
               <Divider />
               <ChakraText>3</ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '4rem', sm: '6rem', md: '8rem', lg: '10rem'}} transform={'rotate(-12deg)'}>
+          <Box marginTop={'20vh'} marginLeft={'9vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '4rem', sm: '6rem', md: '8rem', lg: '10rem'}} transform={'rotate(-12deg)'} >
             <ChakraText>π</ChakraText>
           </Box>
 
-          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '2rem', md: '4rem', lg: '6rem'}} defaultValue={"1"} transform={'rotate(-8deg)'}>
+          <Box marginTop={'5vh'} marginLeft={'7vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '2rem', md: '4rem', lg: '6rem'}} defaultValue={"1"} transform={'rotate(-8deg)'} >
             <ChakraText>
               √
               <ChakraText as='sub'>2</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '0.5rem', sm: '1.5rem', md: '2.5rem', lg: '3.5rem'}} transform={'rotate(-15deg)'}>
+          <Box marginTop={'20vh'} marginLeft={'7vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '0.5rem', sm: '1.5rem', md: '2.5rem', lg: '3.5rem'}} transform={'rotate(-15deg)'} >
             <ChakraText>p(x)</ChakraText>
           </Box>
 
           {/* right side of falling numbers starts here */}
 
-          <Box marginTop={'23vh'} marginLeft={'23vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '3rem', md: '5rem', lg: '7rem'}} transform={'rotate(15deg)'}>
+          <Box marginTop={'23vh'} marginLeft={'23vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '3rem', md: '5rem', lg: '7rem'}} transform={'rotate(15deg)'} >
             <ChakraText>1</ChakraText>
           </Box>
 
-          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '3rem', md: '5rem', lg: '7rem'}} transform={'rotate(11deg)'}>
+          <Box marginTop={'8vh'} marginLeft={'8vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '1rem', sm: '3rem', md: '5rem', lg: '7rem'}} transform={'rotate(11deg)'} >
             <ChakraText>
               e
               <ChakraText as='sup' fontSize={'4rem'}> 3</ChakraText>
             </ChakraText>
           </Box>
 
-          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'#656565'} fontFamily={'CMU Serif, serif'} fontSize={{base: '0.5rem', sm: '1rem', md: '2rem', lg: '3rem'}} transform={'rotate(20deg)'}>
+          <Box marginTop={'35vh'} marginLeft={'3vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{base: '0.5rem', sm: '1rem', md: '2rem', lg: '3rem'}} transform={'rotate(20deg)'} >
             <ChakraText>
               log
               <ChakraText as='sub' fontSize={'2rem'}> 2</ChakraText> 3
@@ -242,12 +252,12 @@ const Index: React.FC = (props) => {
         </Box>
         <Center marginTop={'-90vh'} w={'100vw'} h={'85vh'}> {/* height value must sum to 100vh */}
           <Box>
-            <ChakraText color={'#F6F6F6'} textAlign={'center'} fontSize={{base: '3.5rem', sm: '4.5rem', md: '5.5rem', lg: '6.5rem'}} fontFamily={'CMU Serif Upright, serif'} overflow={'hidden'}>
+            <ChakraText color={'headingWhite'} textAlign={'center'} fontSize={{base: '3.5rem', sm: '4.5rem', md: '5.5rem', lg: '6.5rem'}} fontFamily={'CMU Serif Upright, serif'} zIndex={10} overflow={'hidden'}>
               Designed for interactivity
             </ChakraText>
             <br/>
             <Box alignItems={'center'} textAlign={'center'}>
-              <ChakraText  color={'#bbb'} fontSize={{base: '1.3rem', sm: '1.3rem', md: '2.3rem', lg: '3.3rem'}} fontFamily={'Raleway, serif'} letterSpacing={12} display={'inline-flex'}>
+              <ChakraText  color={'lightGray'} fontSize={{base: '1.3rem', sm: '1.3rem', md: '2.3rem', lg: '3.3rem'}} fontFamily={'Raleway, serif'} letterSpacing={12} display={'inline-flex'}>
                 {/* (
                   <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
                 + 
@@ -268,36 +278,38 @@ const Index: React.FC = (props) => {
         templateRows={'repeat(4, 1fr)'}
         templateColumns={'repeat(6, 1fr)'}
       >
-        <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'} overflow={'hidden'}>
+        <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'bg'} color={'headingWhite'} overflow={'hidden'}>
           <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Web</u>
           </Heading>
 
           {/* add bullet points as text decor */}
-          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'}>
+          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'lightGray'}>
             <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
             <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
             <ListItem overflow={'hidden'}>Clean and modern looks.</ListItem>
           </UnorderedList>
         </GridItem>
 
-        <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'#020207'} color={'#fff'} overflow={'hidden'}> 
+        <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'bg'} color={'headingWhite'} overflow={'hidden'}> 
           <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Mobile</u>
           </Heading>
 
-          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'#bbb'} overflow={'hidden'}>
+          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'lightGray'} overflow={'hidden'} 
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}>
             <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
             <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
             <ListItem overflow={'hidden'}>Clean and modern looks.</ListItem>
           </UnorderedList>
         </GridItem>
         
-        <GridItem height={'100vh'} rowSpan={4} colSpan={1} bg={'#020207'} color={'white'} userSelect={'none'}> 
+        <GridItem height={'100vh'} rotate={`$(bracketRotation)deg`} rowSpan={4} colSpan={1} bg={'bg'} color={'white'} userSelect={'none'}> 
           <Image src={bracketUrl} alt='Image of a curly bracket that points to the current selected mode of examples'/>
         </GridItem>
         
-        <GridItem rowSpan={4} colSpan={2} bg={'#020207'}>
+        <GridItem rowSpan={4} colSpan={2} bg={'bg'}>
           <Mafs height={height} pan={false}>
             <CartesianCoordinates 
               xAxis={{
@@ -357,7 +369,7 @@ const Index: React.FC = (props) => {
             <MafsText x={-3.25} y={-4.8} size={35}>
               C
             </MafsText>
-            <Point x={-3} y={-4.5} color={'#bbb'}/>
+            <Point x={-3} y={-4.5} color={'lightGray'}/>
             
             <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
               A
@@ -371,7 +383,7 @@ const Index: React.FC = (props) => {
               c = {(hypothenuse * 2).toFixed(2)}
             </MafsText>
 
-            <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'} color="#bbb">
+            <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'} >
               (since a^2 + b^2 = c^2)
             </MafsText>
 
@@ -391,7 +403,7 @@ const Index: React.FC = (props) => {
 
     <div className="fourth">
 
-      <Box h={'100vh'} w={'100vw'} bgColor={'#020207'} >
+      <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
           <Box h={'55vh'} w={'75vh'} bgColor={'white'}>
             <Box h={'25.5vh'} w={'75vh'} bgColor={'blue'} display={'flex'}>
@@ -408,7 +420,7 @@ const Index: React.FC = (props) => {
               <Box h={'25.5vh'} w={'25.5vh'} bgColor={'blue.200'} 
                 _hover={{
                   backgroundColor: '#000',
-                  border: '3px dashed #2F94FF',
+                  border: '3px dashed themeBlue',
                 }}
               />
             </Box>
@@ -419,7 +431,7 @@ const Index: React.FC = (props) => {
             <Box h={'25.5vh'} w={'75vh'} bgColor={'blue.500'} 
               _hover={{
                 backgroundColor: '#000',
-                border: '3px dashed #2F94FF',
+                border: '3px dashed themeBlue',
               }}
             />
           
@@ -432,7 +444,7 @@ const Index: React.FC = (props) => {
             h={'55vh'} w={'55vh'} bgColor={'blue.700'} 
             _hover={{
               backgroundColor: '#000',
-              border: '3px dashed #2F94FF',
+              border: '3px dashed themeBlue',
             }}
           />
           <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas>

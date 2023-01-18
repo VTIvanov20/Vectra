@@ -8,11 +8,10 @@ const dark = extendTheme({
   colors: {
     bg: '#020207',
     white: '#fff',
+    headingWhite: '#F6F6F6',
     lightGray: '#bbb',
     darkGray: '#656565',
-    gradientRed: 'linear-gradient(90deg, #FF862F 0%, #FF2F2F 100%);',
-    gradientGreen: 'linear-gradient(90deg, #2F94FF 0%, #2F37FF 100%);',
-    gradientBlue: 'linear-gradient(90deg, #C9FF2F 0%, #2FFF8F 100%);',
+    themeBlue: '#2f94ff',
   }
 })
 
