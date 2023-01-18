@@ -66,7 +66,7 @@ export const strokedSchema = z.object({
 
 export const parametricPropsSchema = strokedSchema.extend({
   type: z.literal("parametric"),
-  xy: z.function().args(z.number()).returns(vector2Schema),
+  xy: z.string(),
   t: vector2Schema,
   minSamplingDepth: z.number().optional(),
   maxSamplingDepth: z.number().optional(),
@@ -74,8 +74,8 @@ export const parametricPropsSchema = strokedSchema.extend({
 
 export const vectorFieldPropsSchema = z.object({
   type: z.literal("vectorField"),
-  xy: z.function().args(vector2Schema).returns(vector2Schema),
-  xyOpacity: z.function().args(vector2Schema).returns(z.number()).optional(),
+  xy: z.string(),
+  xyOpacity: z.string().optional(),
   step: z.number(),
   opacityStep: z.number().optional(),
   color: z.string().optional(),
@@ -84,12 +84,12 @@ export const vectorFieldPropsSchema = z.object({
 export const ofXPropsSchema = parametricPropsSchema.extend({
   type: z.literal("ofX"),
   y: z.string(),
-});
+}).omit({ xy: true, t: true });
 
 export const ofYPropsSchema = parametricPropsSchema.extend({
   type: z.literal("ofY"),
   x: z.string()
-});
+}).omit({ xy: true, t: true });
 
 export const throughPointsPropsSchema = strokedSchema.extend({
   type: z.literal("throughPoints"),
@@ -160,6 +160,11 @@ export const cardinalDirectionSchema = z.union([
 
 export const textPropsSchema = z.object({
   type: z.literal("text"),
+  x: z.number(),
+  y: z.number(),
+  attach: cardinalDirectionSchema,
+  size: z.number(),
+  color: z.string(),
   text: z.string(),
 });
 
@@ -172,7 +177,7 @@ export const movablePointPropsSchema = z.object({
   type: z.literal("movablePoint"),
   point: vector2Schema,
   onMove: z.function().args(vector2Schema).returns(z.void()),
-  constrain: z.string().optional(),
+  constrain: z.function().args(vector2Schema).returns(vector2Schema),
   color: z.string().optional(),
 });
 
@@ -221,40 +226,32 @@ export const transformContextSchema = z.object({
   type: z.literal("transformContext")
 })
 
+// TODO: IMPLEMENT THIS
 // export const transformPropsSchema = z.literal(React.PropsWithChildren);
 
 const paneVisualizerPropsSchema = z.object({
   precision: z.number().optional(),
 });
 
-interface Child {
-  type: string,
-  props?: any,
-  children?: Child[]
-};
-
-export const childSchema: z.ZodType<Child> = z.lazy(() => 
-  z
-    .union([
-      cartesianCoordinatesPropsSchema,
-      parametricPropsSchema,
-      vectorFieldPropsSchema,
-      ofXPropsSchema,
-      ofYPropsSchema,
-      throughPointsPropsSchema,
-      pointAnglePropsSchema,
-      pointSlopePropsSchema,
-      segmentPropsSchema,
-      ellipsePropsSchema,
-      circlePropsSchema,
-      polygonPropsSchema,
-      pointPropsSchema,
-      vectorPropsSchema,
-      textPropsSchema,
-      movablePointPropsSchema
-    ])
-    .and(z.object({ children: z.array(childSchema).optional() }))
-);
+export const elementSchema = z
+  .union([
+    cartesianCoordinatesPropsSchema,
+    parametricPropsSchema,
+    vectorFieldPropsSchema,
+    ofXPropsSchema,
+    ofYPropsSchema,
+    throughPointsPropsSchema,
+    pointAnglePropsSchema,
+    pointSlopePropsSchema,
+    segmentPropsSchema,
+    ellipsePropsSchema,
+    circlePropsSchema,
+    polygonPropsSchema,
+    pointPropsSchema,
+    vectorPropsSchema,
+    textPropsSchema,
+    movablePointPropsSchema
+  ])
 
 export const resourceSchema = z.union([
   useMovablePointArgumentsSchema,
@@ -265,11 +262,12 @@ export const resourceSchema = z.union([
 
 export const pageSchema = z.object({
   resources: z.array(resourceSchema),
-  children: z.array(childSchema)
+  elements: z.array(elementSchema)
 })
 
 export const appletSchema = z.array(pageSchema);
 
+// TODO: IMPLEMENT THIS
 const transformWidgetPropsSchema = z.object({
-  children: z.array(childSchema),
+  children: z.array(elementSchema),
 });

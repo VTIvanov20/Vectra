@@ -1,6 +1,6 @@
 import { Theme } from 'mafs';
 import { z } from 'zod';
-import { resourceSchema, pageSchema, childSchema, appletSchema } from './mafs.zod';
+import { resourceSchema, pageSchema, elementSchema, appletSchema } from './mafs.zod';
 
 // CartesianCoordinates - CartesianCoordinatesProps - done
 // Transform - TransformProps - on hold
@@ -24,8 +24,8 @@ import { resourceSchema, pageSchema, childSchema, appletSchema } from './mafs.zo
 // MovablePoint - MovablePointProps
 
 export type ResourceScaffold = z.infer<typeof resourceSchema>
-export type ChildScaffold = z.infer<typeof childSchema>
+export type ElementScaffold = z.infer<typeof elementSchema>
 export type PageScaffold = z.infer<typeof pageSchema>
 export type AppletScaffold = z.infer<typeof appletSchema>
 
-export { resourceSchema, pageSchema, childSchema, appletSchema };
+export { resourceSchema, pageSchema, elementSchema as childSchema, appletSchema };
