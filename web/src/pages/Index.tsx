@@ -45,23 +45,23 @@ const Index: React.FC = (props) => {
   const answerX = -1.25
   const answerY = 0.67
 
-  const triArr2: Array<number> = [-1.5, -2]
+  const triArr_2: Array<number> = [-1.5, -2]
   const pointC = [-3, -4.5] as [number, number]
 
   // used as base; scrambled due to argument passing by Mafs
   // labeled as B
-  const triA2 = useMovablePoint([triArr2[0] - 1.5, triArr2[1] + 0.5], {
+  const triA_2 = useMovablePoint([triArr_2[0] - 1.5, triArr_2[1] + 0.5], {
     // constrain: ([y]) => [clamp(-1,(Math.round(y*2)/2), (Math.round(y*2)/2)), -1]
-    constrain: ([y]) => [triArr2[0] -1.5, clamp(y,(Math.round(y*2)/2), (Math.round(y*2)/2))]
+    constrain: ([y]) => [triArr_2[0] -1.5, clamp(y,(Math.round(y*2)/2), (Math.round(y*2)/2))]
   })
 
   //labeled as A Math.round(x*2)/2, Math.round(y*2)/2
-  const triC2 = useMovablePoint([triArr2[0] + 3.5, triArr2[1] - 2.5], {
+  const triC_2 = useMovablePoint([triArr_2[0] + 3.5, triArr_2[1] - 2.5], {
     constrain: ([x]) => [clamp(x, (Math.round(x*2)/2), (Math.round(x*2)/2)), pointC[1]]
   })
 
-  let sideA = Math.abs(Math.abs(triA2.y) - Math.abs(-4.5))
-  let sideB = Math.abs(triC2.x) + Math.abs(-3)
+  let sideA = Math.abs(Math.abs(triA_2.y) - Math.abs(-4.5))
+  let sideB = Math.abs(triC_2.x) + Math.abs(-3)
   let hypothenuse = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2))
   
   // end of instance
@@ -360,22 +360,22 @@ const Index: React.FC = (props) => {
               />
 
               <Polygon 
-                points={[triA2.point, pointC, triC2.point]}
+                points={[triA_2.point, pointC, triC_2.point]}
                 color={"#CC2727"}
               />
-              <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
+              <MafsText x={triA_2.x - 0.25} y={triA_2.y + 0.3} size={35}>
                 B
               </MafsText>
 
-              {/* <Point x={Math.abs(triC2 - triA2)}/> */}
+              {/* <Point x={Math.abs(triC_2 - triA_2)}/> */}
 
-              {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
+              {/*Alt styling: x={triB_2.x - 0.25} y={triB_2.y + 0.3} */}
               <MafsText x={-3.25} y={-4.8} size={35}>
                 C
               </MafsText>
               <Point x={-3} y={-4.5} color={'lightGray'}/>
               
-              <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
+              <MafsText x={triC_2.x + 0.25} y={triC_2.y - 0.3} size={35}>
                 A
               </MafsText>
 
@@ -391,9 +391,9 @@ const Index: React.FC = (props) => {
                 (since a^2 + b^2 = c^2)
               </MafsText>
 
-              {triA2.element}
-              {/* {triB2.element} */}
-              {triC2.element}
+              {triA_2.element}
+              {/* {triB_2.element} */}
+              {triC_2.element}
             </Mafs>
             {/* Add alt text for all math views and think about accessibility */}
           </GridItem>
