@@ -11,7 +11,8 @@ import {
   Text as ChakraText, Heading, Image,
   Grid, GridItem,
   Flex,
-  ListItem, UnorderedList
+  ListItem, UnorderedList,
+  Show, Hide
  } from "@chakra-ui/react"
 import bracketUrl from '../assets/bracket.png'
 import { clamp } from "lodash"
@@ -278,25 +279,25 @@ const Index: React.FC = (props) => {
         templateRows={'repeat(4, 1fr)'}
         templateColumns={'repeat(6, 1fr)'}
       >
-        <GridItem rowStart={1} rowSpan={2} colSpan={3} bg={'bg'} color={'headingWhite'} overflow={'hidden'}>
-          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
+        <GridItem rowStart={1} rowSpan={2} colSpan={{base: 6, sm: 6, md: 6, lg: 3}} bg={'bg'} color={'headingWhite'} overflow={'hidden'}>
+          <Heading as='h1' textAlign={{base: 'center', sm: 'center', md: 'center', lg: 'left'}} marginTop={{base: '0vh', md: '8vh'}} marginLeft={'3vw'} size={['3xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Web</u>
           </Heading>
 
           {/* add bullet points as text decor */}
-          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'lightGray'}>
+          <UnorderedList textAlign={{base: 'center', sm: 'center', md: 'center', lg: 'left'}} fontFamily={'Raleway Light'} fontSize={{base: '2.5rem', lg: '3.2rem'}} marginTop={{base: '0vh', md: '2vh'}} marginLeft={{base: 'vw', md: '7.5vw'}} color={'lightGray'}>
             <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
             <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
             <ListItem overflow={'hidden'}>Clean and modern looks.</ListItem>
           </UnorderedList>
         </GridItem>
 
-        <GridItem rowStart={3} rowSpan={2} colSpan={3} bg={'bg'} color={'headingWhite'} overflow={'hidden'}> 
-          <Heading as='h1' marginTop={'8vh'} marginLeft={'3vw'} size={['md', 'lg', 'xl', '2xl', '3xl', '4xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
+        <GridItem rowStart={3} rowSpan={2} colSpan={{base: 6, sm: 6, md: 6, lg: 3}} bg={'bg'} color={'headingWhite'} overflow={'hidden'}> 
+          <Heading as='h1' textAlign={{base: 'center', sm: 'center', md: 'center', lg: 'left'}} marginTop={{base: '0vh', md: '8vh'}} marginLeft={'3vw'} size={['3xl']} overflow={'hidden'} fontFamily={'CMU Serif Upright, serif'}>
             <u>Mobile</u>
           </Heading>
 
-          <UnorderedList fontFamily={'Raleway Light'} fontSize={'3.2rem'} marginTop={'2vh'} marginLeft={'7.5vw'} color={'lightGray'} overflow={'hidden'} 
+          <UnorderedList textAlign={{base: 'center', sm: 'center', md: 'center', lg: 'left'}}  fontFamily={'Raleway Light'}fontSize={{base: '2.5rem', lg: '3.2rem'}} marginTop={{base: '0vh', md: '2vh'}} marginLeft={{base: 'vw', md: '7.5vw'}} color={'lightGray'} overflow={'hidden'} 
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}>
             <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
@@ -305,94 +306,98 @@ const Index: React.FC = (props) => {
           </UnorderedList>
         </GridItem>
         
-        <GridItem height={'100vh'} rotate={`$(bracketRotation)deg`} rowSpan={4} colSpan={1} bg={'bg'} color={'white'} userSelect={'none'}> 
-          <Image src={bracketUrl} alt='Image of a curly bracket that points to the current selected mode of examples'/>
-        </GridItem>
+        <Show above={'lg'}>
+          <GridItem height={'100vh'} rotate={`$(bracketRotation)deg`} rowSpan={4} colSpan={1} bg={'bg'} color={'white'} overflow={'hidden'} userSelect={'none'}> 
+            <Image src={bracketUrl} alt='Image of a curly bracket that points to the current selected mode of examples'/>
+          </GridItem>
+        </Show>
         
-        <GridItem rowSpan={4} colSpan={2} bg={'bg'}>
-          <Mafs height={height} pan={false}>
-            <CartesianCoordinates 
-              xAxis={{
-                axis: false,
-                lines: 0.5,
-                labels: false
-              }}
-              yAxis={{
-                axis: false,
-                lines: 0.5,
-                labels: false
-              }}
-              subdivisions={false}
-            />
+        <Show above={'lg'}>
+          <GridItem rowSpan={4} colSpan={2} bg={'bg'}>
+            <Mafs height={height} pan={false}>
+              <CartesianCoordinates 
+                xAxis={{
+                  axis: false,
+                  lines: 0.5,
+                  labels: false
+                }}
+                yAxis={{
+                  axis: false,
+                  lines: 0.5,
+                  labels: false
+                }}
+                subdivisions={false}
+              />
 
-              {/* x: -0.3 | y: 3.7 */}
-            <MafsText x={assumeX} y={assumeY} size={45} attach="w">
-              Assume that
-            </MafsText>
-            <Line.Segment 
-              weight={5}
-              color={"#2F94FF"}
-              point1={[-3, 3.5]}
-              point2={[-0.25, 3.5]}
-            />
-            <MafsText x={assumeX + 2.65} y={assumeY - 0.8} size={45} attach={"w"}>
-              Solve for the hypothenuse
-            </MafsText>
-            <MafsText x={assumeX - 0.5} y={assumeY - 1.4} size={45} attach={"w"}>
-              of △ABC.              
-            </MafsText>
+                {/* x: -0.3 | y: 3.7 */}
+              <MafsText x={assumeX} y={assumeY} size={45} attach="w">
+                Assume that
+              </MafsText>
+              <Line.Segment 
+                weight={5}
+                color={"#2F94FF"}
+                point1={[-3, 3.5]}
+                point2={[-0.25, 3.5]}
+              />
+              <MafsText x={assumeX + 2.65} y={assumeY - 0.8} size={45} attach={"w"}>
+                Solve for the hypothenuse
+              </MafsText>
+              <MafsText x={assumeX - 0.5} y={assumeY - 1.4} size={45} attach={"w"}>
+                of △ABC.              
+              </MafsText>
 
-            {/* end of problem code */}
-            {/* start of solution code */}
+              {/* end of problem code */}
+              {/* start of solution code */}
 
-            <MafsText x={answerX} y={answerY} size={45} attach={"w"}>
-              Solution
-            </MafsText>
-            <Line.Segment                
-              weight={5}
-              color={"#2F94FF"}
-              point1={[answerX - 1.7, answerY - 0.25]}
-              point2={[answerX, answerY - 0.25]}
-            />
+              <MafsText x={answerX} y={answerY} size={45} attach={"w"}>
+                Solution
+              </MafsText>
+              <Line.Segment                
+                weight={5}
+                color={"#2F94FF"}
+                point1={[answerX - 1.7, answerY - 0.25]}
+                point2={[answerX, answerY - 0.25]}
+              />
 
-            <Polygon 
-              points={[triA2.point, pointC, triC2.point]}
-              color={"#CC2727"}
-            />
-            <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
-              B
-            </MafsText>
+              <Polygon 
+                points={[triA2.point, pointC, triC2.point]}
+                color={"#CC2727"}
+              />
+              <MafsText x={triA2.x - 0.25} y={triA2.y + 0.3} size={35}>
+                B
+              </MafsText>
 
-            {/* <Point x={Math.abs(triC2 - triA2)}/> */}
+              {/* <Point x={Math.abs(triC2 - triA2)}/> */}
 
-            {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
-            <MafsText x={-3.25} y={-4.8} size={35}>
-              C
-            </MafsText>
-            <Point x={-3} y={-4.5} color={'lightGray'}/>
-            
-            <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
-              A
-            </MafsText>
+              {/*Alt styling: x={triB2.x - 0.25} y={triB2.y + 0.3} */}
+              <MafsText x={-3.25} y={-4.8} size={35}>
+                C
+              </MafsText>
+              <Point x={-3} y={-4.5} color={'lightGray'}/>
+              
+              <MafsText x={triC2.x + 0.25} y={triC2.y - 0.3} size={35}>
+                A
+              </MafsText>
 
-            <MafsText x={answerX - 1.7} y={answerY - 0.9} attach={'e'}>
-              If a = {sideA * 2} and b = {sideB * 2}, then ...
-            </MafsText>
+              <MafsText x={answerX - 1.7} y={answerY - 0.9} attach={'e'}>
+                If a = {sideA * 2} and b = {sideB * 2}, then ...
+              </MafsText>
 
-            <MafsText x={answerX + 1.3} y={answerY - 1.93} size={52} attach={'e'}   >
-              c = {(hypothenuse * 2).toFixed(2)}
-            </MafsText>
+              <MafsText x={answerX + 1.3} y={answerY - 1.93} size={52} attach={'e'}   >
+                c = {(hypothenuse * 2).toFixed(2)}
+              </MafsText>
 
-            <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'} >
-              (since a^2 + b^2 = c^2)
-            </MafsText>
+              <MafsText x={answerX + 1.3} y={answerY - 2.43} size={26} attach={'e'} >
+                (since a^2 + b^2 = c^2)
+              </MafsText>
 
-            {triA2.element}
-            {/* {triB2.element} */}
-            {triC2.element}
-          </Mafs>
-          {/* Add alt text for all math views and think about accessibility */}
-        </GridItem>
+              {triA2.element}
+              {/* {triB2.element} */}
+              {triC2.element}
+            </Mafs>
+            {/* Add alt text for all math views and think about accessibility */}
+          </GridItem>
+        </Show>
         
         {/* ====*/}
         {/* <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip' />
