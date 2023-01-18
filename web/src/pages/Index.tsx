@@ -2,9 +2,10 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import {
   Mafs, CartesianCoordinates,
-  Text as MafsText, Vector2,
+  Text as MafsText,
   Polygon, Line, Circle, Point,
-  useMovablePoint, useStopwatch
+  useMovablePoint, useStopwatch,
+  vec
 } from 'mafs';
 import { 
   Box, Center, Divider,
@@ -23,6 +24,8 @@ import { useResolution } from '../util/useResolution';
 import { text } from 'stream/consumers';
 import { BlockList } from 'net';
 
+// forward mafs type in global scope of module
+type Vector2 = vec.Vector2;
 type GraphPoints = Vector2[];
 
 const Index: React.FC = (props) => {
