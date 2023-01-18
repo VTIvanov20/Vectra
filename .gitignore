@@ -353,3 +353,4 @@ MigrationBackup/
 appsettings.json
 
 docs
+venv
