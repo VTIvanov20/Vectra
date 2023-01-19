@@ -30,24 +30,21 @@ import { vector2Schema } from './mafs.zod';
 // Text - TextProps = React.PropsWithChildren
 // MovablePoint - MovablePointProps
 
-export function AppletToJSX(applet: AppletScaffold): JSX.Element[] {
+export function AppletToJSX(applet: AppletScaffold): JSX.Element[][] {
     const mathInstance = new evalexpr.JsEvalexprContext;
     // let resourceMap: { [key: string]:  }
-
-    let outJSX: JSX.Element[] = [];
-    
-    applet.map(page => {
+    return applet.map(page => {
         // TODO: introduce the concept of variables with "$"
-        page.elements.map(element => {
+        return page.elements.map(element => {
             switch(element.type) {
                 case "cartesianCoordinates":
-                    outJSX.push(React.createElement(CartesianCoordinates, element));
+                    return React.createElement(CartesianCoordinates, element)
                     break;
                 case "circle":
-                    outJSX.push(React.createElement(Circle, element));
+                    return React.createElement(Circle, element)
                     break;
                 case "ellipse":
-                    outJSX.push(React.createElement(Ellipse, element));
+                    return React.createElement(Ellipse, element)
                     break;
                 // TODO: implement with movablePoint resource
                 // case "movablePoint":
@@ -55,7 +52,7 @@ export function AppletToJSX(applet: AppletScaffold): JSX.Element[] {
                 //     break;
                 // TODO: implement styling on ofX
                 case "ofX":
-                    outJSX.push(React.createElement(Plot.OfX, {
+                    return React.createElement(Plot.OfX, {
                         y(x) {
                             mathInstance.set_value("x", x)
                             mathInstance.eval(element.y) // for example: element.y = "y = x^2"
@@ -69,10 +66,10 @@ export function AppletToJSX(applet: AppletScaffold): JSX.Element[] {
                         opacity: element.opacity,
                         style: element.style,
                         weight: element.weight
-                    }));
+                    })
                     break;
                 case "ofY":
-                    outJSX.push(React.createElement(Plot.OfY, {
+                    return React.createElement(Plot.OfY, {
                         x(y) {
                             mathInstance.set_value("y", y)
                             mathInstance.eval(element.x) // for example: element.x = "x = y^2"
@@ -86,10 +83,10 @@ export function AppletToJSX(applet: AppletScaffold): JSX.Element[] {
                         opacity: element.opacity,
                         style: element.style,
                         weight: element.weight
-                    }));
+                    })
                     break;
                 case "parametric":
-                    outJSX.push(React.createElement(Plot.Parametric, {
+                    return React.createElement(Plot.Parametric, {
                         xy(t) {
                             mathInstance.set_value("t", t);
                             mathInstance.eval(element.xy); // for example: element.xy = "xy = (math::cos(t), (t / k) * math::sin(t))"
@@ -104,7 +101,7 @@ export function AppletToJSX(applet: AppletScaffold): JSX.Element[] {
                         opacity: element.opacity,
                         style: element.style,
                         weight: element.weight
-                    }))
+                    })
                     break;
                 case "vectorField":
                     let vectorFieldProps: VectorFieldProps = {
@@ -118,39 +115,51 @@ export function AppletToJSX(applet: AppletScaffold): JSX.Element[] {
                             let out = vector2Schema.safeParse(mathInstance.get_value("xy"));
                             if (out.success) return out.data;
                             else throw new Error("Invalid return type from expression.\nMore info: " + out.error.toString());
-                        },
+                        }
                     }
-                    // outJSX.push(React.createElement(Plot.VectorField, ));
+                    if (element.xyOpacity)
+                    {
+                        let xyOpac: string = element.xyOpacity;
+                        vectorFieldProps.xyOpacity = (point) => {
+                            mathInstance.set_value("x", point[0])
+                            mathInstance.set_value("y", point[1])
+                            mathInstance.eval(xyOpac) // for example: element.xyOpacity = "o = x * y"
+                            let out = mathInstance.get_value("o")
+                            if (typeof out == 'number') return out
+                            else throw new Error("Invalid return type from expression")
+                        };
+                    }
+                    return React.createElement(Plot.VectorField, vectorFieldProps)
                     break;
                 case "point":
-                    outJSX.push(React.createElement(Point, element))
+                    return React.createElement(Point, element)
                     break;
                 case "pointAngle":
-                    outJSX.push(React.createElement(Line.PointAngle, element))
+                    return React.createElement(Line.PointAngle, element)
                     break;
                 case "pointSlope":
-                    outJSX.push(React.createElement(Line.PointSlope, element))
+                    return React.createElement(Line.PointSlope, element)
                     break;
                 case "throughPoints":
-                    outJSX.push(React.createElement(Line.ThroughPoints, element))
+                    return React.createElement(Line.ThroughPoints, element)
                     break;
                 case "segment":
-                    outJSX.push(React.createElement(Line.Segment, element))
+                    return React.createElement(Line.Segment, element)
                     break;
                 case "text":
-                    outJSX.push(React.createElement(Text, element));
+                    return React.createElement(Text, element)
                     break;
                 case "vector":
-                    outJSX.push(React.createElement(Vector, element));
+                    return React.createElement(Vector, element)
                     break;
                 case "polygon":
-                    outJSX.push(React.createElement(Polygon, element));
+                    return React.createElement(Polygon, element)
                     break;
             }
-        })
+        }) as JSX.Element[]
     })
 
-    return outJSX;
+    // return [];
 }
 
 export function JSXToApplet(jsx: JSX.Element) {
