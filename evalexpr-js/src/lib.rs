@@ -67,9 +67,22 @@ pub struct JsEvalexprContext {
 impl JsEvalexprContext {
     #[wasm_bindgen(constructor)]
     pub fn new() -> JsEvalexprContext {
-        JsEvalexprContext {
-            context: HashMapContext::new()
-        }
+        let map = context_map! {
+            "pi" => Value::Float(PI),
+            "abs" => Function::new(|x| {
+                match x {
+                    Value::String(v) => Err(EvalexprError::expected_number(v.clone().into())),
+                    Value::Float(v) => Ok(Value::Float(f64::abs(*v))),
+                    Value::Int(v) => Ok(Value::Int(i64::abs(*v))),
+                    Value::Boolean(v) => Err(EvalexprError::expected_number((*v).into())),
+                    Value::Tuple(v) => Err(EvalexprError::expected_number(v.clone().into())),
+                    Value::Empty => Err(EvalexprError::expected_number(Value::Empty))
+                }
+            })
+        };
+
+        if let Ok(map) = map { JsEvalexprContext { context: map } }
+        else { JsEvalexprContext { context: HashMapContext::new() } }
     }
 
     pub fn eval(&mut self, line: String) -> JsValue {
