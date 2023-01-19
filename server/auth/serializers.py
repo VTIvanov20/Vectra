@@ -1,27 +1,20 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework import serializers
+from django.contrib.auth.models import User
+from rest_framework.validators import UniqueValidator
 
 
 class TokenObtainPairSerializer(TokenObtainPairSerializer):
-
     @classmethod
     def get_token(cls, user):
         token = super(TokenObtainPairSerializer, cls).get_token(user)
 
-        # Add custom claims
         token['username'] = user.username
         return token
 
-from rest_framework import serializers
-from django.contrib.auth.models import User
-from rest_framework.validators import UniqueValidator
-from django.contrib.auth.password_validation import validate_password
-
 
 class RegisterSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-            required=True,
-            validators=[UniqueValidator(queryset=User.objects.all())]
-            )
+    email = serializers.CharField(required=True)
 
     password = serializers.CharField(write_only=True, required=True)
 
@@ -33,6 +26,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             'last_name': {'required': True}
         }
 
+    def validate_email(self, value):
+        email_exists = User.objects.filter(email=value).exists()
+        if email_exists:
+            raise serializers.ValidationError('Email already exists')
+        return value
+
     def create(self, validated_data):
         user = User.objects.create(
             username=validated_data['username'],
@@ -41,7 +40,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name']
         )
 
-        
         user.set_password(validated_data['password'])
         user.save()
 

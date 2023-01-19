@@ -14,7 +14,7 @@ services:
 
   web:
     build: .
-    command: poetry run python server/manage.py runserver
+    command: poetry run python server/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:

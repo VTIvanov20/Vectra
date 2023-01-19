@@ -10,5 +10,5 @@ urls = [
 ]
 
 urlpatterns = [
-    path('api/',include(urls))
+    path('api/', include(urls))
 ]
