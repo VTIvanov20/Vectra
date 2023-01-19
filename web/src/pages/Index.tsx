@@ -435,7 +435,7 @@ const Index: React.FC = (props) => {
               <Box h={'25.5vh'} w={'25.5vh'} bgColor={'blue.200'} 
                 _hover={{
                   backgroundColor: '#000',
-                  border: '3px dashed themeBlue',
+                  border: '3px dashed #2F94FF',
                 }}
               />
             </Box>
@@ -446,7 +446,7 @@ const Index: React.FC = (props) => {
             <Box h={'25.5vh'} w={'75vh'} bgColor={'blue.500'} 
               _hover={{
                 backgroundColor: '#000',
-                border: '3px dashed themeBlue',
+                border: '3px dashed #2F94FF',
               }}
             />
           
@@ -459,10 +459,12 @@ const Index: React.FC = (props) => {
             h={'55vh'} w={'55vh'} bgColor={'blue.700'} 
             _hover={{
               backgroundColor: '#000',
-              border: '3px dashed themeBlue',
+              border: '3px dashed #2F94FF',
+              
             }}
           />
-          <canvas id="canvas" height={"inherit"} width={"inherit"}></canvas>
+          <canvas id="canvas" />
+          {/* height={'full'} width={'full'} */}
         </Flex>
       </Box>
     </div>
