@@ -261,14 +261,21 @@ const Index: React.FC = (props) => {
             </ChakraText>
             <br/>
             <Box alignItems={'center'} textAlign={'center'}>
-              <ChakraText  color={'lightGray'} fontSize={{base: '1.3rem', sm: '1.3rem', md: '2.3rem', lg: '3.3rem'}} fontFamily={'Raleway, serif'} letterSpacing={12} display={'inline-flex'}>
+              <ChakraText color={'lightGray'} whiteSpace={'pre'} fontSize={{base: '1.3rem', sm: '1.3rem', md: '2.3rem', lg: '3.3rem'}} fontFamily={'Raleway, serif'} letterSpacing={0} display={'inline-flex'}>
                 {/* (
                   <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
-                + 
+                  +
                   <ChakraText bgGradient={'linear(to-r, #FF862F, #FF2F2F)'} bgClip={'text'}>teachers</ChakraText> 
                 )+
                   <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText> */}
-                  (students + teachers) + parents
+                  <ChakraText fontFamily={'CMU Serif, serif'}>( </ChakraText>
+                  <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
+                  <ChakraText> + </ChakraText>
+                  <ChakraText bgGradient={'linear(to-r, #FF862F, #FF2F2F)'} bgClip={'text'}>teachers</ChakraText> 
+                  <ChakraText fontFamily={'CMU Serif, serif'}> )</ChakraText>
+                  <ChakraText fontFamily={'Raleway, serif'}> + </ChakraText>
+                  <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText>
+                  {/* (students + teachers) + parents */}
               </ChakraText>
             </Box>
           </Box>

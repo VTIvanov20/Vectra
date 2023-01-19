@@ -6,7 +6,7 @@ import './index.css'
 
 const dark = extendTheme({
   colors: {
-    bg: '#020207',
+    bg: '#000',
     white: '#fff',
     headingWhite: '#F6F6F6',
     lightGray: '#bbb',
