@@ -10,11 +10,14 @@ SECRET_KEY = 'django-insecure-o*brmndk79)qa^-z5f1t!i1hpzzg1^9+90ghxd+z)husm+d41!
 
 AZURE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=graphicallyspeaking;AccountKey=h19rWXv6Fd48yOOsoOLNFtdwN9iTCvBm/Fyy5B7dL9RMcr3rgpPcQgBC8Z+hSla6C/2Gqx0/oP/H+AStdg8Fgg==;EndpointSuffix=core.windows.net'
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
