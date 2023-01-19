@@ -1,11 +1,12 @@
-import React, { useRef, useEffect } from 'react';
-import { Mafs, CartesianCoordinates, Text, Plot, Line, Circle, Ellipse, Polygon, Point, Vector, MovablePoint, useTransformContext } from 'mafs';
-import * as mafs from 'mafs';
+import React, { useRef, useEffect, useState } from 'react';
+import { Mafs, Debug, useTransformContext, vec } from 'mafs';
+import * as evalexpr from '../evalexpr-js';
 import { AppletToJSX } from '../util/AppletSerde';
 import { useResolution } from '../util/useResolution';
 import { AppletScaffold } from '../util/MafsSchema';
+import { useMousePos } from '../util/useMousePos';
 
-type Vector2 = mafs.vec.Vector2;
+type Vector2 = vec.Vector2;
 
 // CartesianCoordinates - CartesianCoordinatesProps
 
@@ -70,16 +71,11 @@ const exampleApplet: AppletScaffold = [
     {
         elements: [
             {
-                type: "vectorField",
-                step: 1,
-                xy: "xy = (math::sin x, math::sin y)",
-                xyOpacity: "o = (abs(x) + abs(y)) / 10"
-            }
-        ],
-        resources: []
-    },
-    {
-        elements: [
+                type: "ofX",
+                color: "lightblue",
+                y: "y = x",
+                weight: 5,
+            },
             {
                 type: "cartesianCoordinates"
             }
@@ -89,12 +85,22 @@ const exampleApplet: AppletScaffold = [
 ]
 
 export const Applet: React.FC = (props) => {
-    let [width, height] = useResolution();
-    let divEvents = useRef<React.DOMAttributes<HTMLDivElement>>({});
+    const mathInstance = new evalexpr.JsEvalexprContext
+    let [width, height] = useResolution()
+    let [mouseX, mouseY] = useMousePos()
+    let divEvents = useRef<React.DOMAttributes<HTMLDivElement>>({})
+
+    useEffect(() => {
+        mathInstance.set_value("mouseX", mouseX)
+        mathInstance.set_value("mouseY", mouseY)
+    }, [mouseX, mouseY]);
     
     // TODO: implement AppletToJSX in here
     return <div onClick={e => { divEvents.current["onClick"]?.(e) }}>
-        {...AppletToJSX(exampleApplet).map(e => <Mafs {...{ width, height }}>{...e}</Mafs>)}
+        {...AppletToJSX(exampleApplet, mathInstance).map(e => <Mafs width={width} height={height}>
+            <Debug.ViewportInfo />
+            {...e}
+        </Mafs>)}
     </div>;
 }
 
@@ -107,9 +113,9 @@ const InnerApplet: React.FC<InnerAppletProps> = (props) => {
     
     useEffect(() => {
         props.divEventsRef.current.onClick = e => {
-            let invert = mafs.vec.matrixInvert(transformContext.viewTransform);
+            let invert = vec.matrixInvert(transformContext.viewTransform);
             if (invert)
-                console.log(mafs.vec.transform([e.pageX, e.pageY], invert));
+                console.log(vec.transform([e.pageX, e.pageY], invert));
         };
 
         return () => props.divEventsRef.current.onClick = undefined;

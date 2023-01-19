@@ -30,8 +30,7 @@ import { vector2Schema } from './mafs.zod';
 // Text - TextProps = React.PropsWithChildren
 // MovablePoint - MovablePointProps
 
-export function AppletToJSX(applet: AppletScaffold): JSX.Element[][] {
-    const mathInstance = new evalexpr.JsEvalexprContext;
+export function AppletToJSX(applet: AppletScaffold, mathInstance: evalexpr.JsEvalexprContext): JSX.Element[][] {
     // let resourceMap: { [key: string]:  }
     return applet.map(page => {
         // TODO: introduce the concept of variables with "$"
