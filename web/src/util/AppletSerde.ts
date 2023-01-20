@@ -146,7 +146,7 @@ export function AppletToJSX(applet: AppletScaffold, mathInstance: evalexpr.JsEva
                     return React.createElement(Line.Segment, element)
                     break;
                 case "text":
-                    return React.createElement(Text, element)
+                    return React.createElement(Text, element, element.text)
                     break;
                 case "vector":
                     return React.createElement(Vector, element)
