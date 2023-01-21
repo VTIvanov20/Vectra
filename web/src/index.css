@@ -40,12 +40,30 @@ body {
   scroll-snap-align: start;
 }
 
-canvas {
-  /* height: 55vh;
-  width: 134vh; */
+.numberBox, .spacerBox {
+  /* mask-composite: subtract; */
+  z-index: 1;
+}
+
+.test {
+  mask-image: url(./assets/cursor.png);
+  mask-size: cover;
   position: absolute;
+  mask-composite: intersect;
+  mask-type: alpha;
+}
+
+canvas {
+  height: 55vh;
+  width: 134vh;
+  position: absolute;
+  /* z-index: -1; */
   border: 10px solid green;
-  user-select: none;
+  /* user-select: none;
+  mask-composite: intersect;
+  mask-origin: content-box;
+  mask-mode: inherit;
+  mask-size: cover; */
 }
 
 @media (prefers-color-scheme: light) {

@@ -420,19 +420,19 @@ const Index: React.FC = (props) => {
 
       <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
-          <Box h={'55vh'} w={'75vh'} bgColor={'white'}>
-            <Box h={'25.5vh'} w={'75vh'} bgColor={'blue'} display={'flex'}>
-              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'blue.200'} 
+          <Box className={'numberBox'} h={'55vh'} w={'75vh'}>
+            <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
+              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
                 _hover={{
                   backgroundColor: '#000',
                   border: '3px dashed #2F94FF',
                 }}
               />
               
-              {/* Spacer */}
+              {/* Spacer - sm*/}
               <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
               
-              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'blue.200'} 
+              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} 
                 _hover={{
                   backgroundColor: '#000',
                   border: '3px dashed #2F94FF',
@@ -440,10 +440,10 @@ const Index: React.FC = (props) => {
               />
             </Box>
 
-            {/* Spacer */}
+            {/* Spacer - md*/}
             <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
             
-            <Box h={'25.5vh'} w={'75vh'} bgColor={'blue.500'} 
+            <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} 
               _hover={{
                 backgroundColor: '#000',
                 border: '3px dashed #2F94FF',
@@ -452,18 +452,18 @@ const Index: React.FC = (props) => {
           
           </Box>
           
-          {/* Spacer */}
-          <Box h={'inherit'} w={'2vw'} bgColor={'black'}/> 
+          {/* Spacer - lg*/}
+          <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
           
-          <Box 
-            h={'55vh'} w={'55vh'} bgColor={'blue.700'} 
+          <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'}
             _hover={{
               backgroundColor: '#000',
               border: '3px dashed #2F94FF',
               
             }}
           />
-          <canvas id="canvas" />
+          <canvas id="canvas"/>
+          {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
         </Flex>
       </Box>
