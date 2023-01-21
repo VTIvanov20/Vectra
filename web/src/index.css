@@ -24,11 +24,11 @@
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  cursor: url('./assets/cursor.png');
+  cursor: url('./assets/cursor.svg');
 }
 
 body {
-  cursor: url('./assets/cursor.png'), auto;
+  cursor: url('./assets/cursor.svg'), auto;
 }
 
 .main-parent {
