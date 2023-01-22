@@ -12,7 +12,6 @@ import {
     Drawer, DrawerBody, DrawerFooter, DrawerHeader, 
     DrawerOverlay, DrawerContent, DrawerCloseButton 
 } from "@chakra-ui/react";
-import { zodToJsonSchema } from 'zod-to-json-schema'
 
 export const EditorView: React.FC = (props) => {
     const [currentApplet, setCurrentApplet] = useState<AppletScaffold>([]);
@@ -46,28 +45,28 @@ function ZodSchemaToJSON(def: any): any {
         debugger;
         throw new Error('Something bad happened!');
     }
-
-    if (typeName == z.ZodFirstPartyTypeKind.ZodArray) debugger;
+    
     switch (typeName) {
         case z.ZodFirstPartyTypeKind.ZodString:
-            return "string";
+            return { type: "string" };
         case z.ZodFirstPartyTypeKind.ZodNumber:
-            return "number";
+            return { type: "number" };
         case z.ZodFirstPartyTypeKind.ZodObject:
-            return Object
+            let out: { [key: string]: any } = {};
+            Object
                 .entries(def.shape())
-                .map(e => { let el: any = {}; el[e[0]] = ZodSchemaToJSON((e[1] as any)._def); return el; })
+                .forEach(e => { let el: any = {}; out[e[0]] = ZodSchemaToJSON((e[1] as any)._def); return el; })
+            return out;
         case z.ZodFirstPartyTypeKind.ZodBigInt:
-            return "bigint";
+            return { type: "bigint" };
         case z.ZodFirstPartyTypeKind.ZodBoolean:
-            return "boolean";
+            return { type: "boolean" };
         case z.ZodFirstPartyTypeKind.ZodUndefined:
-            return "undefined";
+            return { type: "undefined" };
         case z.ZodFirstPartyTypeKind.ZodNull:
-            return "null";
+            return { type: "null" };
         case z.ZodFirstPartyTypeKind.ZodArray:
-            let test: z.ZodArray<z.ZodNumber>;
-            return "*" + ZodSchemaToJSON(def.type._def);
+            return { type: 'array', data: ZodSchemaToJSON(def.type._def) };
         case z.ZodFirstPartyTypeKind.ZodUnion:
         case z.ZodFirstPartyTypeKind.ZodDiscriminatedUnion:
             return def.options.map((e: ZodObjectDef) => ZodSchemaToJSON((e as any)._def));
@@ -76,11 +75,11 @@ function ZodSchemaToJSON(def: any): any {
         case z.ZodFirstPartyTypeKind.ZodTuple:
             return def.items.map((e: any) => ZodSchemaToJSON((e as any)._def));
         case z.ZodFirstPartyTypeKind.ZodLiteral:
-            return def.value;
+            return { type: 'literal', data: def.value };
         // case z.ZodFirstPartyTypeKind.ZodNullable:
         //     return parseNullableDef(def, refs);
         case z.ZodFirstPartyTypeKind.ZodOptional:
-            return "?" + ZodSchemaToJSON(def.innerType._def);
+            return { type: 'optional', data: ZodSchemaToJSON(def.innerType._def) };
         // case z.ZodFirstPartyTypeKind.ZodAny:
         //     return parseAnyDef();
         // case z.ZodFirstPartyTypeKind.ZodUnknown:
@@ -105,7 +104,6 @@ function ZodSchemaToJSON(def: any): any {
 
 const EditorSidebar: React.FC = (props) => {
     console.log(ZodSchemaToJSON(elementSchema._def));
-    const jsonSchema = zodToJsonSchema(elementSchema);
     const elementTypes = elementSchema._def.options.map(e => e.shape.type._def.value);
     // const elementSchemas = elementSchema._def.options.map(e => {
     //     let keys = (Object.keys(e._def) as (keyof typeof e._def)[]);
