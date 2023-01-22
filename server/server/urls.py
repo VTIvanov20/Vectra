@@ -1,7 +1,7 @@
 from django.urls import path
 from django.urls import include
 
-import auth.urls as auth
+import authentication.urls as auth
 import files.urls as files
 
 urls = [

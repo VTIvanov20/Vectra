@@ -23,6 +23,7 @@ DATABASES = {
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+IMAGES_DIR = BASE_DIR / 'server' / 'uploads'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'server',
+    'authentication',
+    'files'
 ]
 
 MIDDLEWARE = [

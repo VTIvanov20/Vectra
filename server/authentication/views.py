@@ -22,8 +22,7 @@ class RegisterView(GenericViewSet):
         if serializer_data.is_valid():
             user: User = serializer_data.save()
 
-            fs_client = FileStorage()
-            fs_client.create_client(user.id)
+            FileStorage.create_container_for_user(user_id=user.id)
 
             return Response({'status': 'ok'}, 200)
 

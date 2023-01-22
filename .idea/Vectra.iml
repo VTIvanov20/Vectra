@@ -15,16 +15,19 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/server" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/server/auth" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/server/files" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/server/server" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/server/authentication" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Remote Python 3.10.9 Docker Compose (web at [E:\Vectra\docker-compose.yml])" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="" />
+  </component>
   <component name="PyDocumentationSettings">
-    <option name="format" value="PLAIN" />
-    <option name="myDocStringFormat" value="Plain" />
+    <option name="format" value="GOOGLE" />
+    <option name="myDocStringFormat" value="Google" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

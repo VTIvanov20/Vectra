@@ -1,24 +1,29 @@
-from azure.core.exceptions import ResourceExistsError
-from azure.storage.blob import BlobServiceClient, BlobClient
-from django.conf import settings
+from django.contrib.auth.models import User
+from .models import File
 
 
 class FileStorage:
-    container_name = 'images'
-    client: BlobServiceClient = None
+    """
+    Services for the files
+    """
 
-    def __init__(self):
-        self.client = BlobServiceClient.from_connection_string(settings.AZURE_CONNECTION_STRING)
+    @classmethod
+    def get_images_for_user(cls, user_id: int):
+        return File.objects.filter(user_id=user_id).values_list('user_id', flat=True)
 
-    def create_client(self, user_id: int):
+    @classmethod
+    def create_image(cls, user_id: User, name: str, image: bytes):
+        file = File(user_id=user_id, name=name, image=image)
+        file.save()
+
+    @classmethod
+    def get_image_by_user(cls, user_id: User, id: int):
         try:
-            self.client.create_container(name=str(user_id))
-        except ResourceExistsError:
-            return False
-        return True
+            file = File.objects.get(user_id=user_id, id=id)
+            return file
+        except File.DoesNotExist:
+            return None
 
-    @property
-    def blob_client(self) -> BlobClient:
-        return self.client
-
-    
+    @classmethod
+    def delete_image_by_user(cls, user_id: User, id: int):
+        File.objects.get(user_id=user_id, id=id).delete()
