@@ -6,30 +6,68 @@ import { elementSchema } from "../util/mafs.zod";
 import { AppletScaffold } from "../util/MafsSchema";
 import { useResolution } from "../util/useResolution";
 import { 
+    Container, Box,
     Grid, GridItem, Select,
     Input, InputGroup, InputLeftAddon, 
     Stack, StackDivider, VStack,
     Drawer, DrawerBody, DrawerFooter, DrawerHeader, 
-    DrawerOverlay, DrawerContent, DrawerCloseButton 
+    DrawerOverlay, DrawerContent, DrawerCloseButton, Button,
+    AspectRatio, useDisclosure
 } from "@chakra-ui/react";
 
 export const EditorView: React.FC = (props) => {
     const [currentApplet, setCurrentApplet] = useState<AppletScaffold>([]);
     const [width, height] = useResolution();
 
-    return <Grid
-        h='100vh'
-        templateRows='repeat(1, 1fr)'
-        templateColumns='repeat(4, 1fr)'
-        gap={4}
-    >
-        <GridItem rowSpan={1} colSpan={1} bg='tomato'><EditorSidebar /></GridItem>
-        <GridItem rowSpan={1} colSpan={3}>
-            <Mafs {...{height}}>
-                <EditorMafs />
-            </Mafs>
-        </GridItem>
-    </Grid>;
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [setPlacement] = React.useState('left')
+
+
+    return <Box w={width}>
+        <Button 
+            onClick={onOpen} position={'absolute'} bottom={'2vw'} right={'2vw'}
+            h={'8vh'} w={'8vh'}
+            borderRadius={'100%'} borderColor={'themeBlue'}
+            bgColor={'transparent'} color={'themeBlue'} fontSize={'1.5em'} textAlign={'center'}
+        >
+            +
+        </Button>
+        <Drawer
+            size={'sm'}
+            placement={'left'}
+            isOpen={isOpen}
+            onClose={onClose}
+            // backgroundColor={'sidePanelBg'}
+            // finalFocusRef={btnRef}
+        >
+            <DrawerOverlay />
+            <DrawerContent>
+                <DrawerHeader borderBottomColor={'themeBlue'} borderBottomWidth={'1px'}> 
+                    New Applet
+                </DrawerHeader>
+                <DrawerBody>
+                    <EditorSidebar />
+                </DrawerBody>
+            </DrawerContent>
+        </Drawer>
+        <Mafs {...{height}}>
+            <EditorMafs />
+        </Mafs>
+
+    {/* <Grid
+    h='100vh'
+    templateRows='repeat(1, 1fr)'
+    templateColumns='repeat(4, 1fr)'
+    gap={0}
+>
+    <GridItem rowSpan={1} colSpan={1} bg='tomato'><EditorSidebar /></GridItem>
+    <GridItem rowSpan={1} colSpan={3}>
+        <Mafs {...{height}}>
+            <EditorMafs />
+        </Mafs>
+    </GridItem>
+</Grid> */}
+</Box>;
 }
 
 type SimpleSchema = { [key: string]: string | string[] | SimpleSchema };
@@ -112,22 +150,24 @@ const EditorSidebar: React.FC = (props) => {
     //     })
     // })
 
-    return <VStack
+    return <Box>
+        <VStack
         spacing={4}
         align='stretch'
         padding='1vw'
     >
-        <Select bg='white'>
+        <Select bg={'themeBlue'} w={'5vw'}>
             {elementTypes.map(e => <option
                 value={e}
                 key={e}
             >{e.replace(/([A-Z][a-z])/g,' $1').replace(/(\d)/g,' $1')}</option>)}
         </Select>
         <InputGroup>
-            <InputLeftAddon children='Type' />
-            <Input bg='white' placeholder='type' />
+            <InputLeftAddon children={'Type'} />
+            <Input bg={'#D7E0EA'} placeholder={'type'} />
         </InputGroup>
     </VStack>
+    </Box>
 }
 
 const EditorMafs: React.FC = (props) => {
