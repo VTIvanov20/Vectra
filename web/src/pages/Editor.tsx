@@ -12,9 +12,10 @@ import {
     Stack, StackDivider, VStack,
     Drawer, DrawerBody, DrawerFooter, DrawerHeader, 
     DrawerOverlay, DrawerContent, Button,
-    AspectRatio, useDisclosure, Center, Flex, Spacer,
+    AspectRatio, useDisclosure, Center, Flex, Spacer, FormControl, FormLabel,
     
 } from "@chakra-ui/react";
+import { Formik, Form, Field } from "formik";
 
 export const EditorView: React.FC = (props) => {
     const [currentApplet, setCurrentApplet] = useState<AppletScaffold>([]);
@@ -96,11 +97,62 @@ export const EditorView: React.FC = (props) => {
 </Box>;
 }
 
-type SimpleSchema = { [key: string]: string | string[] | SimpleSchema };
+const StringInput: React.FC<{name: string}> = ({ name }) => {
+    return <Field name={name}>
+        {(props: any) => {
+            console.log(props);
+            return <FormControl>
+                <FormLabel>{name}</FormLabel>
+            </FormControl>
+        }}
+    </Field>
+}
 
-// const parseStringDef = () => 
+const NumberInput: React.FC<{name: string}> = ({ name }) => {
+    return <Field name={name}>
+        {(props: any) => {
+            console.log(props);
+            return <FormControl>
+                <FormLabel>{name}</FormLabel>
+            </FormControl>
+        }}
+    </Field>
+};
 
-function ZodSchemaToJSON(def: any): any {
+const BigIntInput: React.FC<{name: string}> = ({ name }) => {
+    return <Field name={name}>
+        {(props: any) => {
+            console.log(props);
+            return <FormControl>
+                <FormLabel>{name}</FormLabel>
+            </FormControl>
+        }}
+    </Field>
+};
+
+const BooleanInput: React.FC<{name: string}> = ({ name }) => {
+    return <Field name={name}>
+        {(props: any) => {
+            console.log(props);
+            return <FormControl>
+                <FormLabel>{name}</FormLabel>
+            </FormControl>
+        }}
+    </Field>
+};
+
+const ArrayInput: React.FC<{name: string}> = ({ name }) => {
+    return <Field name={name}>
+        {(props: any) => {
+            console.log(props);
+            return <FormControl>
+                <FormLabel>{name}</FormLabel>
+            </FormControl>
+        }}
+    </Field>
+};
+
+function ZodSchemaToJSX(def: any, fieldName: string = "unknown", optional: boolean = false): JSX.Element {
     const { typeName } = def;
 
     if (typeName == undefined)
@@ -112,38 +164,44 @@ function ZodSchemaToJSON(def: any): any {
     
     switch (typeName) {
         case z.ZodFirstPartyTypeKind.ZodString:
-            return { type: "string" };
+            return <StringInput name={fieldName} />;
         case z.ZodFirstPartyTypeKind.ZodNumber:
-            return { type: "number" };
+            return <NumberInput name={fieldName} />;
         case z.ZodFirstPartyTypeKind.ZodObject:
-            let out: { [key: string]: any } = {};
-            Object
+            return <>
+            {Object
                 .entries(def.shape())
-                .forEach(e => { let el: any = {}; out[e[0]] = ZodSchemaToJSON((e[1] as any)._def); return el; })
-            return out;
+                .map((e) => ZodSchemaToJSX((e[1] as any)._def, e[0]))}
+            </>
         case z.ZodFirstPartyTypeKind.ZodBigInt:
-            return { type: "bigint" };
+            return <BigIntInput name={fieldName} />;
         case z.ZodFirstPartyTypeKind.ZodBoolean:
-            return { type: "boolean" };
+            return <BooleanInput name={fieldName} />;
         case z.ZodFirstPartyTypeKind.ZodUndefined:
-            return { type: "undefined" };
+            // return { type: "undefined" };
+            // return <Field name="unkno_wn" value={undefined} disabled />;
+            return <></>;
         case z.ZodFirstPartyTypeKind.ZodNull:
-            return { type: "null" };
+            // return { type: "null" };
+            // return <Field name="unknow_n" value={null} disabled />;
+            return <></>;
         case z.ZodFirstPartyTypeKind.ZodArray:
-            return { type: 'array', data: ZodSchemaToJSON(def.type._def) };
+            // ZodSchemaToJSON(def.type._def)    
+            return <ArrayInput name={fieldName} />
         case z.ZodFirstPartyTypeKind.ZodUnion:
         case z.ZodFirstPartyTypeKind.ZodDiscriminatedUnion:
-            return def.options.map((e: ZodObjectDef) => ZodSchemaToJSON((e as any)._def));
+            return def.options.map((e: ZodObjectDef) => ZodSchemaToJSX((e as any)._def, ));
         // case z.ZodFirstPartyTypeKind.ZodIntersection:
         //     return parseIntersectionDef(def, refs);
         case z.ZodFirstPartyTypeKind.ZodTuple:
-            return def.items.map((e: any) => ZodSchemaToJSON((e as any)._def));
+            return def.items.map((e: any) => ZodSchemaToJSX((e as any)._def));
         case z.ZodFirstPartyTypeKind.ZodLiteral:
-            return { type: 'literal', data: def.value };
+            // return { type: 'literal', data: def.value };
+            return <Field name={fieldName} />
         // case z.ZodFirstPartyTypeKind.ZodNullable:
         //     return parseNullableDef(def, refs);
         case z.ZodFirstPartyTypeKind.ZodOptional:
-            return { type: 'optional', data: ZodSchemaToJSON(def.innerType._def) };
+            return ZodSchemaToJSX(def.innerType._def, fieldName, true);
         // case z.ZodFirstPartyTypeKind.ZodAny:
         //     return parseAnyDef();
         // case z.ZodFirstPartyTypeKind.ZodUnknown:
@@ -159,53 +217,62 @@ function ZodSchemaToJSON(def: any): any {
         case z.ZodFirstPartyTypeKind.ZodFunction:
         case z.ZodFirstPartyTypeKind.ZodVoid:
         case z.ZodFirstPartyTypeKind.ZodSymbol:
-            return undefined;
+            // return undefined;
+            return <></>;
         default:
             // return ((_: never) => undefined)(typeName);
-            return undefined;
+            // return undefined;
+            return <></>;
       }
 }
 
 const EditorSidebar: React.FC = (props) => {
-    console.log(ZodSchemaToJSON(elementSchema._def));
+    // console.log(ZodSchemaToJSON(elementSchema._def));
     const elementTypes = elementSchema._def.options.map(e => e.shape.type._def.value);
-    // const elementSchemas = elementSchema._def.options.map(e => {
-    //     let keys = (Object.keys(e._def) as (keyof typeof e._def)[]);
-    //     keys.map(k => {
-    //         e._def.description?
-    //     })
-    // })
+    const [chosenType, setChosenType] = useState<number>(0);
+    console.log(elementSchema);
 
-    return <Box>
-        <VStack
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log(event.target)
+    }
+
+    return <Box><VStack
         spacing={4}
-        align='stretch'
-        padding='1vw'
-    >
-        <Select variant='outline' bg={'themeBlue'} w={'5vw'} fontFamily={'Raleway, regular'}>
-            {elementTypes.map(e => <option
-                value={e}
-                key={e}
-            >{e.replace(/([A-Z][a-z])/g,' $1').replace(/(\d)/g,' $1')}</option>)}
-        </Select>
-        <InputGroup>
-            <InputLeftAddon children={'Type'} />
-            <Input bg={'#D7E0EA'} placeholder={'type'} />
-        </InputGroup>
-        <Box>
-            <Center>
-            </Center>
-        </Box>
-        {/* <DrawerFooter>
-            <Flex w={'inherit'} justifyContent={'space-between'}>
-                <Button w={'10vw'}>
-                    Close
-                </Button>
-                <Button  w={'10vw'} bgColor={'themeBlue'} textColor={'white'}>
-                    Save
-                </Button>
-            </Flex>
-        </DrawerFooter> */}
+        align='initial'
+        padding='1vw'>
+        <FormControl isRequired>
+            <FormLabel>Type</FormLabel>
+            <Select onChange={e => setChosenType(Number(e.target.value))} variant='outline' bg={'themeBlue'} fontFamily={'Raleway, regular'}>
+                {elementTypes.map((e, i) => <option
+                        value={i}
+                        key={i}
+                    >{(() => {
+                        let out = e.replace(/([A-Z][a-z])/g,' $1').replace(/(\d)/g,' $1')
+                        // why is capitalizing a string in js so hard
+                        out = out[0].toUpperCase() + out.slice(1);
+                        return out;
+                    })()}</option>
+                )}
+            </Select>
+        </FormControl>
+        <Formik initialValues={{}} onSubmit={e => console.log(e)}>
+            {(props) => {
+                console.log(props);
+
+                return <Form>
+                    {/* <InputGroup>
+                        <InputLeftAddon children={'Type'} />
+                        <Input bg={'#D7E0EA'} placeholder={'type'} />
+                    </InputGroup> */}
+                    {ZodSchemaToJSX(elementSchema._def.options[chosenType]._def)}
+                    <Box>
+                        <Center>
+                        </Center>
+                    </Box>
+                </Form>
+            }}
+        </Formik>
     </VStack>
     </Box>
 }
