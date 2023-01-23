@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Mafs, CartesianCoordinates,
   Text as MafsText,
@@ -140,8 +140,50 @@ const Index: React.FC = (props) => {
   const { time, start, stop } = useStopwatch({ endTime: 2 })
   useEffect(() => start(), [start])
 
-  // let canvas = document.getElementById("canvas")
-  // let context = canvas.getContext("2d");
+  // interface Point2D {
+  //   x: number;
+  //   y: number;
+  // }
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // const [cursorPosition, setCursorPosition] = useState<Point2D>({ x: 0, y: 0 });
+
+  // useEffect(() => {
+  //   requestAnimationFrame(renderFrame);
+  // }, [cursorPosition]);
+
+  // function renderFrame(): void {
+  //   const context = canvasRef.current?.getContext('2d');
+  //   if (context != null) {
+  //     clearBackground(context);
+  //     drawCircle(context, cursorPosition);
+  //   }
+  // }
+
+  // function clearBackground(context: CanvasRenderingContext2D): void {
+  //   const { width, height } = context.canvas;
+  //   context.rect(0, 0, width, height);
+  //   context.fillStyle = 'black';
+  //   context.fill();
+  // }
+
+  // function drawCircle(context: CanvasRenderingContext2D, position: Point2D): void {
+  //   context.beginPath();
+  //   context.arc(position.x, position.y, 10, 0, Math.PI * 2);
+  //   context.fillStyle = 'red';
+  //   context.fill();
+  // }
+
+  // function handleMouseMoved(event: React.MouseEvent<Element, MouseEvent>): void {
+  //   const canvas = canvasRef.current;
+  //   if (canvas == null) {
+  //     return;
+  //   }
+  //   const canvasBoundingRect = canvas.getBoundingClientRect();
+  //   const cursorXPos = event.clientX - canvasBoundingRect.left;
+  //   const cursorYPos = event.clientY - canvasBoundingRect.top;
+  //   setCursorPosition({ x: cursorXPos, y: cursorYPos });
+  // }
 
   return <div className="main-parent">
     <div className="first">
@@ -421,48 +463,48 @@ const Index: React.FC = (props) => {
       <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
           <Box className={'numberBox'} h={'55vh'} w={'75vh'}>
-            <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
-              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
-                _hover={{
-                  backgroundColor: '#000',
-                  border: '3px dashed #2F94FF',
-                }}
-              />
-              
-              {/* Spacer - sm*/}
-              <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
-              
-              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} 
-                _hover={{
-                  backgroundColor: '#000',
-                  border: '3px dashed #2F94FF',
-                }}
-              />
-            </Box>
+              <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
+                <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
+                  _hover={{
+                    backgroundColor: '#000',
+                    border: '3px dashed #2F94FF',
+                  }}
+                />
+                
+                {/* Spacer - sm*/}
+                <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
+                
+                <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} 
+                  _hover={{
+                    backgroundColor: '#000',
+                    border: '3px dashed #2F94FF',
+                  }}
+                />
+              </Box>
 
-            {/* Spacer - md*/}
-            <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+              {/* Spacer - md*/}
+              <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+              
+              <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} 
+                _hover={{
+                  backgroundColor: '#000',
+                  border: '3px dashed #2F94FF',
+                }}
+              />
             
-            <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} 
+            </Box>
+            
+            {/* Spacer - lg*/}
+            <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
+            
+            <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'}
               _hover={{
                 backgroundColor: '#000',
                 border: '3px dashed #2F94FF',
+                
               }}
             />
-          
-          </Box>
-          
-          {/* Spacer - lg*/}
-          <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
-          
-          <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'}
-            _hover={{
-              backgroundColor: '#000',
-              border: '3px dashed #2F94FF',
-              
-            }}
-          />
-          <canvas id="canvas"/>
+          <canvas id="canvas" ref={canvasRef}/>
           {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
         </Flex>
