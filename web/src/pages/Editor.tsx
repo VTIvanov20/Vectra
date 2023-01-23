@@ -6,13 +6,14 @@ import { elementSchema } from "../util/mafs.zod";
 import { AppletScaffold } from "../util/MafsSchema";
 import { useResolution } from "../util/useResolution";
 import { 
-    Container, Box,
+    Box,
     Grid, GridItem, Select,
     Input, InputGroup, InputLeftAddon, 
     Stack, StackDivider, VStack,
     Drawer, DrawerBody, DrawerFooter, DrawerHeader, 
-    DrawerOverlay, DrawerContent, DrawerCloseButton, Button,
-    AspectRatio, useDisclosure
+    DrawerOverlay, DrawerContent, Button,
+    AspectRatio, useDisclosure, Center, Flex, Spacer,
+    
 } from "@chakra-ui/react";
 
 export const EditorView: React.FC = (props) => {
@@ -42,12 +43,37 @@ export const EditorView: React.FC = (props) => {
         >
             <DrawerOverlay />
             <DrawerContent>
+
+                {/* start of name header */}
+
                 <DrawerHeader borderBottomColor={'themeBlue'} borderBottomWidth={'1px'}> 
                     New Applet
                 </DrawerHeader>
+
+                {/* start of content section */}
+
                 <DrawerBody>
                     <EditorSidebar />
                 </DrawerBody>
+
+                {/* start of button footer */}
+                
+                <DrawerFooter>
+                    <Flex>
+                        <Box>
+                        <Button onClick={onClose} bgColor={'#DCE2E9'} w={'10vw'}>
+                            Close
+                        </Button>
+                        </Box>
+                        <Spacer />
+                        <Box>
+                        <Button onClick={onClose} w={'10vw'} bgColor={'themeBlue'} textColor={'white'}>
+                            Save
+                        </Button>
+                        </Box>
+                    </Flex>
+                </DrawerFooter>
+
             </DrawerContent>
         </Drawer>
         <Mafs {...{height}}>
@@ -156,7 +182,7 @@ const EditorSidebar: React.FC = (props) => {
         align='stretch'
         padding='1vw'
     >
-        <Select bg={'themeBlue'} w={'5vw'}>
+        <Select variant='outline' bg={'themeBlue'} w={'5vw'} fontFamily={'Raleway, regular'}>
             {elementTypes.map(e => <option
                 value={e}
                 key={e}
@@ -166,6 +192,20 @@ const EditorSidebar: React.FC = (props) => {
             <InputLeftAddon children={'Type'} />
             <Input bg={'#D7E0EA'} placeholder={'type'} />
         </InputGroup>
+        <Box>
+            <Center>
+            </Center>
+        </Box>
+        {/* <DrawerFooter>
+            <Flex w={'inherit'} justifyContent={'space-between'}>
+                <Button w={'10vw'}>
+                    Close
+                </Button>
+                <Button  w={'10vw'} bgColor={'themeBlue'} textColor={'white'}>
+                    Save
+                </Button>
+            </Flex>
+        </DrawerFooter> */}
     </VStack>
     </Box>
 }
