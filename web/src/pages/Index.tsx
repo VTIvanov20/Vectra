@@ -15,7 +15,7 @@ import {
   ListItem, UnorderedList,
   Show, Hide
  } from "@chakra-ui/react"
-import bracketUrl from '../assets/bracket.png'
+import bracketUrl from '../assets/img/bracket.png'
 import { clamp } from "lodash"
 import styled from "@emotion/styled"  
 import { triggerAsyncId } from 'async_hooks';
@@ -145,9 +145,40 @@ const Index: React.FC = (props) => {
   //   y: number;
   // }
 
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
   // const [cursorPosition, setCursorPosition] = useState<Point2D>({ x: 0, y: 0 });
 
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const drawText = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+  
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    window.devicePixelRatio = 2
+    var scale = window.devicePixelRatio; 
+
+    // var myFont = new FontFace('myFont', 'url(assets/fonts/myFont/myFont.otf)');
+    var myFont = new FontFace('myFont', 'url(assets/fonts/SF-Pro-Display-Regular.otf');
+
+    myFont.load().then(function(font) {
+      document.fonts.add(myFont);
+    });
+
+      
+      var gradient = ctx.createLinearGradient(0, 0, 150, 100);
+      gradient.addColorStop(0, "#BBBBBB");
+      gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
+      ctx.fillStyle = gradient;
+      ctx.font = 'normal normal 18px SF Pro Display';
+      ctx.fillText('Hello, World!', 10, 35);
+      console.log('Font loaded');
+      
+    // 137deg, #BBBBBB -17.38%, rgba(187, 187, 187, 0) 106.23%);
+  };  
+  
   // useEffect(() => {
   //   requestAnimationFrame(renderFrame);
   // }, [cursorPosition]);
@@ -462,17 +493,17 @@ const Index: React.FC = (props) => {
 
       <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
-          <Box className={'numberBox'} h={'55vh'} w={'75vh'}>
-              <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
-                <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
+          {/* <Box className={'numberBox'} h={'55vh'} w={'75vh'}> */}
+              {/* <Box h={'25.5vh'} w={'75vh'} display={'flex'}> */}
+                {/* <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
                   _hover={{
                     backgroundColor: '#000',
                     border: '3px dashed #2F94FF',
                   }}
-                />
+                /> */}
                 
                 {/* Spacer - sm*/}
-                <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
+                {/* <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
                 
                 <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} 
                   _hover={{
@@ -480,10 +511,10 @@ const Index: React.FC = (props) => {
                     border: '3px dashed #2F94FF',
                   }}
                 />
-              </Box>
+              </Box> */}
 
               {/* Spacer - md*/}
-              <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+              {/* <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
               
               <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} 
                 _hover={{
@@ -492,10 +523,10 @@ const Index: React.FC = (props) => {
                 }}
               />
             
-            </Box>
+            </Box> */}
             
             {/* Spacer - lg*/}
-            <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
+            {/* <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
             
             <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'}
               _hover={{
@@ -503,8 +534,8 @@ const Index: React.FC = (props) => {
                 border: '3px dashed #2F94FF',
                 
               }}
-            />
-          <canvas id="canvas" ref={canvasRef}/>
+            /> */}
+          <canvas id="canvas" ref={canvasRef} onClick={drawText}/>
           {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
         </Flex>
