@@ -12,10 +12,10 @@ import {
     Stack, StackDivider, VStack,
     Drawer, DrawerBody, DrawerFooter, DrawerHeader, 
     DrawerOverlay, DrawerContent, Button,
-    AspectRatio, useDisclosure, Center, Flex, Spacer, FormControl, FormLabel,
+    AspectRatio, useDisclosure, Center, Flex, Spacer, FormControl, FormLabel, NumberInput, NumberInputStepper, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, Checkbox, Divider,
     
 } from "@chakra-ui/react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikProps } from "formik";
 
 export const EditorView: React.FC = (props) => {
     const [currentApplet, setCurrentApplet] = useState<AppletScaffold>([]);
@@ -61,17 +61,9 @@ export const EditorView: React.FC = (props) => {
                 
                 <DrawerFooter>
                     <Flex>
-                        <Box>
-                        <Button onClick={onClose} bgColor={'#DCE2E9'} w={'10vw'}>
+                        <Button onClick={onClose} w={'10vw'} bgColor={'#DCE2E9'} textColor={'black'}>
                             Close
                         </Button>
-                        </Box>
-                        <Spacer />
-                        <Box>
-                        <Button onClick={onClose} w={'10vw'} bgColor={'themeBlue'} textColor={'white'}>
-                            Save
-                        </Button>
-                        </Box>
                     </Flex>
                 </DrawerFooter>
 
@@ -97,62 +89,111 @@ export const EditorView: React.FC = (props) => {
 </Box>;
 }
 
-const StringInput: React.FC<{name: string}> = ({ name }) => {
-    return <Field name={name}>
-        {(props: any) => {
+const StringInput: React.FC<{name: string, optional: boolean}> = ({ name, optional }) => {
+    return <Field name={name} required={!optional}>
+        {(props: FormikProps<any>) => {
             console.log(props);
-            return <FormControl>
+            return <FormControl isRequired={!optional}>
                 <FormLabel>{name}</FormLabel>
+                <Input />
             </FormControl>
         }}
     </Field>
 }
 
-const NumberInput: React.FC<{name: string}> = ({ name }) => {
-    return <Field name={name}>
-        {(props: any) => {
+const _NumberInput: React.FC<{name: string, optional: boolean}> = ({ name, optional }) => {
+    return <Field name={name} required={!optional}>
+        {(props: FormikProps<any>) => {
             console.log(props);
-            return <FormControl>
+            return <FormControl isRequired={!optional}>
+                <FormLabel>{name}</FormLabel>
+                <NumberInput>
+                    <NumberInputField />
+                    <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                    </NumberInputStepper>
+                </NumberInput>
+            </FormControl>
+        }}
+    </Field>
+};
+
+const BigIntInput: React.FC<{name: string, optional: boolean}> = ({ name, optional }) => {
+    return <Field name={name} required={!optional}>
+        {(props: FormikProps<any>) => {
+            console.log(props);
+            return <FormControl isRequired={!optional}>
+                <FormLabel>{name}</FormLabel>
+                <NumberInput>
+                    <NumberInputField />
+                    <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                    </NumberInputStepper>
+                </NumberInput>
+            </FormControl>
+        }}
+    </Field>
+};
+
+const BooleanInput: React.FC<{name: string, optional: boolean}> = ({ name, optional }) => {
+    return <Field name={name} required={!optional}>
+        {(props: FormikProps<any>) => {
+            console.log(props);
+            return <FormControl isRequired={!optional}>
+                <FormLabel>{name}</FormLabel>
+                <Checkbox>{name}</Checkbox>
+            </FormControl>
+        }}
+    </Field>
+};
+
+const ArrayInput: React.FC<{name: string, optional: boolean}> = ({ name, optional }) => {
+    return <Field name={name} required={!optional}>
+        {(props: FormikProps<any>) => {
+            console.log(props);
+            return <FormControl isRequired={!optional}>
                 <FormLabel>{name}</FormLabel>
             </FormControl>
         }}
     </Field>
 };
 
-const BigIntInput: React.FC<{name: string}> = ({ name }) => {
-    return <Field name={name}>
-        {(props: any) => {
-            console.log(props);
-            return <FormControl>
-                <FormLabel>{name}</FormLabel>
-            </FormControl>
-        }}
-    </Field>
-};
+const UnionInput: React.FC<{name: string, unionDef: any, optional: boolean}> = ({ name, optional, unionDef }) => {
+    const [chosenField, setChosenField] = useState<number>(0);
+    
+    let unionFields: JSX.Element[] = [];
+    let unionOptions: JSX.Element[] = [];
 
-const BooleanInput: React.FC<{name: string}> = ({ name }) => {
-    return <Field name={name}>
-        {(props: any) => {
-            console.log(props);
-            return <FormControl>
-                <FormLabel>{name}</FormLabel>
-            </FormControl>
-        }}
-    </Field>
-};
+    unionDef.options.forEach((e: any, i: number) => {
+        unionOptions.push(<option value={i}>
+            {((): string => {
+                if (e._def.typeName == z.ZodFirstPartyTypeKind.ZodLiteral) {
+                    return e._def.value.toString();
+                } else {
+                    return "custom";
+                }
+            })()}
+        </option>)
 
-const ArrayInput: React.FC<{name: string}> = ({ name }) => {
-    return <Field name={name}>
-        {(props: any) => {
-            console.log(props);
-            return <FormControl>
-                <FormLabel>{name}</FormLabel>
-            </FormControl>
-        }}
-    </Field>
-};
+        if (e._def.typeName != z.ZodFirstPartyTypeKind.ZodLiteral) {
+            unionFields.push(ZodSchemaToJSX(e._def, name, optional));
+        } else unionFields.push(ZodSchemaToJSX(e._def, name, optional));
+    })
 
-function ZodSchemaToJSX(def: any, fieldName: string = "unknown", optional: boolean = false): JSX.Element {
+    return <>
+        <FormControl isRequired={!optional}>
+            <FormLabel>{name}</FormLabel>
+            <Select onChange={e => setChosenField(Number(e.target.value))}>
+                {...unionOptions}
+            </Select>
+        </FormControl>
+        {unionFields[chosenField]}
+    </>
+}
+
+function ZodSchemaToJSX(def: any, fName?: string, optional: boolean = false): JSX.Element {
     const { typeName } = def;
 
     if (typeName == undefined)
@@ -162,21 +203,28 @@ function ZodSchemaToJSX(def: any, fieldName: string = "unknown", optional: boole
         throw new Error('Something bad happened!');
     }
     
+    let fieldName: string = "";
+    if (fName) {
+        fieldName = fName;
+        if (typeName == z.ZodFirstPartyTypeKind.ZodObject)
+            fieldName += '.';
+    }
+
     switch (typeName) {
         case z.ZodFirstPartyTypeKind.ZodString:
-            return <StringInput name={fieldName} />;
+            return <StringInput name={fieldName} {...{optional}} />;
         case z.ZodFirstPartyTypeKind.ZodNumber:
-            return <NumberInput name={fieldName} />;
+            return <_NumberInput name={fieldName} {...{optional}} />;
         case z.ZodFirstPartyTypeKind.ZodObject:
-            return <>
+            return <VStack>
             {Object
                 .entries(def.shape())
-                .map((e) => ZodSchemaToJSX((e[1] as any)._def, e[0]))}
-            </>
+                .map((e) => <>{ZodSchemaToJSX((e[1] as any)._def, fieldName + e[0])}<Divider /></>)}
+            </VStack>
         case z.ZodFirstPartyTypeKind.ZodBigInt:
-            return <BigIntInput name={fieldName} />;
+            return <BigIntInput name={fieldName} {...{optional}} />;
         case z.ZodFirstPartyTypeKind.ZodBoolean:
-            return <BooleanInput name={fieldName} />;
+            return <BooleanInput name={fieldName} {...{optional}} />;
         case z.ZodFirstPartyTypeKind.ZodUndefined:
             // return { type: "undefined" };
             // return <Field name="unkno_wn" value={undefined} disabled />;
@@ -187,17 +235,18 @@ function ZodSchemaToJSX(def: any, fieldName: string = "unknown", optional: boole
             return <></>;
         case z.ZodFirstPartyTypeKind.ZodArray:
             // ZodSchemaToJSON(def.type._def)    
-            return <ArrayInput name={fieldName} />
+            return <ArrayInput name={fieldName} {...{optional}} />
         case z.ZodFirstPartyTypeKind.ZodUnion:
         case z.ZodFirstPartyTypeKind.ZodDiscriminatedUnion:
-            return def.options.map((e: ZodObjectDef) => ZodSchemaToJSX((e as any)._def, ));
+            // return def.options.map((e: ZodObjectDef, i: number) => ZodSchemaToJSX((e as any)._def, `${fieldName}[${i}]`));
+            return <UnionInput name={fieldName} {...{optional}} unionDef={def} />
         // case z.ZodFirstPartyTypeKind.ZodIntersection:
         //     return parseIntersectionDef(def, refs);
         case z.ZodFirstPartyTypeKind.ZodTuple:
-            return def.items.map((e: any) => ZodSchemaToJSX((e as any)._def));
+            return def.items.map((e: any, i: number) => ZodSchemaToJSX((e as any)._def, `${fieldName}[${i}]`));
         case z.ZodFirstPartyTypeKind.ZodLiteral:
             // return { type: 'literal', data: def.value };
-            return <Field name={fieldName} />
+            return <Field name={fieldName} value={def.value} type='hidden' />
         // case z.ZodFirstPartyTypeKind.ZodNullable:
         //     return parseNullableDef(def, refs);
         case z.ZodFirstPartyTypeKind.ZodOptional:
@@ -243,7 +292,7 @@ const EditorSidebar: React.FC = (props) => {
         padding='1vw'>
         <FormControl isRequired>
             <FormLabel>Type</FormLabel>
-            <Select onChange={e => setChosenType(Number(e.target.value))} variant='outline' bg={'themeBlue'} fontFamily={'Raleway, regular'}>
+            <Select onChange={e => setChosenType(Number(e.target.value))} variant='outline' bg='themeBlue' fontFamily={'Raleway, regular'}>
                 {elementTypes.map((e, i) => <option
                         value={i}
                         key={i}
@@ -256,20 +305,19 @@ const EditorSidebar: React.FC = (props) => {
                 )}
             </Select>
         </FormControl>
-        <Formik initialValues={{}} onSubmit={e => console.log(e)}>
-            {(props) => {
+        <Formik initialValues={{}} onSubmit={(e: { [key: string]: any }) => { e['type'] = elementTypes[chosenType]; console.log(e) }}>
+            {(props: FormikProps<any>) => {
                 console.log(props);
 
-                return <Form>
+                return <Form onSubmit={props.handleSubmit}>
                     {/* <InputGroup>
                         <InputLeftAddon children={'Type'} />
                         <Input bg={'#D7E0EA'} placeholder={'type'} />
                     </InputGroup> */}
                     {ZodSchemaToJSX(elementSchema._def.options[chosenType]._def)}
-                    <Box>
-                        <Center>
-                        </Center>
-                    </Box>
+                    <Button type='submit' bgColor={'themeBlue'}>
+                        Submit
+                    </Button>
                 </Form>
             }}
         </Formik>
