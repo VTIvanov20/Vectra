@@ -1,7 +1,6 @@
 # Vectra
 
 ## Running the project
----
 - Run backend and db containers `docker-compose up -d`
 - Install frontend dependencies `make dev-install`
 - Run frontend `make dev`
