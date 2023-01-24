@@ -28,6 +28,12 @@ import { BlockList } from 'net';
 type Vector2 = vec.Vector2;
 type GraphPoints = Vector2[];
 
+interface NumberProps {
+  inputRange: string;
+  step: number;
+  opacity: number;
+}
+
 const Index: React.FC = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   let bracketRotation = 0
@@ -151,14 +157,28 @@ const Index: React.FC = (props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawText = () => {
+    interface Props {
+      text: string;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
   
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    window.devicePixelRatio = 2
-    var scale = window.devicePixelRatio; 
+    devicePixelRatio = 10;
+    let scale = window.devicePixelRatio;
+
+    let canvasHeight = 55, canvasWidth = 134;
+    // let contentX = canvasWidth / 2;
+    // let contentY = canvasHeight / 2;    
+
+    canvas.style.height = canvasHeight + 'vh';
+    canvas.style.width  = canvasWidth  + 'vh';
+
+    canvas.width = Math.floor(canvasWidth  * 2 * scale) * 3.5;
+    canvas.width = Math.floor(canvasHeight * scale) * 3.5;
 
     // var myFont = new FontFace('myFont', 'url(assets/fonts/myFont/myFont.otf)');
     var myFont = new FontFace('myFont', 'url(assets/fonts/SF-Pro-Display-Regular.otf');
@@ -167,15 +187,24 @@ const Index: React.FC = (props) => {
       document.fonts.add(myFont);
     });
 
+      let piNum = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091";
+      
+      let eNum = "stas";
       
       var gradient = ctx.createLinearGradient(0, 0, 150, 100);
+      ctx.scale(scale*4, scale);
+
       gradient.addColorStop(0, "#BBBBBB");
       gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
       ctx.fillStyle = gradient;
-      ctx.font = 'normal normal 18px SF Pro Display';
-      ctx.fillText('Hello, World!', 10, 35);
-      console.log('Font loaded');
+      ctx.font = 'normal normal 2px SF Pro Display';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(piNum, 1, 2);
       
+      // const animateText: React.FC<NumberProps> = ({inputRange, step, opacity}) => {
+      //   for()
+      // }
+
     // 137deg, #BBBBBB -17.38%, rgba(187, 187, 187, 0) 106.23%);
   };  
   
@@ -493,9 +522,9 @@ const Index: React.FC = (props) => {
 
       <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
-          {/* <Box className={'numberBox'} h={'55vh'} w={'75vh'}> */}
-              {/* <Box h={'25.5vh'} w={'75vh'} display={'flex'}> */}
-                {/* <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
+          {/* <Box className={'numberBox'} h={'55vh'} w={'75vh'}> 
+              <Box h={'25.5vh'} w={'75vh'} display={'flex'}> 
+                <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
                   _hover={{
                     backgroundColor: '#000',
                     border: '3px dashed #2F94FF',
@@ -535,7 +564,7 @@ const Index: React.FC = (props) => {
                 
               }}
             /> */}
-          <canvas id="canvas" ref={canvasRef} onClick={drawText}/>
+          <canvas id="canvas" ref={canvasRef} onClick={drawText} />
           {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
         </Flex>
