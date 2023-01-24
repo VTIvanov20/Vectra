@@ -2,8 +2,11 @@ import { ThemeContext } from "@emotion/react";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './App.css'
+
 import { Applet } from "./pages/Applet";
 import { EditorView } from "./pages/Editor";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 const IndexPage = lazy(() => import('./pages/Index'));
 
@@ -21,6 +24,16 @@ const router = createBrowserRouter([
   {
     path: "/editor",
     element: <EditorView />,
+    children: []
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+    children: []
+  },
+  {
+    path: "/login",
+    element: <Login />,
     children: []
   }
 ])

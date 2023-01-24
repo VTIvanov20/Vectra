@@ -1,0 +1,18 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.input {
+    border: 1px solid black;
+}
+
+.submit {
+    height: 50px;
+    width: 100px;
+}
