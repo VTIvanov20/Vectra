@@ -192,21 +192,29 @@ const Index: React.FC = (props) => {
       let eNum = "stas";
       
       var gradient = ctx.createLinearGradient(0, 0, 150, 100);
-      ctx.scale(scale*4, scale);
+      ctx.scale(scale*5, scale);
 
       gradient.addColorStop(0, "#BBBBBB");
       gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
       ctx.fillStyle = gradient;
-      ctx.font = 'normal normal 2px SF Pro Display';
+      ctx.font = 'normal normal 3px SF Pro Display';
       ctx.textBaseline = 'middle';
       ctx.fillText(piNum, 1, 2);
+      const textWidth = ctx.measureText(piNum).width;
+      console.log(textWidth)
+      // ctx.fillText(piNum, (canvasRef.current.width - textWidth), 2);
       
       // const animateText: React.FC<NumberProps> = ({inputRange, step, opacity}) => {
-      //   for()
+        
       // }
+      // ctx.scale(scale*10, scale*2);
+      // gradient.addColorStop(0, "#BBBBBB");
+      // gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
+      // ctx.fillStyle = gradient;
+      // ctx.font = 'normal normal 1px SF Pro Display';
 
     // 137deg, #BBBBBB -17.38%, rgba(187, 187, 187, 0) 106.23%);
-  };  
+  };
   
   // useEffect(() => {
   //   requestAnimationFrame(renderFrame);
@@ -564,7 +572,7 @@ const Index: React.FC = (props) => {
                 
               }}
             /> */}
-          <canvas id="canvas" ref={canvasRef} onClick={drawText} />
+          <canvas id="canvas" width={'133vh'} ref={canvasRef} onClick={drawText} />
           {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
         </Flex>
