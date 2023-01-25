@@ -37,7 +37,7 @@ export default class UserService {
         })
         .then(res => {
             if (res.status === 200) {
-                return res.json().then(json => json.token);
+                return res.json().then(json => json.access);
             } else {
                 return false;
             }

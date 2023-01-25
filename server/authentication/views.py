@@ -6,7 +6,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.models import User
 
 from .serializers import TokenObtainPairSerializer, RegisterSerializer
-from files.services import FileStorage
 
 
 class ObtainTokenPairView(TokenObtainPairView):
@@ -21,8 +20,6 @@ class RegisterView(GenericViewSet):
         serializer_data = RegisterSerializer(data=data)
         if serializer_data.is_valid():
             user: User = serializer_data.save()
-
-            FileStorage.create_container_for_user(user_id=user.id)
 
             return Response({'status': 'ok'}, 200)
 
