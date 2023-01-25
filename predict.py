@@ -3,17 +3,20 @@ from azure.cognitiveservices.vision.customvision.prediction import CustomVisionP
 from azure.cognitiveservices.vision.customvision.training.models import ImageFileCreateBatch, ImageFileCreateEntry, Region
 from msrest.authentication import ApiKeyCredentials
 import os, time, uuid
+import dotenv
+
+load_dotenv()
 
 # Replace with valid values
-ENDPOINT = "https://vectramathinformations-prediction.cognitiveservices.azure.com/"
-prediction_key = "7a7f68eeec3144f2a7c14c722bd406d3"
-prediction_resource_id = "/subscriptions/a7a27936-47dc-4e4c-ab83-b2c07675638a/resourceGroups/Vectra/providers/Microsoft.CognitiveServices/accounts/VectraMathInformations"
+ENDPOINT = os.getenv("ENDPOINT")
+prediction_key = os.getenv("PREDICTION_KEY")
+prediction_resource_id = os.getenv("PREDICTION_RESOURCE_ID")
 
 prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
 predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 
-projectId = "440fe2cf-7036-4e3e-be72-f52158eabe08"
-publish_iteration_name = "Iteration5"
+projectId = os.getenv("PROJECT_ID")
+publish_iteration_name = os.getenv("PUBLISH_ITERATION_NAME")
 
 base_image_location = os.path.join (os.path.dirname(__file__), "Images")
 
