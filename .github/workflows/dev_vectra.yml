@@ -58,4 +58,4 @@ jobs:
         with:
           app-name: 'vectra'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_609a845f428441d09a096b5f0affbe6e }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
