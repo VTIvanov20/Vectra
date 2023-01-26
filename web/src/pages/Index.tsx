@@ -23,6 +23,7 @@ import { number } from 'prop-types';
 import { useResolution } from '../util/useResolution';
 import { text } from 'stream/consumers';
 import { BlockList } from 'net';
+import { setMaxIdleHTTPParsers } from 'http';
 
 // forward mafs type in global scope of module
 type Vector2 = vec.Vector2;
@@ -155,16 +156,27 @@ const Index: React.FC = (props) => {
   // const [cursorPosition, setCursorPosition] = useState<Point2D>({ x: 0, y: 0 });
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  let context: CanvasRenderingContext2D | null | undefined = null;
 
-  const drawText = () => {
-    interface Props {
-      text: string;
-    }
+  const drawText = (text: string, fontSize: number) => {
+    if (!context) return;
 
+    text
+      .split('\n')
+      .forEach((e, i) => {
+        if (!context) return;
+        context.font = `normal normal ${fontSize}px SF Pro Display`;
+        context.textBaseline = 'middle';
+
+        context.fillText(e, 0.5, 1.75 + 3 * i);
+      })
+  }
+  
+  const drawAnimatedText = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
   
-    const ctx = canvas.getContext('2d');
+    const ctx = context;
     if (!ctx) return;
 
     devicePixelRatio = 10;
@@ -187,12 +199,12 @@ const Index: React.FC = (props) => {
       document.fonts.add(myFont);
     });
 
-      const piNum = "3.14159265358979323846 2643383279502884197169399 10582097494459230781640628 6208998628034825342117067 9821480865132823066470938 446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091";
-      // const piNum = "3.14159265358979323846 2643383279502884197169399 10582097494459230781640628 6208998628034825342117067 9821480865132823066470938 446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091";
-      let piNumSecond = "2643383279502884197169399"
-      let piNumThird = "10582097494459230781640628"
-      let piNumFourth = "6208998628034825342117067"
-      let piNumFifth = "9821480865132823066470938"
+      // const piNum = "3.14159265358979323846 2643383279502884197169399";
+      let piNum = "3.141592653589793238462\n643383279502884197169399\n10582097494459230781640628\n6208998628034825342117067\n9821480865132823066470938"
+      // let piNumSecond = "2643383279502884197169399"
+      // let piNumThird = "10582097494459230781640628"
+      // let piNumFourth = "6208998628034825342117067"
+      // let piNumFifth = "9821480865132823066470938"
 
       // console.log("hello there")
 
@@ -201,24 +213,30 @@ const Index: React.FC = (props) => {
       //     ctx.fillText(piNum, 0.5, 1.75);
       // }
       
-      let eNum = "stas";
-      
       var gradient = ctx.createLinearGradient(0, 0, 150, 100);
       ctx.scale(scale*5, scale);
-      
+
       gradient.addColorStop(0, "#BBBBBB");
       gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
-      ctx.fillStyle = gradient;
-      ctx.font = 'normal normal 3px SF Pro Display';
-      ctx.textBaseline = 'middle';
+
+      for(let i = 0; i < piNum.length; i++) {
+        setTimeout(() => {
+          if (canvasRef.current)
+            ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+          ctx.fillStyle = gradient;
+          ctx.font = 'normal normal 3px SF Pro Display';
+          ctx.textBaseline = 'middle';
+          drawText(piNum.slice(0, i), 3)
+        }, 75 * i);
+      }
       
-      ctx.fillText(piNum, 0.5, 1.75)
-      ctx.fillText(piNumSecond, 0.5, 4.75);
-      ctx.fillText(piNumThird, 0.5, 7.75);
-      ctx.fillText(piNumFourth, 0.5, 10.75);
-      ctx.fillText(piNumFifth, 0.5, 13.75);
       
-      const textWidth = ctx.measureText(piNum).width;
+      //ctx.fillText(piNumSecond, 0.5, 4.75);
+      //ctx.fillText(piNumThird, 0.5, 7.75);
+      //ctx.fillText(piNumFourth, 0.5, 10.75);
+      //ctx.fillText(piNumFifth, 0.5, 13.75);
+      
+      const textWidth = ctx.measureText(piNum[0]).width;
       console.log(textWidth)
       // ctx.fillText(piNum, (canvasRef.current.width - textWidth), 2);
       
@@ -234,7 +252,11 @@ const Index: React.FC = (props) => {
     // 137deg, #BBBBBB -17.38%, rgba(187, 187, 187, 0) 106.23%);
   };
 
-  useEffect(() => drawText, []);
+  useEffect(() => {
+    if (canvasRef.current)
+      context = canvasRef.current.getContext('2d');
+    drawAnimatedText();
+  }, []);
   
   // useEffect(() => {
   //   requestAnimationFrame(renderFrame);
