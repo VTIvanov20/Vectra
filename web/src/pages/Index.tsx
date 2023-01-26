@@ -187,19 +187,37 @@ const Index: React.FC = (props) => {
       document.fonts.add(myFont);
     });
 
-      let piNum = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091";
+      const piNum = "3.14159265358979323846 2643383279502884197169399 10582097494459230781640628 6208998628034825342117067 9821480865132823066470938 446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091";
+      // const piNum = "3.14159265358979323846 2643383279502884197169399 10582097494459230781640628 6208998628034825342117067 9821480865132823066470938 446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091";
+      let piNumSecond = "2643383279502884197169399"
+      let piNumThird = "10582097494459230781640628"
+      let piNumFourth = "6208998628034825342117067"
+      let piNumFifth = "9821480865132823066470938"
+
+      // console.log("hello there")
+
+      // for (const [i, character] of Object.entries('testink')) {
+      //   if(i === "9") 
+      //     ctx.fillText(piNum, 0.5, 1.75);
+      // }
       
       let eNum = "stas";
       
       var gradient = ctx.createLinearGradient(0, 0, 150, 100);
       ctx.scale(scale*5, scale);
-
+      
       gradient.addColorStop(0, "#BBBBBB");
       gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
       ctx.fillStyle = gradient;
       ctx.font = 'normal normal 3px SF Pro Display';
       ctx.textBaseline = 'middle';
-      ctx.fillText(piNum, 1, 2);
+      
+      ctx.fillText(piNum, 0.5, 1.75)
+      ctx.fillText(piNumSecond, 0.5, 4.75);
+      ctx.fillText(piNumThird, 0.5, 7.75);
+      ctx.fillText(piNumFourth, 0.5, 10.75);
+      ctx.fillText(piNumFifth, 0.5, 13.75);
+      
       const textWidth = ctx.measureText(piNum).width;
       console.log(textWidth)
       // ctx.fillText(piNum, (canvasRef.current.width - textWidth), 2);
@@ -215,6 +233,8 @@ const Index: React.FC = (props) => {
 
     // 137deg, #BBBBBB -17.38%, rgba(187, 187, 187, 0) 106.23%);
   };
+
+  useEffect(() => drawText, []);
   
   // useEffect(() => {
   //   requestAnimationFrame(renderFrame);
@@ -530,17 +550,17 @@ const Index: React.FC = (props) => {
 
       <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
-          {/* <Box className={'numberBox'} h={'55vh'} w={'75vh'}> 
+          <Box className={'numberBox'} h={'55vh'} w={'75vh'}> 
               <Box h={'25.5vh'} w={'75vh'} display={'flex'}> 
                 <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} 
                   _hover={{
                     backgroundColor: '#000',
                     border: '3px dashed #2F94FF',
                   }}
-                /> */}
+                />
                 
                 {/* Spacer - sm*/}
-                {/* <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
+                <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
                 
                 <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} 
                   _hover={{
@@ -548,10 +568,10 @@ const Index: React.FC = (props) => {
                     border: '3px dashed #2F94FF',
                   }}
                 />
-              </Box> */}
+              </Box>
 
               {/* Spacer - md*/}
-              {/* <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+              <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
               
               <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} 
                 _hover={{
@@ -560,10 +580,10 @@ const Index: React.FC = (props) => {
                 }}
               />
             
-            </Box> */}
+            </Box>
             
             {/* Spacer - lg*/}
-            {/* <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
+            <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'}/> 
             
             <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'}
               _hover={{
@@ -571,8 +591,8 @@ const Index: React.FC = (props) => {
                 border: '3px dashed #2F94FF',
                 
               }}
-            /> */}
-          <canvas id="canvas" width={'133vh'} ref={canvasRef} onClick={drawText} />
+            />
+          <canvas id="canvas" width={'133vh'} ref={canvasRef} />
           {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
         </Flex>
