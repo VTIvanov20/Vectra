@@ -237,8 +237,8 @@ const Index: React.FC = (props) => {
     var gradient = ctx.createLinearGradient(0, 0, 150, 100);
     ctx.scale(scale * 5, scale);
 
-    gradient.addColorStop(0, "#BBBBBB");
-    gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
+    gradient.addColorStop(0, "#fff");
+    gradient.addColorStop(1, "#bbb");
 
     if (scrollPosition >= 1750) {
       setShouldDraw(false);
@@ -484,9 +484,9 @@ const Index: React.FC = (props) => {
           <UnorderedList textAlign={{ base: 'center', sm: 'center', md: 'center', lg: 'left' }} fontFamily={'Raleway Light'} fontSize={{ base: '2.5rem', lg: '3.2rem' }} marginTop={{ base: '0vh', md: '2vh' }} marginLeft={{ base: 'vw', md: '7.5vw' }} color={'lightGray'} overflow={'hidden'}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
-            <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
-            <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
-            <ListItem overflow={'hidden'}>Clean and modern looks.</ListItem>
+            <ListItem overflow={'hidden'}>Usable for everybody.</ListItem>
+            <ListItem overflow={'hidden'}>Take a picture. Upload it.</ListItem>
+            <ListItem overflow={'hidden'}>View shape geometry online.</ListItem>
           </UnorderedList>
         </GridItem>
 
@@ -596,46 +596,69 @@ const Index: React.FC = (props) => {
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
           <Box className={'numberBox'} h={'55vh'} w={'75vh'}>
             <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
-              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'}
+              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
                 _hover={{
                   backgroundColor: '#000',
                   border: '3px dashed #2F94FF',
+                  color: '#fff',
+                  display: 'flex',
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: 'cetner',
                 }}
-              />
+              >Explore public applets</Box>
 
               {/* Spacer - sm*/}
               <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
 
-              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'}
+              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
                 _hover={{
                   backgroundColor: '#000',
                   border: '3px dashed #2F94FF',
+                  color: '#fff',
+                  display: 'flex',
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: 'cetner',
+
                 }}
-              />
+              >*filler content*</Box>
             </Box>
 
             {/* Spacer - md*/}
             <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
 
-            <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'}
+            <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
               _hover={{
                 backgroundColor: '#000',
                 border: '3px dashed #2F94FF',
+                color: '#fff',
+                display: 'flex',
+                textAlign: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'cetner',
               }}
-            />
+            >a</Box>
 
           </Box>
 
           {/* Spacer - lg*/}
           <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'} />
 
-          <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'}
+          <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
             _hover={{
               backgroundColor: '#000',
               border: '3px dashed #2F94FF',
-
-            }}
-          />
+              color: '#fff',
+              display: 'flex',
+              textAlign: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'cetner',            }}
+          >*mockup of a phone with mobile design*</Box>
           <canvas id="canvas" width={'133vh'} ref={canvasRef} />
           {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
           {/* height={'full'} width={'full'} */}
