@@ -57,15 +57,6 @@ const Index: React.FC = (props) => {
   const scrollPosition = useScroll();
   const [shouldDraw, setShouldDraw] = useState(true);
 
-  let bracketRotation = 0
-  // if(isHovered === true)
-  // {
-  //   bracketRotation = "180deg"
-  // } 
-  // else {
-  //   bracketRotation = "90deg"
-  // }
-
   let [width, height] = useResolution();
 
   // second Mafs instance
@@ -167,14 +158,6 @@ const Index: React.FC = (props) => {
   const { time, start, stop } = useStopwatch({ endTime: 2 })
   useEffect(() => start(), [start])
 
-  // interface Point2D {
-  //   x: number;
-  //   y: number;
-  // }
-
-  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  // const [cursorPosition, setCursorPosition] = useState<Point2D>({ x: 0, y: 0 });
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let context: CanvasRenderingContext2D | null | undefined = null;
 
@@ -220,19 +203,7 @@ const Index: React.FC = (props) => {
       document.fonts.add(myFont);
     });
 
-    // const piNum = "3.14159265358979323846 2643383279502884197169399";
     let piNum = "3.141592653589793238462\n643383279502884197169399\n10582097494459230781640628\n6208998628034825342117067\n9821480865132823066470938"
-    // let piNumSecond = "2643383279502884197169399"
-    // let piNumThird = "10582097494459230781640628"
-    // let piNumFourth = "6208998628034825342117067"
-    // let piNumFifth = "9821480865132823066470938"
-
-    // console.log("hello there")
-
-    // for (const [i, character] of Object.entries('testink')) {
-    //   if(i === "9") 
-    //     ctx.fillText(piNum, 0.5, 1.75);
-    // }
 
     var gradient = ctx.createLinearGradient(0, 0, 150, 100);
     ctx.scale(scale * 5, scale);
@@ -252,26 +223,7 @@ const Index: React.FC = (props) => {
       }
     }
 
-
-    //ctx.fillText(piNumSecond, 0.5, 4.75);
-    //ctx.fillText(piNumThird, 0.5, 7.75);
-    //ctx.fillText(piNumFourth, 0.5, 10.75);
-    //ctx.fillText(piNumFifth, 0.5, 13.75);
-
     const textWidth = ctx.measureText(piNum[0]).width;
-    //console.log(textWidth)
-    // ctx.fillText(piNum, (canvasRef.current.width - textWidth), 2);
-
-    // const animateText: React.FC<NumberProps> = ({inputRange, step, opacity}) => {
-
-    // }
-    // ctx.scale(scale*10, scale*2);
-    // gradient.addColorStop(0, "#BBBBBB");
-    // gradient.addColorStop(1, "rgba(180, 180, 180, 0)");
-    // ctx.fillStyle = gradient;
-    // ctx.font = 'normal normal 1px SF Pro Display';
-
-    // 137deg, #BBBBBB -17.38%, rgba(187, 187, 187, 0) 106.23%);
   };
 
   useEffect(() => {
@@ -279,43 +231,6 @@ const Index: React.FC = (props) => {
       context = canvasRef.current.getContext('2d');
     drawAnimatedText();
   }, [scrollPosition]);
-
-  // useEffect(() => {
-  //   requestAnimationFrame(renderFrame);
-  // }, [cursorPosition]);
-
-  // function renderFrame(): void {
-  //   const context = canvasRef.current?.getContext('2d');
-  //   if (context != null) {
-  //     clearBackground(context);
-  //     drawCircle(context, cursorPosition);
-  //   }
-  // }
-
-  // function clearBackground(context: CanvasRenderingContext2D): void {
-  //   const { width, height } = context.canvas;
-  //   context.rect(0, 0, width, height);
-  //   context.fillStyle = 'black';
-  //   context.fill();
-  // }
-
-  // function drawCircle(context: CanvasRenderingContext2D, position: Point2D): void {
-  //   context.beginPath();
-  //   context.arc(position.x, position.y, 10, 0, Math.PI * 2);
-  //   context.fillStyle = 'red';
-  //   context.fill();
-  // }
-
-  // function handleMouseMoved(event: React.MouseEvent<Element, MouseEvent>): void {
-  //   const canvas = canvasRef.current;
-  //   if (canvas == null) {
-  //     return;
-  //   }
-  //   const canvasBoundingRect = canvas.getBoundingClientRect();
-  //   const cursorXPos = event.clientX - canvasBoundingRect.left;
-  //   const cursorYPos = event.clientY - canvasBoundingRect.top;
-  //   setCursorPosition({ x: cursorXPos, y: cursorYPos });
-  // }
 
   return <div className="main-parent">
     <div className="first">
@@ -383,7 +298,7 @@ const Index: React.FC = (props) => {
     </div>
     <div className={"second"}>
       <Box w={'100vw'} h={'100vh'} bgColor={'bg'}>
-        <Box w={{ base: '30rem', sm: '60rem', md: '100rem', lg: '200rem' }} h={'100vh'} display={'inline-flex'} overflow={'hidden'}> {/* height value must sum to 100vh  fontSize={{ base: '24px', md: '40px', lg: '56px' }}       \/  this was previously 4rem \/  */}
+        <Box w={{ base: '30rem', sm: '60rem', md: '100rem', lg: '200rem' }} h={'100vh'} display={'inline-flex'} overflow={'hidden'}> {/* height value must sum to 100vh  fontSize={{ base: '24px', md: '40px', lg: '56px' }}
 
           {/* TODO: add rotation to all elemetns */}
           <Box marginTop={'10vh'} marginLeft={'6vw'} textAlign={'center'} color={'darkGray'} fontFamily={'CMU Serif, serif'} fontSize={{ base: '1rem', sm: '2rem', md: '3rem', lg: '4rem' }} transform={'rotate(-8deg)'} >
@@ -436,12 +351,6 @@ const Index: React.FC = (props) => {
             <br />
             <Box alignItems={'center'} textAlign={'center'}>
               <ChakraText color={'lightGray'} whiteSpace={'pre'} fontSize={{ base: '1.3rem', sm: '1.3rem', md: '2.3rem', lg: '3.3rem' }} fontFamily={'Raleway, serif'} letterSpacing={0} display={'inline-flex'}>
-                {/* (
-                  <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
-                  +
-                  <ChakraText bgGradient={'linear(to-r, #FF862F, #FF2F2F)'} bgClip={'text'}>teachers</ChakraText> 
-                )+
-                  <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText> */}
                 <ChakraText fontFamily={'CMU Serif, serif'}>( </ChakraText>
                 <ChakraText bgGradient={'linear(to-r, #2F94FF, #2F37FF)'} bgClip={'text'}>students</ChakraText>
                 <ChakraText> + </ChakraText>
@@ -449,7 +358,6 @@ const Index: React.FC = (props) => {
                 <ChakraText fontFamily={'CMU Serif, serif'}> )</ChakraText>
                 <ChakraText fontFamily={'Raleway, serif'}> + </ChakraText>
                 <ChakraText bgGradient={'linear(to-r, #C9FF2F, #2FFF8F)'} bgClip={'text'}>parents</ChakraText>
-                {/* (students + teachers) + parents */}
               </ChakraText>
             </Box>
           </Box>
@@ -468,7 +376,7 @@ const Index: React.FC = (props) => {
             <u>Web</u>
           </Heading>
 
-          {/* add bullet points as text decor */}
+          {/* add bullet points as text decoration */}
           <UnorderedList textAlign={{ base: 'center', sm: 'center', md: 'center', lg: 'left' }} fontFamily={'Raleway Light'} fontSize={{ base: '2.5rem', lg: '3.2rem' }} marginTop={{ base: '0vh', md: '2vh' }} marginLeft={{ base: 'vw', md: '7.5vw' }} color={'lightGray'}>
             <ListItem overflow={'hidden'}>Online editing platform.</ListItem>
             <ListItem overflow={'hidden'}>Designed for classrooms.</ListItem>
@@ -582,11 +490,6 @@ const Index: React.FC = (props) => {
             {/* Add alt text for all math views and think about accessibility */}
           </GridItem>
         </Show>
-
-        {/* ====*/}
-        {/* <GridItem rowStart={1} rowSpan={2} colSpan={3} bg='papayawhip' />
-        <GridItem rowStart={3} rowSpan={4} colSpan={3} bg='papayawhip' />
-        <GridItem rowSpan={4} colSpan={3} bg='tomato' /> */}
       </Grid>
     </div>
 
@@ -660,8 +563,6 @@ const Index: React.FC = (props) => {
               alignSelf: 'cetner',            }}
           >*mockup of a phone with mobile design*</Box>
           <canvas id="canvas" width={'133vh'} ref={canvasRef} />
-          {/* <Box  className='test' w={'100px'} h={'100px'} bgColor={'#ff0000'}></Box> */}
-          {/* height={'full'} width={'full'} */}
         </Flex>
       </Box>
     </div>
