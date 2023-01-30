@@ -510,7 +510,7 @@ const Index: React.FC = (props) => {
     <div className="fourth">
 
       <Box h={'100vh'} w={'100vw'} bgColor={'bg'} >
-        <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'}>
+        <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'} userSelect={'none'}>
           <Box className={'numberBox'} h={'55vh'} w={'75vh'}>
             <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
               <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
