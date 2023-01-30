@@ -28,10 +28,10 @@ The solution we propose is a platform that uses augmented reality (AR) technolog
     <a href="https://sass-lang.com/"><img src="https://img.icons8.com/color/344/sass.png" alt="SASS logo" width=48px /></a>
     <a href="https://reactnative.dev/"><img src="https://img.icons8.com/color/344/react-native.png" alt="React Native logo" width=50px /></a>
     <a href="https://www.typescriptlang.org/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png" alt="Typescript logo" width=50px /></a>
-    <a href="https://chakra-ui.com/"><img src="https://pbs.twimg.com/profile_images/1244925541448286208/rzylUjaf_400x400.jpg" alt="Chakra logo" width=50px /></a>
+    <a href="https://chakra-ui.com/"><img src="https://archive.org/download/github.com-chakra-ui-chakra-ui_-_2020-02-13_17-20-29/cover.jpg" alt="Chakra logo" width=50px /></a>
     <a href="https://www.djangoproject.com/"><img src="https://framagit.org/uploads/-/system/project/avatar/28062/django.png" alt="Django logo" width=50px /></a>
     <a href="https://azure.microsoft.com/en-us/"><img src="https://img.icons8.com/fluency/344/azure-1.png" alt="Azure logo" width=48px /></a>
-    <a href="https://azure.microsoft.com/en-us/products/postgresql/"><img src="https://miro.medium.com/max/371/1*AWMBwdFHMJFbNK22ccoi0w.png" alt="Azure logo" width=48px /></a>
+    <a href="https://azure.microsoft.com/en-us/products/postgresql/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png" alt="Azure logo" width=48px /></a>
     <a href="https://azure.microsoft.com/en-us/services/app-service/"><img src="https://ms-azuretools.gallerycdn.vsassets.io/extensions/ms-azuretools/vscode-azureappservice/0.23.3/1650585198428/Microsoft.VisualStudio.Services.Icons.Default" alt="Azure App Service logo" width=48px /></a>
     <a href="https://www.customvision.ai/"><img src="https://www.customvision.ai/Images/logo.svg" alt="Custom Vision logo" width=50px /></a>
     <a href="https://www.postman.com/"><img src="https://res.cloudinary.com/postman/image/upload/t_team_logo/v1629869194/team/2893aede23f01bfcbd2319326bc96a6ed0524eba759745ed6d73405a3a8b67a8" alt="Postman logo" width=54px /></a>
@@ -42,6 +42,8 @@ The solution we propose is a platform that uses augmented reality (AR) technolog
   - [Documentation](https://codingburgas-my.sharepoint.com/:w:/g/personal/ssuzunov19_codingburgas_bg/EYbedR4CMU5KtuN8YJ_0g1cBmXBIYc8q8op1JQ-7cM2BGw?e=6qPCe2)
 ### Presentation:
   - [PowerPoint](https://codingburgas-my.sharepoint.com/:p:/g/personal/ssuzunov19_codingburgas_bg/ER_1dfrkX_JPs60q6z0eAboBZVMQdSxSesMWufZf3gIpMQ?e=OWYfiv)
+### User Manual
+  - [UserManual](https://drive.google.com/file/d/1VI0uyMayT7VZvUq3mOEhQdNBLzaz6FUo/view?usp=sharing)
 ### Video:
   - [Video](https://codingburgas-my.sharepoint.com/personal/vtivanov20_codingburgas_bg/_layouts/15/stream.aspx?id=%2Fpersonal%2Fvtivanov20%5Fcodingburgas%5Fbg%2FDocuments%2F20230127%5F152015000%5FiOS%2EMOV&ga=1)
 ### Project diagram:
