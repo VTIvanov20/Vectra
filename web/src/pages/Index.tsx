@@ -12,7 +12,7 @@ import {
   Box, Center, Divider,
   Text as ChakraText, Heading, Image,
   Grid, GridItem,
-  Flex,
+  Flex, Link as ChakraLink,
   ListItem, UnorderedList,
   Show, Hide
 } from "@chakra-ui/react"
@@ -513,23 +513,47 @@ const Index: React.FC = (props) => {
         <Flex direction={['column', 'column', 'row', 'row']} h={'100vh'} w={'100vw'} justifyContent={'center'} alignItems={'center'} userSelect={'none'}>
           <Box className={'numberBox'} h={'55vh'} w={'75vh'}>
             <Box h={'25.5vh'} w={'75vh'} display={'flex'}>
-              <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
-                _hover={{
-                  backgroundColor: '#000',
-                  border: '3px dashed #2F94FF',
-                  color: '#fff',
-                  display: 'flex',
-                  textAlign: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  alignSelf: 'cetner',
-                }}
-              >Explore public applets</Box>
+              <ChakraLink href="/applet">
+                <Box h={'25.5vh'} w={'45.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
+                  _hover={{
+                    backgroundColor: '#000',
+                    border: '3px dashed #2F94FF',
+                    color: '#fff',
+                    display: 'flex',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    alignSelf: 'cetner',
+                  }}
+                >
+                  Explore public applets
+                </Box>
+              </ChakraLink>
 
               {/* Spacer - sm*/}
               <Box h={'25.5vh'} w={'4vh'} bgColor={'black'} />
 
-              <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
+              <ChakraLink href="/">
+                <Box h={'25.5vh'} w={'25.5vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
+                  _hover={{
+                    backgroundColor: '#000',
+                    border: '3px dashed #2F94FF',
+                    color: '#fff',
+                    display: 'flex',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    alignSelf: 'cetner',
+
+                  }}
+                >*filler content*</Box>
+              </ChakraLink>
+            </Box>
+
+            {/* Spacer - md*/}
+            <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+            <ChakraLink href="/editor">
+              <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
                 _hover={{
                   backgroundColor: '#000',
                   border: '3px dashed #2F94FF',
@@ -539,15 +563,18 @@ const Index: React.FC = (props) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   alignSelf: 'cetner',
-
                 }}
-              >*filler content*</Box>
-            </Box>
+              >
+                Try out the online editor
+              </Box>
+            </ChakraLink>
+          </Box>
 
-            {/* Spacer - md*/}
-            <Box h={'4vh'} w={'75vh'} bgColor={'black'} />
+          {/* Spacer - lg*/}
+          <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'} />
 
-            <Box h={'25.5vh'} w={'75vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
+          <ChakraLink href="/">
+            <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
               _hover={{
                 backgroundColor: '#000',
                 border: '3px dashed #2F94FF',
@@ -558,25 +585,10 @@ const Index: React.FC = (props) => {
                 justifyContent: 'center',
                 alignSelf: 'cetner',
               }}
-            >a</Box>
-
-          </Box>
-
-          {/* Spacer - lg*/}
-          <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'} />
-
-          <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
-            _hover={{
-              backgroundColor: '#000',
-              border: '3px dashed #2F94FF',
-              color: '#fff',
-              display: 'flex',
-              textAlign: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignSelf: 'cetner',
-            }}
-          >*mockup of a phone with mobile design*</Box>
+            >
+              *mockup of a phone with mobile design*
+            </Box>
+          </ChakraLink>
           <canvas id="canvas" width={'133vh'} ref={canvasRef} />
         </Flex>
       </Box>

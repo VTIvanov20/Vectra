@@ -6,7 +6,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background-color: rgba(0, 0, 0, 0.8);
+  /* background-color: linear-gradient(180deg, #000000 100%, rgba(0, 0, 0, 0) 0%); */
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
   color: #fff;
   position: fixed;
   top: 0;
