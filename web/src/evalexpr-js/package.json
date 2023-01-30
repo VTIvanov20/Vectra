@@ -1,0 +1,12 @@
+{
+  "name": "evalexpr-js",
+  "version": "0.1.0",
+  "files": [
+    "evalexpr_js_bg.wasm",
+    "evalexpr_js.js",
+    "evalexpr_js.d.ts"
+  ],
+  "module": "evalexpr_js.js",
+  "types": "evalexpr_js.d.ts",
+  "sideEffects": false
+}
