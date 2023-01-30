@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  cursor: url('./assets/img/cursor.svg');
+}
+
+body {
+  cursor: url('./assets/img/cursor.svg'), auto;
+}
+
+.main-parent {
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.first, .second, .third, .fourth {
+  scroll-snap-align: start;
+}
+
+.numberBox, .spacerBox {
+  /* mask-composite: subtract; */
+  z-index: 1;
+}
+
+.test {
+  mask-image: url('./assets/img/cursor.svg');
+  mask-size: cover;
+  position: absolute;
+  mask-composite: intersect;
+  mask-type: alpha;
+}
+
+canvas {
+  height: 55vh;
+  width: 134vh;
+  position: absolute;
+  background-color: black;
+  image-rendering: crisp-edges;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
