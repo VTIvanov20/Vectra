@@ -42,3 +42,58 @@
 .read-the-docs {
   color: #888;
 } */
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: rgba(63, 81, 181, 0.8);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+}
+
+.navbar-link {
+  margin-left: 20px;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-link:hover {
+  background-color: #fff;
+  color: #3f51b5;
+  box-shadow: 0px 0px 10px 0px #3f51b5;
+}
+
+.buttonGo {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  padding: 10px 20px;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 75px;
+  background: #3454b4;
+  border-radius: 30%;
+  color: #fff;
+  font-size: 28px;
+  font-family: "CMU Serif Upright, serif";
+}

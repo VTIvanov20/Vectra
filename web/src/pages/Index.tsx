@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from "react";
+import { Link } from 'react-router-dom';
 import {
   Mafs, CartesianCoordinates,
   Text as MafsText,
@@ -191,7 +192,7 @@ const Index: React.FC = (props) => {
     // let contentY = canvasHeight / 2;    
 
     canvas.style.height = canvasHeight + 'vh';
-    canvas.style.width  = canvasWidth  + 'vh';
+    canvas.style.width = canvasWidth + 'vh';
 
     canvas.width = Math.floor(canvasWidth * 2 * scale) * 3.5;
     canvas.width = Math.floor(canvasHeight * scale) * 3.5;
@@ -233,7 +234,19 @@ const Index: React.FC = (props) => {
   }, [scrollPosition]);
 
   return <div className="main-parent">
+    <div className="navbar-container">
+      <Link className="navbar-brand" to="/Index">Vectra</Link>
+      <div className="navbar-links">
+        <Link className="navbar-link" to="/Login">Login</Link>
+        <Link className="navbar-link" to="/Signup">Register</Link>
+      </div>
+    </div>
     <div className="first">
+
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <button className="buttonGo">Let's go</button>
+      </div>
+
       <Mafs height={height}>
         <CartesianCoordinates
           xAxis={{
@@ -294,6 +307,7 @@ const Index: React.FC = (props) => {
         {triA.element}
         {triB.element}
         {triC.element}
+
       </Mafs>
     </div>
     <div className={"second"}>
@@ -560,7 +574,8 @@ const Index: React.FC = (props) => {
               textAlign: 'center',
               alignItems: 'center',
               justifyContent: 'center',
-              alignSelf: 'cetner',            }}
+              alignSelf: 'cetner',
+            }}
           >*mockup of a phone with mobile design*</Box>
           <canvas id="canvas" width={'133vh'} ref={canvasRef} />
         </Flex>
