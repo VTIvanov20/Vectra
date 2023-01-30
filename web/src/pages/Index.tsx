@@ -573,7 +573,7 @@ const Index: React.FC = (props) => {
           {/* Spacer - lg*/}
           <Box className={'spacerBox'} h={'55vh'} w={'2vw'} bgColor={'black'} />
 
-          <ChakraLink href="/">
+          {/* <ChakraLink href="/"> */}
             <Box className={'numberBox'} h={'55vh'} w={'55vh'} bgColor={'transparent'} color={'transparent'} fontSize={'4xl'}
               _hover={{
                 backgroundColor: '#000',
@@ -588,7 +588,7 @@ const Index: React.FC = (props) => {
             >
               *mockup of a phone with mobile design*
             </Box>
-          </ChakraLink>
+          {/* </ChakraLink> */}
           <canvas id="canvas" width={'133vh'} ref={canvasRef} />
         </Flex>
       </Box>
