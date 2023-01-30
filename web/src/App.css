@@ -85,15 +85,14 @@
 
 .buttonGo {
   position: absolute;
+  border: none;
   top: 20%;
   left: 50%;
-  padding: 10px 20px;
   transform: translate(-50%, -50%);
   width: 200px;
-  height: 75px;
-  background: #3454b4;
-  border-radius: 30%;
+  height: 60px;
+  background: #2F94FF;
+  border-radius: 50px;
   color: #fff;
-  font-size: 28px;
-  font-family: "CMU Serif Upright, serif";
+  font-size: 35px;
 }
