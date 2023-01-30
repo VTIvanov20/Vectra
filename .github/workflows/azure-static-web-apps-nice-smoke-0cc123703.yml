@@ -23,7 +23,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
+        node-version: '18.x'
     - run:
         npm i
     - run:
@@ -45,8 +45,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/web" # App source code path
-          output_location: "dist" # Built app content directory - optional
+          app_location: "/web/dist" # App source code path
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
