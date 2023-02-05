@@ -133,16 +133,6 @@ const Index: React.FC = (props) => {
     [(blValue + 2), (tlValue + 0.5)]
   ]
 
-  // borken, will fix later on
-  // const circleDrag = useMovablePoint([
-  //   Math.sqrt(49) / 7,
-  //   Math.sqrt(49) / 7,
-  //   7, 3.5
-  // ]);
-
-  // const radius = vec.mag(circleDrag.point)
-
-
   //TODO: simplify the following lines, by using a map
   const triArr: Array<number> = [6, -0.5]
 

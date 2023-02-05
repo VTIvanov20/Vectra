@@ -44,8 +44,6 @@ The solution we propose is a platform that uses augmented reality (AR) technolog
   - [PowerPoint](https://codingburgas-my.sharepoint.com/:p:/g/personal/ssuzunov19_codingburgas_bg/ER_1dfrkX_JPs60q6z0eAboBZVMQdSxSesMWufZf3gIpMQ?e=OWYfiv)
 ### User Manual
   - [UserManual](https://drive.google.com/file/d/1VI0uyMayT7VZvUq3mOEhQdNBLzaz6FUo/view?usp=sharing)
-### Video:
-  - [Video](https://codingburgas-my.sharepoint.com/personal/vtivanov20_codingburgas_bg/_layouts/15/stream.aspx?id=%2Fpersonal%2Fvtivanov20%5Fcodingburgas%5Fbg%2FDocuments%2F20230127%5F152015000%5FiOS%2EMOV&ga=1)
 ### Project diagram:
   - [Diagram](https://lucid.app/lucidchart/0640a590-1767-4b7d-9696-c61adbf4ba32/edit?viewport_loc=-2810%2C-1530%2C5123%2C1848%2C0_0&invitationId=inv_c8998192-feb8-41f5-bfc0-b1c6e7498d9c)
 
