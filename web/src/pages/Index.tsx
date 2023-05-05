@@ -513,7 +513,7 @@ const Index: React.FC = (props) => {
                     textAlign: 'center',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    alignSelf: 'cetner',
+                    alignSelf: 'center',
                   }}
                 >
                   Explore public applets
@@ -533,7 +533,7 @@ const Index: React.FC = (props) => {
                     textAlign: 'center',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    alignSelf: 'cetner',
+                    alignSelf: 'center',
 
                   }}
                 >*filler content*</Box>
@@ -552,7 +552,7 @@ const Index: React.FC = (props) => {
                   textAlign: 'center',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  alignSelf: 'cetner',
+                  alignSelf: 'center',
                 }}
               >
                 Try out the online editor
@@ -573,7 +573,7 @@ const Index: React.FC = (props) => {
                 textAlign: 'center',
                 alignItems: 'center',
                 justifyContent: 'center',
-                alignSelf: 'cetner',
+                alignSelf: 'center',
               }}
             >
               *mockup of a phone with mobile design*
